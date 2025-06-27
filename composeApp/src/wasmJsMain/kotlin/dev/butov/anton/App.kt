@@ -6,10 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,29 +24,60 @@ import antonbutov.composeapp.generated.resources.redBack
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        LazyColumn(
-            modifier = Modifier.background(color = Colors.background),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            item {
-                Image(
-                    modifier = Modifier.padding(horizontal = 160.dp, vertical = 10.dp),
-                    painter = painterResource(Res.drawable.redBack), contentDescription = null
-                )
-                Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
-                }
-                Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
-                }
-                AnimatedVisibility(showContent) {
-                    val greeting = remember { Greeting().greet() }
-                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(painterResource(Res.drawable.compose_multiplatform), null)
-                        Text("Compose: $greeting")
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn(
+                modifier = Modifier.background(color = Color.LightGray),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                item {
+                    Button(onClick = { showContent = !showContent }) {
+                        Text("Click me!")
                     }
+                    Button(onClick = { showContent = !showContent }) {
+                        Text("Click me!")
+                    }
+                    AnimatedVisibility(showContent) {
+                        val greeting = remember { Greeting().greet() }
+                        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                            Image(painterResource(Res.drawable.compose_multiplatform), null)
+                            Text("Compose: $greeting")
+                        }
+                    }
+                }
+            }
+
+            LazyColumn() {
+                item {
+                    Box(
+                        Modifier
+                            .background(Colors.background)
+                            .height(3500.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Row(
+                            Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 80.dp)
+                        ) {
+                            VerticalDivider(color = Colors.onBackground)
+                            Spacer(Modifier.weight(1f))
+                            VerticalDivider(color = Colors.onBackground)
+                            Spacer(Modifier.weight(1f))
+                            VerticalDivider(color = Colors.onBackground)
+                            Spacer(Modifier.weight(1f))
+                            VerticalDivider(color = Colors.onBackground)
+                            Spacer(Modifier.weight(1f))
+                            VerticalDivider(color = Colors.onBackground)
+                        }
+                            Image(
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
+                                painter = painterResource(Res.drawable.redBack), contentDescription = null,
+                                contentScale = ContentScale.FillBounds
+                            )
+                        }
                 }
             }
         }
     }
 }
+

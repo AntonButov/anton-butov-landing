@@ -1,12 +1,12 @@
 package dev.butov.anton
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -24,9 +24,11 @@ import antonbutov.composeapp.generated.resources.redBack
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        val scrollState = rememberLazyListState()
         Box(modifier = Modifier.fillMaxSize()) {
+            /*
             LazyColumn(
-                modifier = Modifier.background(color = Color.LightGray),
+                modifier = Modifier.background(color = Color.LightGray).fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 item {
@@ -46,7 +48,11 @@ fun App() {
                 }
             }
 
-            LazyColumn() {
+             */
+
+            LazyColumn(
+                state = scrollState,
+            ) {
                 item {
                     Box(
                         Modifier
@@ -69,14 +75,18 @@ fun App() {
                             Spacer(Modifier.weight(1f))
                             VerticalDivider(color = Colors.onBackground)
                         }
-                            Image(
-                                modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
-                                painter = painterResource(Res.drawable.redBack), contentDescription = null,
-                                contentScale = ContentScale.FillBounds
-                            )
-                        }
+                        Image(
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
+                            painter = painterResource(Res.drawable.redBack), contentDescription = null,
+                            contentScale = ContentScale.FillBounds
+                        )
+                    }
                 }
             }
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
+            )
         }
     }
 }

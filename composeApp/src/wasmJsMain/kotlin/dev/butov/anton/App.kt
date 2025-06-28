@@ -11,6 +11,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -82,7 +83,7 @@ fun App() {
 
 @Composable
 fun MainColumn() {
-    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp)) {
         Header()
     }
 }
@@ -93,14 +94,14 @@ fun Header() {
         Modifier
             .height(50.dp)
             .fillMaxWidth()
-            .padding(horizontal = 81.dp)
     ) {
         Box(
             modifier = Modifier
-                .width(160.dp) // или wrapContentWidth()
+                .width(160.dp)
                 .fillMaxHeight()
-                .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
+                .clip(MaterialTheme.shapes.small)
                 .background(Colors.primary.copy(alpha = 0.1f))
+                .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
                 .padding(horizontal = 7.dp, vertical = 6.dp)
         ) {
             Row(

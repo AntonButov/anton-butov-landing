@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -18,26 +19,21 @@ import antonbutov.composeapp.generated.resources.*
 import antonbutov.composeapp.generated.resources.Inter_28pt_Regular
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.call
+import dev.butov.anton.myiconpack.AntonButov
+import dev.butov.anton.myiconpack.Arrow
+import dev.butov.anton.myiconpack.Call
+import dev.butov.anton.myiconpack.RedBack
 import org.jetbrains.compose.resources.painterResource
 
 import org.jetbrains.compose.resources.Font
 
 @Composable
 fun App() {
-    val interFont = FontFamily(
-        Font(
-            resource = Res.font.Inter_28pt_Regular,
-            weight = FontWeight.Normal,
-        ),
-        Font(
-            resource = Res.font.Inter_28pt_Medium,
-            weight = FontWeight.Medium,
-        )
+    val antonButovPainter = painterResource(Res.drawable.antonButov)
 
-    )
     MaterialTheme {
         CompositionLocalProvider(
-            LocalTextStyle provides LocalTextStyle.current.copy(fontFamily = interFont)
+            LocalTextStyle provides LocalTextStyle.current.copy(fontFamily = InterFonts())
         ) {
             var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
@@ -68,7 +64,7 @@ fun App() {
 
                 BackGround(scrollState)
 
-                MainColumn()
+                MainColumn(antonButovPainter)
                 VerticalScrollbar(
                         adapter = rememberScrollbarAdapter(scrollState),
                         modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
@@ -79,29 +75,49 @@ fun App() {
 }
 
 @Composable
-fun MainColumn() {
+fun MainColumn(antonButovPainter: Painter) {
     Column(Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp)) {
-        Header()
+        Header(antonButovPainter)
     }
 }
 
 @Composable
-fun Header() {
+fun Header(antonButovPainter: Painter) {
     Box(
         Modifier
             .height(50.dp)
             .fillMaxWidth()
     ) {
-        AntonButov()
+        Arrows()
+        AntonButov(antonButovPainter)
         CallButton()
     }
 }
 
 @Composable
-fun BoxScope.AntonButov() {
+fun BoxScope.Arrows() {
+    Row(
+        modifier = Modifier.align(Alignment.Center)
+    ) {
+       Arrow()
+       Arrow()
+    }
+}
+
+@Composable
+private fun Arrow() {
+    Icon(
+        imageVector = AntonIcons.Arrow,
+        contentDescription = "Arrow",
+        tint = Colors.primary,
+    )
+}
+
+@Composable
+fun BoxScope.AntonButov(antonButovPainter: Painter) {
         Icon(
             modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(Res.drawable.antonButov),
+            imageVector = AntonIcons.AntonButov,
             tint = Colors.primary,
             contentDescription = "AntonButov"
         )
@@ -132,7 +148,7 @@ fun BoxScope.CallButton() {
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Icon(
-                    painter = painterResource(Res.drawable.call),
+                    imageVector = AntonIcons.Call,
                     contentDescription = "Phone Icon",
                     tint = Colors.primary
                 )
@@ -170,7 +186,7 @@ fun BackGround(scrollState: LazyListState) {
                 }
                 Image(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
-                    painter = painterResource(Res.drawable.redBack), contentDescription = null,
+                    imageVector = AntonIcons.RedBack, contentDescription = null,
                     contentScale = ContentScale.FillBounds
                 )
             }

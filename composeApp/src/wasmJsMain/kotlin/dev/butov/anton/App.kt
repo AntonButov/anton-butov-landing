@@ -2,11 +2,9 @@ package dev.butov.anton
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.*
@@ -90,13 +87,31 @@ fun MainColumn() {
 
 @Composable
 fun Header() {
-    Row(
+    Box(
         Modifier
             .height(50.dp)
             .fillMaxWidth()
     ) {
+        AntonButov()
+        CallButton()
+    }
+}
+
+@Composable
+fun BoxScope.AntonButov() {
+        Icon(
+            modifier = Modifier.align(Alignment.Center),
+            painter = painterResource(Res.drawable.antonButov),
+            tint = Colors.primary,
+            contentDescription = "AntonButov"
+        )
+}
+
+@Composable
+fun BoxScope.CallButton() {
         Box(
             modifier = Modifier
+                .align(Alignment.CenterEnd)
                 .width(160.dp)
                 .fillMaxHeight()
                 .clip(MaterialTheme.shapes.small)
@@ -123,7 +138,6 @@ fun Header() {
                 )
             }
         }
-    }
 }
 
 @Composable

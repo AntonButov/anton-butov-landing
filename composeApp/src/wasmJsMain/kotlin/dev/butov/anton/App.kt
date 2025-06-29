@@ -10,27 +10,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import antonbutov.composeapp.generated.resources.*
-import antonbutov.composeapp.generated.resources.Inter_28pt_Regular
 import antonbutov.composeapp.generated.resources.Res
-import antonbutov.composeapp.generated.resources.call
+import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.AntonButov
 import dev.butov.anton.myiconpack.Arrow
 import dev.butov.anton.myiconpack.Call
 import dev.butov.anton.myiconpack.RedBack
+import dev.butov.anton.myiconpack.Gamburger
 import org.jetbrains.compose.resources.painterResource
-
-import org.jetbrains.compose.resources.Font
 
 @Composable
 fun App() {
-    val antonButovPainter = painterResource(Res.drawable.antonButov)
-
     MaterialTheme {
         CompositionLocalProvider(
             LocalTextStyle provides LocalTextStyle.current.copy(fontFamily = InterFonts())
@@ -64,7 +56,7 @@ fun App() {
 
                 BackGround(scrollState)
 
-                MainColumn(antonButovPainter)
+                MainColumn()
                 VerticalScrollbar(
                         adapter = rememberScrollbarAdapter(scrollState),
                         modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd)
@@ -75,23 +67,33 @@ fun App() {
 }
 
 @Composable
-fun MainColumn(antonButovPainter: Painter) {
+fun MainColumn() {
     Column(Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp)) {
-        Header(antonButovPainter)
+        Header()
     }
 }
 
 @Composable
-fun Header(antonButovPainter: Painter) {
+fun Header() {
     Box(
         Modifier
             .height(50.dp)
             .fillMaxWidth()
     ) {
+        Gamburger()
         Arrows()
-        AntonButov(antonButovPainter)
+        AntonButov()
         CallButton()
     }
+}
+
+@Composable
+fun Gamburger() {
+    Icon(
+        imageVector = AntonIcons.Gamburger,
+        contentDescription = "Gamburger",
+        tint = Colors.primary,
+    )
 }
 
 @Composable
@@ -114,7 +116,7 @@ private fun Arrow() {
 }
 
 @Composable
-fun BoxScope.AntonButov(antonButovPainter: Painter) {
+fun BoxScope.AntonButov() {
         Icon(
             modifier = Modifier.align(Alignment.Center),
             imageVector = AntonIcons.AntonButov,
@@ -186,7 +188,7 @@ fun BackGround(scrollState: LazyListState) {
                 }
                 Image(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
-                    imageVector = AntonIcons.RedBack, contentDescription = null,
+                    painter = painterResource(Res.drawable.redBack), contentDescription = null,
                     contentScale = ContentScale.FillBounds
                 )
             }

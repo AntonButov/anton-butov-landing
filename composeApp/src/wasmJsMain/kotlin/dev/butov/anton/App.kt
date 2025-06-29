@@ -23,6 +23,7 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
+import dev.butov.anton.uikit.CallButtonDark
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -56,6 +57,19 @@ fun MainColumn() {
         Spacer(modifier = Modifier.size(50.dp))
         PhotoBlock()
         Spacer(Modifier.size(60.dp))
+        Technologies()
+    }
+}
+
+@Composable
+fun Technologies() {
+    FlowRow(
+        modifier = Modifier
+            .clip(MaterialTheme.shapes.medium)
+            .background(Colors.background)
+            .padding(16.dp)
+    ) {
+
     }
 }
 
@@ -128,7 +142,7 @@ fun Header() {
         Hamburger()
         Arrows()
         AntonButov()
-        CallButton()
+        CallButtonDark(Modifier.align(Alignment.CenterEnd))
     }
 }
 
@@ -166,41 +180,6 @@ fun BoxScope.AntonButov() {
         tint = Colors.primary,
         contentDescription = "AntonButov",
     )
-}
-
-@Composable
-fun BoxScope.CallButton() {
-    Box(
-        modifier =
-        Modifier
-            .align(Alignment.CenterEnd)
-            .width(160.dp)
-            .fillMaxHeight()
-            .clip(MaterialTheme.shapes.small)
-            .background(Colors.primary.copy(alpha = 0.1f))
-            .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
-            .padding(horizontal = 7.dp, vertical = 6.dp),
-    ) {
-        Row(
-            modifier =
-            Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = "Assign a call",
-                color = Colors.primary,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Icon(
-                imageVector = AntonIcons.Call,
-                contentDescription = "Phone Icon",
-                tint = Colors.primary,
-            )
-        }
-    }
 }
 
 @Composable

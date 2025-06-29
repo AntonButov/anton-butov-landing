@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString.Builder
 import androidx.compose.ui.text.SpanStyle
@@ -59,13 +60,14 @@ fun MainColumn() {
 
 @Composable
 fun PhotoBlock() {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.height(600.dp).fillMaxWidth()) {
         Im(Modifier.align(Alignment.BottomStart))
         Icon(
             painter = painterResource(Res.drawable.butov),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd),
+            tint = Color.Unspecified,
         )
     }
 }

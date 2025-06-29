@@ -111,7 +111,7 @@ fun Header() {
             .height(50.dp)
             .fillMaxWidth(),
     ) {
-        Gamburger()
+        Hamburger()
         Arrows()
         AntonButov()
         CallButton()
@@ -119,7 +119,7 @@ fun Header() {
 }
 
 @Composable
-fun Gamburger() {
+fun Hamburger() {
     Icon(
         imageVector = AntonIcons.Gamburger,
         contentDescription = "Gamburger",
@@ -240,7 +240,14 @@ fun BackGround(scrollState: LazyListState) {
                         )
                     }
                     VerticalDivider(color = dividerColor)
-                    Spacer(Modifier.weight(1f))
+                    Box(Modifier.weight(1f)) {
+                        Icon(
+                            modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top= 200.dp),
+                            imageVector = AntonIcons.RectangleSoft,
+                            contentDescription = null,
+                            tint = Colors.primary,
+                        )
+                    }
                     VerticalDivider(color = dividerColor)
                     Spacer(Modifier.weight(1f))
                     VerticalDivider(color = dividerColor)

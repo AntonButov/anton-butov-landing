@@ -11,16 +11,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.AnnotatedString.Builder
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.redBack
-import dev.butov.anton.myiconpack.AntonButov
-import dev.butov.anton.myiconpack.Arrow
-import dev.butov.anton.myiconpack.Call
-import dev.butov.anton.myiconpack.Gamburger
+import dev.butov.anton.myiconpack.*
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -47,36 +46,63 @@ fun App() {
 @Composable
 fun MainColumn() {
     Column(Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp)) {
-        PhotoBlock()
         Header()
+        Spacer(modifier = Modifier.size(50.dp))
+        PhotoBlock()
     }
 }
 
 @Composable
 fun PhotoBlock() {
-    Im()
+    Row {
+        Im()
+    }
 }
 
 @Composable
 fun Im() {
+
     val firstText =
         buildAnnotatedString {
-            withStyle(
-                style =
-                    SpanStyle(
-                        color = Colors.primary,
-                    ),
-            ) {
+            SoftStyle {
+                append("I'm ")
             }
-            //    append(
-            //        annotatedString = "I'm Anton Butov,\n" +
-            //                "a passionate Senior Android Developer"
-            //        style = SpanStyle(
-            //    "I'm Anton Butov,\n" +
-            //          "a passionate Senior Android Developer"
-            // Text()
+            FullStyle {
+                append("Anton Butov\n")
+            }
+            SoftStyle {
+                append("and I'm a ")
+            }
+            FullStyle {
+                append("Senior Android Developer")
+            }
         }
+    Text(
+        text = firstText,
+        style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
+    )
+
+    //    append(
+    //        annotatedString = "I'm Anton Butov,\n" +
+    //                "a passionate Senior Android Developer"
+    //        style = SpanStyle(
+    //    "I'm Anton Butov,\n" +
+    //          "a passionate Senior Android Developer"
+    // Text()
 }
+
+private val softStyle = SpanStyle(
+    color = Colors.primary.copy(alpha = 0.6f),
+)
+private val fullStyle = SpanStyle(
+    color = Colors.primary,
+)
+
+private fun Builder.SoftStyle(block: Builder.() -> Unit) =
+    withStyle(softStyle, block)
+
+private fun Builder.FullStyle(block: Builder.() -> Unit) =
+    withStyle(fullStyle, block)
 
 @Composable
 fun Header() {
@@ -134,20 +160,20 @@ fun BoxScope.AntonButov() {
 fun BoxScope.CallButton() {
     Box(
         modifier =
-            Modifier
-                .align(Alignment.CenterEnd)
-                .width(160.dp)
-                .fillMaxHeight()
-                .clip(MaterialTheme.shapes.small)
-                .background(Colors.primary.copy(alpha = 0.1f))
-                .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
-                .padding(horizontal = 7.dp, vertical = 6.dp),
+        Modifier
+            .align(Alignment.CenterEnd)
+            .width(160.dp)
+            .fillMaxHeight()
+            .clip(MaterialTheme.shapes.small)
+            .background(Colors.primary.copy(alpha = 0.1f))
+            .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
+            .padding(horizontal = 7.dp, vertical = 6.dp),
     ) {
         Row(
             modifier =
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth(),
+            Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -184,9 +210,35 @@ fun BackGround(scrollState: LazyListState) {
                 ) {
                     val dividerColor = Colors.primary.copy(alpha = 0.1f)
                     VerticalDivider(color = dividerColor)
-                    Spacer(Modifier.weight(1f))
+                    Box(Modifier.weight(1f)) {
+                        Icon(
+                            modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
+                            imageVector = AntonIcons.RectangleSoft,
+                            contentDescription = null,
+                            tint = Colors.primary,
+                        )
+                        Icon(
+                            modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
+                            imageVector = AntonIcons.RectangleHard,
+                            contentDescription = null,
+                            tint = Colors.primary,
+                        )
+                    }
                     VerticalDivider(color = dividerColor)
-                    Spacer(Modifier.weight(1f))
+                    Box(Modifier.weight(1f)) {
+                        Icon(
+                            modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
+                            imageVector = AntonIcons.RectangleSoft,
+                            contentDescription = null,
+                            tint = Colors.primary,
+                        )
+                        Icon(
+                            modifier = Modifier.align(Alignment.TopEnd).padding(top= 200.dp,end = 100.dp),
+                            imageVector = AntonIcons.RectangleHard,
+                            contentDescription = null,
+                            tint = Colors.primary,
+                        )
+                    }
                     VerticalDivider(color = dividerColor)
                     Spacer(Modifier.weight(1f))
                     VerticalDivider(color = dividerColor)

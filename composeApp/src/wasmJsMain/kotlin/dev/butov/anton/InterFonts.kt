@@ -3,6 +3,7 @@ package dev.butov.anton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import antonbutov.composeapp.generated.resources.Inter_28pt_Light
 import antonbutov.composeapp.generated.resources.Inter_28pt_Medium
 import antonbutov.composeapp.generated.resources.Inter_28pt_Regular
 import antonbutov.composeapp.generated.resources.Res
@@ -18,5 +19,9 @@ fun InterFonts() =
         Font(
             resource = Res.font.Inter_28pt_Medium,
             weight = FontWeight.Medium,
+        ),
+        Font(
+            resource = Res.font.Inter_28pt_Light,
+            weight = FontWeight.Light,
         ),
     )

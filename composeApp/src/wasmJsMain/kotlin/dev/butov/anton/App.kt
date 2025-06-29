@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString.Builder
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -27,7 +28,9 @@ import org.jetbrains.compose.resources.painterResource
 fun App() {
     MaterialTheme {
         CompositionLocalProvider(
-            LocalTextStyle provides LocalTextStyle.current.copy(fontFamily = InterFonts()),
+            LocalTextStyle provides LocalTextStyle.current.copy(
+                fontFamily = InterFonts(),
+            ),
         ) {
             var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
@@ -61,34 +64,34 @@ fun PhotoBlock() {
 
 @Composable
 fun Im() {
-
-    val firstText =
-        buildAnnotatedString {
-            SoftStyle {
-                append("I'm ")
+    Column {
+        val firstText =
+            buildAnnotatedString {
+                SoftStyle {
+                    append("I'm ")
+                }
+                FullStyle {
+                    append("Anton Butov\n")
+                }
+                SoftStyle {
+                    append("and I'm a ")
+                }
+                FullStyle {
+                    append("Senior Android Developer")
+                }
             }
-            FullStyle {
-                append("Anton Butov\n")
-            }
-            SoftStyle {
-                append("and I'm a ")
-            }
-            FullStyle {
-                append("Senior Android Developer")
-            }
-        }
-    Text(
-        text = firstText,
-        style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
-    )
-
-    //    append(
-    //        annotatedString = "I'm Anton Butov,\n" +
-    //                "a passionate Senior Android Developer"
-    //        style = SpanStyle(
-    //    "I'm Anton Butov,\n" +
-    //          "a passionate Senior Android Developer"
-    // Text()
+        Text(
+            text = firstText,
+            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
+        )
+        Spacer(Modifier.size(24.dp))
+        val secondText = "Nice to meet you."
+        Text(
+            text = secondText,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+            color = Colors.primary.copy(alpha = 0.6f),
+        )
+    }
 }
 
 private val softStyle = SpanStyle(
@@ -233,7 +236,7 @@ fun BackGround(scrollState: LazyListState) {
                             tint = Colors.primary,
                         )
                         Icon(
-                            modifier = Modifier.align(Alignment.TopEnd).padding(top= 200.dp,end = 100.dp),
+                            modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
                             imageVector = AntonIcons.RectangleHard,
                             contentDescription = null,
                             tint = Colors.primary,
@@ -242,7 +245,7 @@ fun BackGround(scrollState: LazyListState) {
                     VerticalDivider(color = dividerColor)
                     Box(Modifier.weight(1f)) {
                         Icon(
-                            modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top= 200.dp),
+                            modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
                             imageVector = AntonIcons.RectangleSoft,
                             contentDescription = null,
                             tint = Colors.primary,

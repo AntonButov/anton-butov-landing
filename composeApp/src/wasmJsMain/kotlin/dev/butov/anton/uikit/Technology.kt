@@ -69,7 +69,7 @@ private fun Technology(
             .background(Colors.primary.copy(alpha = 0.2f)),
     ) {
         Icon(
-            modifier = modifierIcon.align(Alignment.TopStart),
+            modifier = modifierIcon,
             imageVector = icon,
             contentDescription = null,
         )

@@ -24,6 +24,7 @@ import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.CallButtonDark
+import dev.butov.anton.uikit.CallButtonLight
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -81,7 +82,7 @@ fun PhotoBlock() {
             painter = painterResource(Res.drawable.butov),
             contentDescription = null,
             modifier = Modifier
-                .align(Alignment.CenterEnd),
+                .align(Alignment.BottomEnd),
             tint = Color.Unspecified,
         )
     }
@@ -116,6 +117,8 @@ fun Im(modifier: Modifier) {
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
             color = Colors.primary.copy(alpha = 0.6f),
         )
+        Spacer(Modifier.size(24.dp))
+        CallButtonLight(Modifier.height(50.dp))
     }
 }
 

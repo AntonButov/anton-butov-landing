@@ -19,14 +19,22 @@ import dev.butov.anton.myiconpack.Call
 @Composable
 fun CallButtonDark(modifier: Modifier) {
     CallButton(
-        modifier = modifier,
+        modifier = modifier.fillMaxHeight(),
         background = Colors.primary.copy(alpha = 0.1f),
         contentColor = Colors.primary,
         borderColor = Colors.primary.copy(alpha = 0.2f),
     )
 }
 
-
+@Composable
+fun CallButtonLight(modifier: Modifier) {
+    CallButton(
+        modifier = modifier,
+        background = Colors.primary,
+        contentColor = Colors.background,
+        borderColor = Colors.primary,
+    )
+}
 
 @Composable
 private fun CallButton(modifier: Modifier, background: Color, contentColor: Color, borderColor: Color) {
@@ -34,7 +42,6 @@ private fun CallButton(modifier: Modifier, background: Color, contentColor: Colo
         modifier = modifier
            // .align(Alignment.CenterEnd)
             .width(160.dp)
-            .fillMaxHeight()
             .clip(MaterialTheme.shapes.small)
             .background(background)
             .border(1.dp, borderColor, MaterialTheme.shapes.small)

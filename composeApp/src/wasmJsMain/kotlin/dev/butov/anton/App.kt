@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
+import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import org.jetbrains.compose.resources.painterResource
@@ -31,6 +32,7 @@ fun App() {
             LocalTextStyle provides LocalTextStyle.current.copy(
                 fontFamily = InterFonts(),
             ),
+            LocalContentColor provides Colors.primary,
         ) {
             var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
@@ -57,14 +59,20 @@ fun MainColumn() {
 
 @Composable
 fun PhotoBlock() {
-    Row {
-        Im()
+    Box(modifier = Modifier.fillMaxSize()) {
+        Im(Modifier.align(Alignment.BottomStart))
+        Icon(
+            painter = painterResource(Res.drawable.butov),
+            contentDescription = null,
+            modifier = Modifier
+                .align(Alignment.CenterEnd),
+        )
     }
 }
 
 @Composable
-fun Im() {
-    Column {
+fun Im(modifier: Modifier) {
+    Column(modifier = modifier) {
         val firstText =
             buildAnnotatedString {
                 SoftStyle {
@@ -126,7 +134,6 @@ fun Hamburger() {
     Icon(
         imageVector = AntonIcons.Gamburger,
         contentDescription = "Gamburger",
-        tint = Colors.primary,
     )
 }
 
@@ -145,7 +152,6 @@ private fun Arrow() {
     Icon(
         imageVector = AntonIcons.Arrow,
         contentDescription = "Arrow",
-        tint = Colors.primary,
     )
 }
 

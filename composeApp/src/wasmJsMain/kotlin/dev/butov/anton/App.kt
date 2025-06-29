@@ -23,9 +23,7 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
-import dev.butov.anton.uikit.CallButtonDark
-import dev.butov.anton.uikit.CallButtonLight
-import dev.butov.anton.uikit.TechnologyHeader
+import dev.butov.anton.uikit.*
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -76,10 +74,11 @@ fun Technologies() {
     FlowRow(
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
-            .background(Colors.background)
+            .background(Colors.background.copy(alpha = 0.45f))
             .padding(16.dp)
     ) {
         TechnologyHeader()
+        TechnologyKotlin()
     }
 }
 

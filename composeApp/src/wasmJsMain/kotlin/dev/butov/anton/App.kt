@@ -41,8 +41,14 @@ fun App() {
             var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
             Box(modifier = Modifier.fillMaxSize()) {
-                BackGround(scrollState)
-                MainColumn(scrollState)
+                LazyColumn(state = scrollState) {
+                    item {
+                        Box {
+                            BackGround()
+                            MainColumn()
+                        }
+                    }
+                }
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(scrollState),
                     modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
@@ -53,26 +59,15 @@ fun App() {
 }
 
 @Composable
-fun MainColumn(scrollState: LazyListState) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp),
-        state = scrollState
+fun MainColumn() {
+    Column(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 81.dp, vertical = 50.dp),
     ) {
-        item {
-            Header()
-        }
-        item {
-            Spacer(modifier = Modifier.size(50.dp))
-        }
-        item {
-            PhotoBlock()
-        }
-        item {
-            Spacer(Modifier.size(60.dp))
-        }
-        item {
-            Technologies()
-        }
+        Header()
+        Spacer(modifier = Modifier.size(50.dp))
+        PhotoBlock()
+        Spacer(Modifier.size(60.dp))
+        Technologies()
     }
 }
 
@@ -90,7 +85,7 @@ fun Technologies() {
 
 @Composable
 fun PhotoBlock() {
-    Box(modifier = Modifier.height(600.dp).fillMaxWidth()) {
+    Box(modifier = Modifier.height(550.dp).fillMaxWidth()) {
         Im(Modifier.align(Alignment.BottomStart))
         Icon(
             painter = painterResource(Res.drawable.butov),
@@ -200,73 +195,62 @@ fun BoxScope.AntonButov() {
 }
 
 @Composable
-fun BackGround(scrollState: LazyListState) {
-    LazyColumn(
-        state = scrollState,
+fun BackGround() {
+    Row(
+        Modifier
+            .height(3500.dp)
+            .fillMaxWidth()
+            .background(Colors.background)
+            .padding(horizontal = 80.dp),
     ) {
-        item {
-            Box(
-                Modifier
-                    .background(Colors.background)
-                    .height(3500.dp)
-                    .fillMaxWidth(),
-            ) {
-                Row(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 80.dp),
-                ) {
-                    val dividerColor = Colors.primary.copy(alpha = 0.1f)
-                    VerticalDivider(color = dividerColor)
-                    Box(Modifier.weight(1f)) {
-                        Icon(
-                            modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
-                            imageVector = AntonIcons.RectangleSoft,
-                            contentDescription = null,
-                            tint = Colors.primary,
-                        )
-                        Icon(
-                            modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
-                            imageVector = AntonIcons.RectangleHard,
-                            contentDescription = null,
-                            tint = Colors.primary,
-                        )
-                    }
-                    VerticalDivider(color = dividerColor)
-                    Box(Modifier.weight(1f)) {
-                        Icon(
-                            modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
-                            imageVector = AntonIcons.RectangleSoft,
-                            contentDescription = null,
-                            tint = Colors.primary,
-                        )
-                        Icon(
-                            modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
-                            imageVector = AntonIcons.RectangleHard,
-                            contentDescription = null,
-                            tint = Colors.primary,
-                        )
-                    }
-                    VerticalDivider(color = dividerColor)
-                    Box(Modifier.weight(1f)) {
-                        Icon(
-                            modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
-                            imageVector = AntonIcons.RectangleSoft,
-                            contentDescription = null,
-                            tint = Colors.primary,
-                        )
-                    }
-                    VerticalDivider(color = dividerColor)
-                    Spacer(Modifier.weight(1f))
-                    VerticalDivider(color = dividerColor)
-                }
-                Image(
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
-                    painter = painterResource(Res.drawable.redBack),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillBounds,
-                )
-            }
+        val dividerColor = Colors.primary.copy(alpha = 0.1f)
+        VerticalDivider(color = dividerColor)
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+                tint = Colors.primary,
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
+                imageVector = AntonIcons.RectangleHard,
+                contentDescription = null,
+                tint = Colors.primary,
+            )
         }
+        VerticalDivider(color = dividerColor)
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+                tint = Colors.primary,
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
+                imageVector = AntonIcons.RectangleHard,
+                contentDescription = null,
+                tint = Colors.primary,
+            )
+        }
+        VerticalDivider(color = dividerColor)
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+                tint = Colors.primary,
+            )
+        }
+        VerticalDivider(color = dividerColor)
+        Spacer(Modifier.weight(1f))
+        VerticalDivider(color = dividerColor)
     }
+    Image(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
+        painter = painterResource(Res.drawable.redBack),
+        contentDescription = null,
+        contentScale = ContentScale.FillBounds,
+    )
 }

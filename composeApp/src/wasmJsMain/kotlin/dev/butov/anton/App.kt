@@ -55,6 +55,7 @@ fun MainColumn() {
         Header()
         Spacer(modifier = Modifier.size(50.dp))
         PhotoBlock()
+        Spacer(Modifier.size(60.dp))
     }
 }
 

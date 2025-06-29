@@ -4,6 +4,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,7 +16,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString.Builder
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -25,6 +25,7 @@ import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.CallButtonDark
 import dev.butov.anton.uikit.CallButtonLight
+import dev.butov.anton.uikit.TechnologyHeader
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -41,7 +42,7 @@ fun App() {
             val scrollState = rememberLazyListState()
             Box(modifier = Modifier.fillMaxSize()) {
                 BackGround(scrollState)
-                MainColumn()
+                MainColumn(scrollState)
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(scrollState),
                     modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
@@ -52,13 +53,26 @@ fun App() {
 }
 
 @Composable
-fun MainColumn() {
-    Column(Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp)) {
-        Header()
-        Spacer(modifier = Modifier.size(50.dp))
-        PhotoBlock()
-        Spacer(Modifier.size(60.dp))
-        Technologies()
+fun MainColumn(scrollState: LazyListState) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 81.dp, vertical = 50.dp),
+        state = scrollState
+    ) {
+        item {
+            Header()
+        }
+        item {
+            Spacer(modifier = Modifier.size(50.dp))
+        }
+        item {
+            PhotoBlock()
+        }
+        item {
+            Spacer(Modifier.size(60.dp))
+        }
+        item {
+            Technologies()
+        }
     }
 }
 
@@ -70,7 +84,7 @@ fun Technologies() {
             .background(Colors.background)
             .padding(16.dp)
     ) {
-
+        TechnologyHeader()
     }
 }
 

@@ -40,7 +40,6 @@ fun CallButtonLight(modifier: Modifier) {
 private fun CallButton(modifier: Modifier, background: Color, contentColor: Color, borderColor: Color) {
     Box(
         modifier = modifier
-           // .align(Alignment.CenterEnd)
             .width(160.dp)
             .clip(MaterialTheme.shapes.small)
             .background(background)

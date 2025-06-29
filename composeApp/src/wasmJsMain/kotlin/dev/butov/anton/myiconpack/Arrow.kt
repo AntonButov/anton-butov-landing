@@ -13,13 +13,18 @@ import dev.butov.anton.AntonIcons
 
 val AntonIcons.Arrow: ImageVector by lazy {
     Builder(
-        name = "Arrow", defaultWidth = 41.0.dp, defaultHeight = 38.0.dp,
-        viewportWidth = 41.0f, viewportHeight = 38.0f
+        name = "Arrow",
+        defaultWidth = 41.0.dp,
+        defaultHeight = 38.0.dp,
+        viewportWidth = 41.0f,
+        viewportHeight = 38.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.1f, strokeAlpha
-            = 0.1f, strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.1f,
+            strokeAlpha =
+            0.1f,
+            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f, pathFillType = NonZero,
         ) {
             moveTo(40.1129f, 23.4723f)
             lineTo(0.0f, 37.9048f)

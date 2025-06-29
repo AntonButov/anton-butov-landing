@@ -12,11 +12,23 @@ import androidx.compose.ui.unit.dp
 import dev.butov.anton.AntonIcons
 
 val AntonIcons.Gamburger: ImageVector by lazy {
-    Builder(name = "Group 5", defaultWidth = 46.0.dp, defaultHeight = 46.0.dp,
-        viewportWidth = 46.0f, viewportHeight = 46.0f).apply {
-        path(fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.1f,
-            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero) {
+    Builder(
+        name = "Group 5",
+        defaultWidth = 46.0.dp,
+        defaultHeight = 46.0.dp,
+        viewportWidth = 46.0f,
+        viewportHeight = 46.0f,
+    ).apply {
+        path(
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            fillAlpha = 0.1f,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
+        ) {
             moveTo(0.0f, 5.0f)
             curveTo(0.0f, 2.2386f, 2.2386f, 0.0f, 5.0f, 0.0f)
             horizontalLineTo(41.0f)
@@ -28,9 +40,17 @@ val AntonIcons.Gamburger: ImageVector by lazy {
             verticalLineTo(5.0f)
             close()
         }
-        path(fill = SolidColor(Color(0x00000000)), stroke = SolidColor(Color(0xFFffffff)),
-            strokeAlpha = 0.2f, strokeLineWidth = 1.0f, strokeLineCap = Butt, strokeLineJoin
-            = Miter, strokeLineMiter = 4.0f, pathFillType = NonZero) {
+        path(
+            fill = SolidColor(Color(0x00000000)),
+            stroke = SolidColor(Color(0xFFffffff)),
+            strokeAlpha = 0.2f,
+            strokeLineWidth = 1.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin =
+            Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
+        ) {
             moveTo(5.0f, 0.5f)
             horizontalLineTo(41.0f)
             curveTo(43.4853f, 0.5f, 45.5f, 2.5147f, 45.5f, 5.0f)
@@ -42,9 +62,15 @@ val AntonIcons.Gamburger: ImageVector by lazy {
             curveTo(0.5f, 2.5147f, 2.5147f, 0.5f, 5.0f, 0.5f)
             close()
         }
-        path(fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero) {
+        path(
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
+        ) {
             moveTo(10.0f, 19.0f)
             lineTo(36.0f, 19.0f)
             arcTo(1.0f, 1.0f, 0.0f, false, true, 37.0f, 20.0f)
@@ -56,9 +82,15 @@ val AntonIcons.Gamburger: ImageVector by lazy {
             arcTo(1.0f, 1.0f, 0.0f, false, true, 10.0f, 19.0f)
             close()
         }
-        path(fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero) {
+        path(
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
+        ) {
             moveTo(10.0f, 25.0f)
             lineTo(36.0f, 25.0f)
             arcTo(1.0f, 1.0f, 0.0f, false, true, 37.0f, 26.0f)

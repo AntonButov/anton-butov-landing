@@ -9,14 +9,14 @@ import antonbutov.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.Font
 
 @Composable
-fun InterFonts() = FontFamily(
-    Font(
-        resource = Res.font.Inter_28pt_Regular,
-        weight = FontWeight.Normal,
-    ),
-    Font(
-        resource = Res.font.Inter_28pt_Medium,
-        weight = FontWeight.Medium,
+fun InterFonts() =
+    FontFamily(
+        Font(
+            resource = Res.font.Inter_28pt_Regular,
+            weight = FontWeight.Normal,
+        ),
+        Font(
+            resource = Res.font.Inter_28pt_Medium,
+            weight = FontWeight.Medium,
+        ),
     )
-
-)

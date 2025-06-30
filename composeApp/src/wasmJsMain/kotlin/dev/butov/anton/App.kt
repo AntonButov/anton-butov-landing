@@ -194,7 +194,7 @@ fun BoxScope.AntonButov() {
 }
 
 @Composable
-fun BackGround() {
+fun BoxScope.BackGround() {
     Row(
         Modifier
             .height(3500.dp)
@@ -209,13 +209,11 @@ fun BackGround() {
                 modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
-                tint = Colors.primary,
             )
             Icon(
                 modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
                 imageVector = AntonIcons.RectangleHard,
                 contentDescription = null,
-                tint = Colors.primary,
             )
         }
         VerticalDivider(color = dividerColor)
@@ -224,13 +222,11 @@ fun BackGround() {
                 modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
-                tint = Colors.primary,
             )
             Icon(
                 modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
                 imageVector = AntonIcons.RectangleHard,
                 contentDescription = null,
-                tint = Colors.primary,
             )
         }
         VerticalDivider(color = dividerColor)
@@ -239,7 +235,6 @@ fun BackGround() {
                 modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
-                tint = Colors.primary,
             )
         }
         VerticalDivider(color = dividerColor)
@@ -247,9 +242,9 @@ fun BackGround() {
         VerticalDivider(color = dividerColor)
     }
     Image(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 550.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 150.dp),
         painter = painterResource(Res.drawable.redBack),
         contentDescription = null,
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.FillWidth,
     )
 }

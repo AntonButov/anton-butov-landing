@@ -38,7 +38,7 @@ fun TechnologyHeader(
     Technology {
         Text(
             modifier = modifier.align(Alignment.TopStart),
-            text = "Technologies:",
+            text = "My technologies:",
             style = MaterialTheme.typography.bodyMedium,
         )
     }

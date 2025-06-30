@@ -71,8 +71,8 @@ fun TechnologyCompose() {
         modifierIcon = Modifier
             .padding(start = 13.dp, top = 10.dp),
         icon = AntonIcons.Compose,
-        technology = "Java",
-        experience = "5 years" // todo by now
+        technology = "Jetpack Compose",
+        experience = "3 years" // todo by now
     )
 }
 
@@ -82,8 +82,41 @@ fun TechnologyDagger() {
         modifierIcon = Modifier
             .padding(start = 12.dp, top = 10.dp),
         icon = AntonIcons.Google,
-        technology = "Java",
+        technology = "Dagger",
         experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyCleanArchitecture() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 13.dp, top = 10.dp),
+        icon = AntonIcons.Android,
+        technology = "Clear Architecture",
+        experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyTDD() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 13.dp, top = 10.dp),
+        icon = AntonIcons.Android,
+        technology = "TDD",
+        experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyKMP() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 13.dp, top = 10.dp),
+        icon = AntonIcons.Kotlin,
+        technology = "KMP",
+        experience = "3 years" // todo by now
     )
 }
 

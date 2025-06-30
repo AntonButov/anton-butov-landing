@@ -91,7 +91,11 @@ fun Technologies() {
         Spacer(Modifier.size(7.dp))
         TechnologyDagger()
         Spacer(Modifier.size(7.dp))
-
+        TechnologyCleanArchitecture()
+        Spacer(Modifier.size(7.dp))
+        TechnologyTDD()
+        Spacer(Modifier.size(7.dp))
+        TechnologyKMP()
     }
 }
 

@@ -79,22 +79,17 @@ fun Technologies() {
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
             .background(Colors.background.copy(alpha = 0.45f))
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(7.dp),
+        verticalArrangement =  Arrangement.spacedBy(7.dp),
     ) {
         TechnologyHeader()
-        Spacer(Modifier.size(7.dp))
         TechnologyKotlin()
-        Spacer(Modifier.size(7.dp))
         TechnologyJava()
-        Spacer(Modifier.size(7.dp))
         TechnologyCompose()
-        Spacer(Modifier.size(7.dp))
         TechnologyDagger()
-        Spacer(Modifier.size(7.dp))
         TechnologyCleanArchitecture()
-        Spacer(Modifier.size(7.dp))
         TechnologyTDD()
-        Spacer(Modifier.size(7.dp))
         TechnologyKMP()
     }
 }

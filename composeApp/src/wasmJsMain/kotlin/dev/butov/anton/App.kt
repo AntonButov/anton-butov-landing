@@ -10,8 +10,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RenderEffect
+import androidx.compose.ui.graphics.Shader
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString.Builder
 import androidx.compose.ui.text.SpanStyle
@@ -78,7 +82,16 @@ fun Technologies() {
             .padding(16.dp)
     ) {
         TechnologyHeader()
+        Spacer(Modifier.size(7.dp))
         TechnologyKotlin()
+        Spacer(Modifier.size(7.dp))
+        TechnologyJava()
+        Spacer(Modifier.size(7.dp))
+        TechnologyCompose()
+        Spacer(Modifier.size(7.dp))
+        TechnologyDagger()
+        Spacer(Modifier.size(7.dp))
+
     }
 }
 

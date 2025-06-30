@@ -14,8 +14,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
-import dev.butov.anton.myiconpack.AntonIcons
-import dev.butov.anton.myiconpack.Kotlin
+import dev.butov.anton.myiconpack.*
 import org.w3c.dom.ImageBitmapRenderingContextSettings
 
 val TECHNOLOGY_HEIGHT = 110.dp
@@ -51,6 +50,39 @@ fun TechnologyKotlin() {
             .padding(start = 15.dp, top = 14.dp),
         icon = AntonIcons.Kotlin,
         technology = "Kotlin",
+        experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyJava() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 15.dp, top = 10.dp),
+        icon = AntonIcons.Java,
+        technology = "Java",
+        experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyCompose() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 13.dp, top = 10.dp),
+        icon = AntonIcons.Compose,
+        technology = "Java",
+        experience = "5 years" // todo by now
+    )
+}
+
+@Composable
+fun TechnologyDagger() {
+    Technology(
+        modifierIcon = Modifier
+            .padding(start = 12.dp, top = 10.dp),
+        icon = AntonIcons.Google,
+        technology = "Java",
         experience = "5 years" // todo by now
     )
 }

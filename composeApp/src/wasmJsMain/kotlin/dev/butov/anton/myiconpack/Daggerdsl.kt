@@ -7,7 +7,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import dev.butov.anton.MyIconPack
 
 val AntonIcons.DaggerDsl: ImageVector by lazy {
     Builder(name = "Daggerdsl", defaultWidth = 70.0.dp, defaultHeight = 69.0.dp,

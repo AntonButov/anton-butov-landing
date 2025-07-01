@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import dev.butov.anton.MyIconPack
 
 val AntonIcons.Ln: ImageVector by lazy {
     Builder(name = "Ln", defaultWidth = 23.0.dp, defaultHeight = 22.0.dp, viewportWidth =

@@ -109,11 +109,11 @@ private fun TechnologyButton(technology: TechnologiesEnum) {
     Box(
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
-            .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.medium)
+            .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
             .background(Colors.primary.copy(alpha = 0.1f)),
         contentAlignment = Alignment.Center,
     ) {
-        Row(Modifier.align(Alignment.Center)) {
+        Row(Modifier.height(40.dp).padding(horizontal = 13.dp).padding(vertical = 11.dp)) {
             Icon(
                 imageVector = technology.imageVector,
                 contentDescription = null,

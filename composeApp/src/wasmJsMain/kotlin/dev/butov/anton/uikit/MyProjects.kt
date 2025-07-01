@@ -3,6 +3,7 @@ package dev.butov.anton.uikit
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.BoxScopeInstance.align
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,7 +20,9 @@ import dev.butov.anton.Colors
 import dev.butov.anton.InterFonts
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.AntonIcons
+import dev.butov.anton.myiconpack.ClickArrow
 import dev.butov.anton.myiconpack.Go
+import dev.butov.anton.myiconpack.Kotlin
 
 @Composable
 fun MyProjects() {
@@ -48,7 +51,7 @@ fun MyProjects() {
 @Composable
 private fun ProjectGo() {
     Project(
-        imageVector = AntonIcons.Go,
+        imageVector = AntonIcons.Kotlin,
         name = "Yandex GO",
         time = "2023-2024",
         technologies = listOf(
@@ -69,7 +72,11 @@ private fun Project(imageVector: ImageVector, name: String, time: String, techno
         .background(Colors.background.copy(alpha = 0.4f))
         .padding(horizontal = 14.dp, vertical = 16.dp)
     ) {
-        ProjectIcon(imageVector)
+        Row {
+            ProjectIcon(imageVector)
+            Spacer(Modifier.weight(1f))
+            ClickIcon(Modifier.align(Alignment.CenterVertically))
+        }
         Column(
             modifier = Modifier.align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -86,9 +93,17 @@ private fun Project(imageVector: ImageVector, name: String, time: String, techno
 }
 
 @Composable
-private fun BoxScope.ProjectIcon(imageVector: ImageVector) {
+private fun ClickIcon(modifier: Modifier) {
     Icon(
-        modifier = Modifier.align(Alignment.TopStart),
+        modifier = modifier,
+        imageVector = AntonIcons.ClickArrow,
+        contentDescription = null,
+    )
+}
+
+@Composable
+private fun ProjectIcon(imageVector: ImageVector) {
+    Icon(
         imageVector = imageVector,
         contentDescription = null,
     )

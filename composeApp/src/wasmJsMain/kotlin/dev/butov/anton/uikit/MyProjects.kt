@@ -3,7 +3,6 @@ package dev.butov.anton.uikit
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.BoxScopeInstance.align
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,18 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import antonbutov.composeapp.generated.resources.Res
+import antonbutov.composeapp.generated.resources.go
 import dev.butov.anton.Colors
 import dev.butov.anton.InterFonts
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.ClickArrow
-import dev.butov.anton.myiconpack.Go
 import dev.butov.anton.myiconpack.Kotlin
+import org.jetbrains.compose.resources.imageResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MyProjects() {
@@ -51,7 +55,7 @@ fun MyProjects() {
 @Composable
 private fun ProjectGo() {
     Project(
-        imageVector = AntonIcons.Kotlin,
+        painter = painterResource(Res.drawable.go),
         name = "Yandex GO",
         time = "2023-2024",
         technologies = listOf(
@@ -63,7 +67,7 @@ private fun ProjectGo() {
 }
 
 @Composable
-private fun Project(imageVector: ImageVector, name: String, time: String, technologies: List<@Composable () -> Unit>) {
+private fun Project(painter: Painter, name: String, time: String, technologies: List<@Composable () -> Unit>) {
     Box(Modifier
         .height(300.dp)
         .width(270.dp)
@@ -73,7 +77,7 @@ private fun Project(imageVector: ImageVector, name: String, time: String, techno
         .padding(horizontal = 14.dp, vertical = 16.dp)
     ) {
         Row {
-            ProjectIcon(imageVector)
+            ProjectIcon(painter)
             Spacer(Modifier.weight(1f))
             ClickIcon(Modifier.align(Alignment.CenterVertically))
         }
@@ -106,6 +110,15 @@ private fun ProjectIcon(imageVector: ImageVector) {
     Icon(
         imageVector = imageVector,
         contentDescription = null,
+    )
+}
+
+@Composable
+private fun ProjectIcon(painter: Painter) {
+    Icon(
+        painter = painter,
+        contentDescription = null,
+        tint = Colors.primary,
     )
 }
 

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
+import antonbutov.composeapp.generated.resources.go
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.*
@@ -145,7 +146,7 @@ fun Im(modifier: Modifier) {
 }
 
 @Composable
-fun BoxScope.BackGround() {
+fun BackGround() {
     Row(
         Modifier
             .height(3500.dp)

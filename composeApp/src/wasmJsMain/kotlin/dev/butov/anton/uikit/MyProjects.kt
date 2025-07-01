@@ -12,9 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
+import dev.butov.anton.InterFonts
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Go
@@ -59,7 +61,14 @@ private fun ProjectGo() {
 
 @Composable
 private fun Project(imageVector: ImageVector, name: String, time: String, technologies: List<@Composable () -> Unit>) {
-    Box(Modifier.height(300.dp).width(270.dp)) {
+    Box(Modifier
+        .height(300.dp)
+        .width(270.dp)
+        .clip(MaterialTheme.shapes.small)
+        .border(1.dp, Colors.primary.copy(alpha = 0.5f), MaterialTheme.shapes.small)
+        .background(Colors.background.copy(alpha = 0.4f))
+        .padding(horizontal = 14.dp, vertical = 16.dp)
+    ) {
         ProjectIcon(imageVector)
         Column(
             modifier = Modifier.align(Alignment.BottomCenter),
@@ -92,7 +101,6 @@ private fun ProjectName(name: String, time: String) {
             text = name,
             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
         )
-        Spacer(Modifier.size(20.dp))
         Text(
             text = buildAnnotatedString {
                 SoftStyle {
@@ -108,13 +116,14 @@ private fun ProjectName(name: String, time: String) {
 private fun TechnologyButton(technology: TechnologiesEnum) {
     Box(
         modifier = Modifier
-            .clip(MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.small)
             .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.small)
             .background(Colors.primary.copy(alpha = 0.1f)),
         contentAlignment = Alignment.Center,
     ) {
         Row(Modifier.height(40.dp).padding(horizontal = 13.dp).padding(vertical = 11.dp)) {
             Icon(
+                modifier = Modifier.size(15.dp).align(Alignment.CenterVertically),
                 imageVector = technology.imageVector,
                 contentDescription = null,
             )

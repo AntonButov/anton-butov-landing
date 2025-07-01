@@ -1,0 +1,127 @@
+package dev.butov.anton.uikit
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import dev.butov.anton.Colors
+import dev.butov.anton.myiconpack.AntonIcons
+import dev.butov.anton.myiconpack.Go
+
+@Composable
+fun MyProjects() {
+    Column {
+        Text(
+            text = buildAnnotatedString {
+                SoftStyle {
+                    append("My ")
+                }
+                FullStyle {
+                    append("Projects:")
+                }
+            },
+            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
+        )
+        Spacer(Modifier.size(36.dp))
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            ProjectGo()
+        }
+    }
+}
+
+@Composable
+private fun ProjectGo() {
+    Project(
+        imageVector = AntonIcons.Go,
+        name = "Yandex GO",
+        time = "2023-2024",
+        technologies = listOf(
+            {}
+        )
+    )
+}
+
+@Composable
+private fun Project(imageVector: ImageVector, name: String, time: String, technologies: List<@Composable () -> Unit>) {
+    Box(Modifier.height(300.dp).width(270.dp)) {
+        ProjectIcon(imageVector)
+        Column(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            ProjectName(name, time)
+            Spacer(Modifier.size(20.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                technologies.forEach {
+                    it()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.ProjectIcon(imageVector: ImageVector) {
+    Icon(
+        modifier = Modifier.align(Alignment.TopStart),
+        imageVector = imageVector,
+        contentDescription = null,
+    )
+}
+
+@Composable
+private fun ProjectName(name: String, time: String) {
+    Column {
+        Text(
+            text = name,
+            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
+        )
+        Spacer(Modifier.size(20.dp))
+        Text(
+            text = buildAnnotatedString {
+                SoftStyle {
+                    append(time)
+                }
+            },
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Normal),
+        )
+    }
+}
+
+@Composable
+private fun TechnologyButton(icon: ImageVector, technology: String) {
+    Box(
+        modifier = Modifier
+            .clip(MaterialTheme.shapes.medium)
+            .border(1.dp, Colors.primary.copy(alpha = 0.2f), MaterialTheme.shapes.medium)
+            .background(Colors.primary.copy(alpha = 0.1f)),
+        contentAlignment = Alignment.Center,
+    ) {
+        Row(Modifier.align(Alignment.Center)) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+            )
+            Spacer(Modifier.size(6.dp))
+            Text(
+                modifier = Modifier.align(Alignment.CenterVertically),
+                text = technology,
+                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Normal),
+            )
+        }
+    }
+}
+

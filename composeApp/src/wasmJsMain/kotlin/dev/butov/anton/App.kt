@@ -70,6 +70,8 @@ fun MainColumn() {
         PhotoBlock()
         Spacer(Modifier.size(60.dp))
         Technologies()
+        Spacer(Modifier.size(150.dp))
+        MyProjects()
     }
 }
 
@@ -140,69 +142,6 @@ fun Im(modifier: Modifier) {
         Spacer(Modifier.size(24.dp))
         CallButtonLight(Modifier.height(50.dp))
     }
-}
-
-private val softStyle = SpanStyle(
-    color = Colors.primary.copy(alpha = 0.6f),
-)
-private val fullStyle = SpanStyle(
-    color = Colors.primary,
-)
-
-private fun Builder.SoftStyle(block: Builder.() -> Unit) =
-    withStyle(softStyle, block)
-
-private fun Builder.FullStyle(block: Builder.() -> Unit) =
-    withStyle(fullStyle, block)
-
-@Composable
-fun Header() {
-    Box(
-        Modifier
-            .height(50.dp)
-            .fillMaxWidth(),
-    ) {
-        Hamburger()
-        Arrows()
-        AntonButov()
-        CallButtonDark(Modifier.align(Alignment.CenterEnd))
-    }
-}
-
-@Composable
-fun Hamburger() {
-    Icon(
-        imageVector = AntonIcons.Gamburger,
-        contentDescription = "Gamburger",
-    )
-}
-
-@Composable
-fun BoxScope.Arrows() {
-    Row(
-        modifier = Modifier.align(Alignment.Center),
-    ) {
-        Arrow()
-        Arrow()
-    }
-}
-
-@Composable
-private fun Arrow() {
-    Icon(
-        imageVector = AntonIcons.Arrow,
-        contentDescription = "Arrow",
-    )
-}
-
-@Composable
-fun BoxScope.AntonButov() {
-    Icon(
-        modifier = Modifier.align(Alignment.Center),
-        imageVector = AntonIcons.AntonButov,
-        tint = Colors.primary,
-        contentDescription = "AntonButov",
-    )
 }
 
 @Composable

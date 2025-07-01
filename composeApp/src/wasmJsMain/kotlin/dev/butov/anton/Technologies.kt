@@ -3,7 +3,7 @@ package dev.butov.anton
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.butov.anton.myiconpack.*
 
-enum class TechnologiesEnum(imageVector: ImageVector, name: String) {
+enum class TechnologiesEnum(val imageVector: ImageVector, val text: String) {
     Kotlin(AntonIcons.Kotlin, "Kotlin"),
     Java(AntonIcons.Java, "Java"),
     JetpackCompose(AntonIcons.Compose, "Jetpack Compose"),

@@ -15,6 +15,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
+import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Go
 
@@ -49,7 +50,9 @@ private fun ProjectGo() {
         name = "Yandex GO",
         time = "2023-2024",
         technologies = listOf(
-            {}
+            { TechnologyButton(TechnologiesEnum.Kotlin) },
+            { TechnologyButton(TechnologiesEnum.Java) },
+            { TechnologyButton(TechnologiesEnum.Dagger) },
         )
     )
 }
@@ -102,7 +105,7 @@ private fun ProjectName(name: String, time: String) {
 }
 
 @Composable
-private fun TechnologyButton(icon: ImageVector, technology: String) {
+private fun TechnologyButton(technology: TechnologiesEnum) {
     Box(
         modifier = Modifier
             .clip(MaterialTheme.shapes.medium)
@@ -112,13 +115,13 @@ private fun TechnologyButton(icon: ImageVector, technology: String) {
     ) {
         Row(Modifier.align(Alignment.Center)) {
             Icon(
-                imageVector = icon,
+                imageVector = technology.imageVector,
                 contentDescription = null,
             )
             Spacer(Modifier.size(6.dp))
             Text(
                 modifier = Modifier.align(Alignment.CenterVertically),
-                text = technology,
+                text = technology.text,
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Normal),
             )
         }

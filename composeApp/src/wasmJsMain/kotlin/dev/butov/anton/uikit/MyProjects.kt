@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorPainter
@@ -18,13 +19,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
+import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.go
 import dev.butov.anton.Colors
 import dev.butov.anton.InterFonts
 import dev.butov.anton.TechnologiesEnum
-import dev.butov.anton.myiconpack.AntonIcons
-import dev.butov.anton.myiconpack.ClickArrow
-import dev.butov.anton.myiconpack.Kotlin
+import dev.butov.anton.myiconpack.*
 import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -77,7 +77,11 @@ private fun Project(painter: Painter, name: String, time: String, technologies: 
         .padding(horizontal = 14.dp, vertical = 16.dp)
     ) {
         Row {
-            ProjectIcon(painter)
+            Icon(
+                painter = painter,
+                contentDescription = null,
+                tint = Color.Unspecified
+            )
             Spacer(Modifier.weight(1f))
             ClickIcon(Modifier.align(Alignment.CenterVertically))
         }
@@ -118,7 +122,6 @@ private fun ProjectIcon(painter: Painter) {
     Icon(
         painter = painter,
         contentDescription = null,
-        tint = Colors.primary,
     )
 }
 

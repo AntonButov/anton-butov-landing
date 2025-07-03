@@ -24,9 +24,10 @@ ktlint {
 //    dependsOn("check")
 // }
 
-gradle.taskGraph.whenReady {
-    if (hasTask(":composeApp:wasmJsBrowserDevelopmentRun")) {
-        tasks.getByPath(":composeApp:wasmJsBrowserDevelopmentRun").dependsOn(":ktlintFormat")
+gradle.projectsEvaluated {
+    // The task is created in the composeApp module, so we reference it by path
+    tasks.findByPath(":composeApp:wasmJsBrowserDevelopmentRun")?.apply {
+        dependsOn("ktlintFormat")
     }
 }
 

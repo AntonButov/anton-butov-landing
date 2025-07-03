@@ -18,6 +18,8 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
+import dev.butov.anton.screens.BackGround
+import dev.butov.anton.screens.MainColumn
 import dev.butov.anton.uikit.*
 import org.jetbrains.compose.resources.painterResource
 
@@ -48,21 +50,6 @@ fun App() {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun MainColumn() {
-    Column(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 81.dp, vertical = 50.dp),
-    ) {
-        Header()
-        Spacer(modifier = Modifier.size(50.dp))
-        PhotoBlock()
-        Spacer(Modifier.size(60.dp))
-        Technologies()
-        Spacer(Modifier.size(150.dp))
-        MyProjects()
     }
 }
 
@@ -135,60 +122,4 @@ fun Im(modifier: Modifier) {
         Spacer(Modifier.size(24.dp))
         CallButtonLight(Modifier.height(50.dp))
     }
-}
-
-@Composable
-fun BackGround() {
-    Row(
-        Modifier
-            .height(3500.dp)
-            .fillMaxWidth()
-            .background(Colors.background)
-            .padding(horizontal = 80.dp),
-    ) {
-        val dividerColor = Colors.primary.copy(alpha = 0.1f)
-        VerticalDivider(color = dividerColor)
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-            Icon(
-                modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
-                imageVector = AntonIcons.RectangleHard,
-                contentDescription = null,
-            )
-        }
-        VerticalDivider(color = dividerColor)
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-            Icon(
-                modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
-                imageVector = AntonIcons.RectangleHard,
-                contentDescription = null,
-            )
-        }
-        VerticalDivider(color = dividerColor)
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-        }
-        VerticalDivider(color = dividerColor)
-        Spacer(Modifier.weight(1f))
-        VerticalDivider(color = dividerColor)
-    }
-    Image(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 150.dp),
-        painter = painterResource(Res.drawable.redBack),
-        contentDescription = null,
-        contentScale = ContentScale.FillWidth,
-    )
 }

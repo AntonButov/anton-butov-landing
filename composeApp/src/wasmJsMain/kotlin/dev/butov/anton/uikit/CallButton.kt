@@ -37,20 +37,26 @@ fun CallButtonLight(modifier: Modifier) {
 }
 
 @Composable
-private fun CallButton(modifier: Modifier, background: Color, contentColor: Color, borderColor: Color) {
+private fun CallButton(
+    modifier: Modifier,
+    background: Color,
+    contentColor: Color,
+    borderColor: Color,
+) {
     Box(
-        modifier = modifier
-            .width(160.dp)
-            .clip(MaterialTheme.shapes.small)
-            .background(background)
-            .border(1.dp, borderColor, MaterialTheme.shapes.small)
-            .padding(horizontal = 7.dp, vertical = 6.dp),
+        modifier =
+            modifier
+                .width(160.dp)
+                .clip(MaterialTheme.shapes.small)
+                .background(background)
+                .border(1.dp, borderColor, MaterialTheme.shapes.small)
+                .padding(horizontal = 7.dp, vertical = 6.dp),
     ) {
         Row(
             modifier =
-            Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth(),
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {

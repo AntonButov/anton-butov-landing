@@ -12,13 +12,21 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.Teleg: ImageVector by lazy {
     Builder(
-        name = "Teleg", defaultWidth = 25.0.dp, defaultHeight = 20.0.dp,
-        viewportWidth = 25.0f, viewportHeight = 20.0f
+        name = "Teleg",
+        defaultWidth = 25.0.dp,
+        defaultHeight = 20.0.dp,
+        viewportWidth = 25.0f,
+        viewportHeight = 20.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.6f,
-            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            fillAlpha = 0.6f,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(22.88f, 0.1315f)
             lineTo(1.6207f, 8.2774f)

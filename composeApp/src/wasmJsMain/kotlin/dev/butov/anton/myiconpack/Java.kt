@@ -12,13 +12,20 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.Java: ImageVector by lazy {
     Builder(
-        name = "Java", defaultWidth = 19.0.dp, defaultHeight = 27.0.dp,
-        viewportWidth = 19.0f, viewportHeight = 27.0f
+        name = "Java",
+        defaultWidth = 19.0.dp,
+        defaultHeight = 27.0.dp,
+        viewportWidth = 19.0f,
+        viewportHeight = 27.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(2.4623f, 15.5902f)
             curveTo(2.4623f, 14.8641f, 5.2208f, 14.4596f, 6.5039f, 14.361f)
@@ -84,9 +91,13 @@ val AntonIcons.Java: ImageVector by lazy {
             close()
         }
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(12.6129f, 1.8774f)
             curveTo(12.6129f, 5.9124f, 7.0753f, 7.4527f, 7.0753f, 10.3208f)

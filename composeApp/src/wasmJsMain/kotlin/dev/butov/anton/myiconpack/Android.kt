@@ -16,7 +16,7 @@ val AntonIcons.Android: ImageVector by lazy {
         defaultWidth = 24.0.dp,
         defaultHeight = 24.0.dp,
         viewportWidth = 24.0f,
-        viewportHeight = 24.0f
+        viewportHeight = 24.0f,
     ).apply {
         path(
             fill = SolidColor(Color(0xFFffffff)),
@@ -25,7 +25,7 @@ val AntonIcons.Android: ImageVector by lazy {
             strokeLineCap = Butt,
             strokeLineJoin = Miter,
             strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            pathFillType = NonZero,
         ) {
             moveTo(1.0f, 18.0002f)
             curveTo(1.15f, 16.2169f, 1.696f, 14.5752f, 2.638f, 13.0752f)

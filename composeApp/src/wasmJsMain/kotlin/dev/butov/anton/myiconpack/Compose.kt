@@ -13,14 +13,21 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.Compose: ImageVector by lazy {
     Builder(
-        name = "Compose", defaultWidth = 24.0.dp, defaultHeight = 24.0.dp,
-        viewportWidth = 24.0f, viewportHeight = 24.0f
+        name = "Compose",
+        defaultWidth = 24.0.dp,
+        defaultHeight = 24.0.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
     ).apply {
         group {
             path(
-                fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-                strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-                pathFillType = NonZero
+                fill = SolidColor(Color(0xFFffffff)),
+                stroke = null,
+                strokeLineWidth = 0.0f,
+                strokeLineCap = Butt,
+                strokeLineJoin = Miter,
+                strokeLineMiter = 4.0f,
+                pathFillType = NonZero,
             ) {
                 moveTo(12.1348f, 0.0032f)
                 curveTo(11.6382f, -0.0215f, 11.145f, 0.0979f, 10.7148f, 0.3472f)

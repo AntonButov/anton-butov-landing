@@ -3,42 +3,32 @@ package dev.butov.anton
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RenderEffect
-import androidx.compose.ui.graphics.Shader
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.AnnotatedString.Builder
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
-import antonbutov.composeapp.generated.resources.go
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.*
 import org.jetbrains.compose.resources.painterResource
 
-
 @Composable
 fun App() {
     MaterialTheme {
         CompositionLocalProvider(
-            LocalTextStyle provides LocalTextStyle.current.copy(
-                fontFamily = InterFonts(),
-            ),
+            LocalTextStyle provides
+                LocalTextStyle.current.copy(
+                    fontFamily = InterFonts(),
+                ),
             LocalContentColor provides Colors.primary,
         ) {
             var showContent by remember { mutableStateOf(false) }
@@ -79,12 +69,13 @@ fun MainColumn() {
 @Composable
 fun Technologies() {
     FlowRow(
-        modifier = Modifier
-            .clip(MaterialTheme.shapes.medium)
-            .background(Colors.background.copy(alpha = 0.45f))
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .clip(MaterialTheme.shapes.medium)
+                .background(Colors.background.copy(alpha = 0.45f))
+                .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(7.dp),
-        verticalArrangement =  Arrangement.spacedBy(7.dp),
+        verticalArrangement = Arrangement.spacedBy(7.dp),
     ) {
         TechnologyHeader()
         TechnologyKotlin()
@@ -104,8 +95,9 @@ fun PhotoBlock() {
         Icon(
             painter = painterResource(Res.drawable.butov),
             contentDescription = null,
-            modifier = Modifier
-                .align(Alignment.BottomEnd),
+            modifier =
+                Modifier
+                    .align(Alignment.BottomEnd),
             tint = Color.Unspecified,
         )
     }

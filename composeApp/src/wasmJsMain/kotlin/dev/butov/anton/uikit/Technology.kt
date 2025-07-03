@@ -15,12 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.*
-import org.w3c.dom.ImageBitmapRenderingContextSettings
 
 @Composable
 fun Technology(
     modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
+    content: @Composable BoxScope.() -> Unit,
 ) {
     Box(modifier.height(110.dp).width(155.dp)) {
         content()
@@ -28,9 +27,7 @@ fun Technology(
 }
 
 @Composable
-fun TechnologyHeader(
-    modifier: Modifier = Modifier
-) {
+fun TechnologyHeader(modifier: Modifier = Modifier) {
     Technology {
         Text(
             modifier = modifier.align(Alignment.TopStart),
@@ -43,77 +40,84 @@ fun TechnologyHeader(
 @Composable
 fun TechnologyKotlin() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 15.dp, top = 14.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 15.dp, top = 14.dp),
         icon = AntonIcons.Kotlin,
         technology = "Kotlin",
-        experience = "5 years" // todo by now
+        experience = "5 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyJava() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 15.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 15.dp, top = 10.dp),
         icon = AntonIcons.Java,
         technology = "Java",
-        experience = "5 years" // todo by now
+        experience = "5 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyCompose() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 13.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 13.dp, top = 10.dp),
         icon = AntonIcons.Compose,
         technology = "Jetpack Compose",
-        experience = "3 years" // todo by now
+        experience = "3 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyDagger() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 12.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 12.dp, top = 10.dp),
         icon = AntonIcons.Google,
         technology = "Dagger",
-        experience = "5 years" // todo by now
+        experience = "5 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyCleanArchitecture() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 13.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 13.dp, top = 10.dp),
         icon = AntonIcons.Android,
         technology = "Clear Architecture",
-        experience = "5 years" // todo by now
+        experience = "5 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyTDD() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 13.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 13.dp, top = 10.dp),
         icon = AntonIcons.Android,
         technology = "TDD",
-        experience = "5 years" // todo by now
+        experience = "5 years", // todo by now
     )
 }
 
 @Composable
 fun TechnologyKMP() {
     Technology(
-        modifierIcon = Modifier
-            .padding(start = 13.dp, top = 10.dp),
+        modifierIcon =
+            Modifier
+                .padding(start = 13.dp, top = 10.dp),
         icon = AntonIcons.Kotlin,
         technology = "KMP",
-        experience = "3 years" // todo by now
+        experience = "3 years", // todo by now
     )
 }
 
@@ -122,13 +126,14 @@ private fun Technology(
     modifierIcon: Modifier,
     icon: ImageVector,
     technology: String,
-    experience: String
+    experience: String,
 ) {
     Technology(
-        modifier = Modifier
-            .clip(MaterialTheme.shapes.medium)
-            .border(1.dp, Colors.primary.copy(alpha = 0.4f), MaterialTheme.shapes.medium)
-            .background(Colors.primary.copy(alpha = 0.2f)),
+        modifier =
+            Modifier
+                .clip(MaterialTheme.shapes.medium)
+                .border(1.dp, Colors.primary.copy(alpha = 0.4f), MaterialTheme.shapes.medium)
+                .background(Colors.primary.copy(alpha = 0.2f)),
     ) {
         Icon(
             modifier = modifierIcon,
@@ -146,7 +151,5 @@ private fun Technology(
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Light),
             )
         }
-
     }
 }
-

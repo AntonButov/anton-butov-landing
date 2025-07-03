@@ -1,12 +1,9 @@
 package dev.butov.anton.myiconpack
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathFillType
 import androidx.compose.ui.graphics.PathFillType.Companion.NonZero
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeCap.Companion.Butt
-import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.StrokeJoin.Companion.Miter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.ImageVector.Builder
@@ -15,13 +12,18 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.Scroll: ImageVector by lazy {
     Builder(
-        name = "Scroll", defaultWidth = 24.0.dp, defaultHeight = 24.0.dp,
-        viewportWidth = 24.0f, viewportHeight = 24.0f
+        name = "Scroll",
+        defaultWidth = 24.0.dp,
+        defaultHeight = 24.0.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f, strokeAlpha
-            = 0.4f, strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f,
+            strokeAlpha =
+            0.4f,
+            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f, pathFillType = NonZero,
         ) {
             moveTo(16.19f, 2.0f)
             horizontalLineTo(7.81f)
@@ -35,9 +37,13 @@ val AntonIcons.Scroll: ImageVector by lazy {
             close()
         }
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(9.6002f, 15.7799f)
             curveTo(9.4102f, 15.7799f, 9.2202f, 15.7099f, 9.0702f, 15.5599f)
@@ -53,9 +59,13 @@ val AntonIcons.Scroll: ImageVector by lazy {
             close()
         }
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(14.3998f, 15.7802f)
             curveTo(14.2098f, 15.7802f, 14.0198f, 15.7102f, 13.8698f, 15.5602f)

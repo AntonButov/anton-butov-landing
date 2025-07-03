@@ -17,15 +17,12 @@ import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.*
 import org.w3c.dom.ImageBitmapRenderingContextSettings
 
-val TECHNOLOGY_HEIGHT = 110.dp
-val TECHNOLOGY_WIDTH = 155.dp
-
 @Composable
 fun Technology(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
-    Box(modifier.height(TECHNOLOGY_HEIGHT).width(TECHNOLOGY_WIDTH)) {
+    Box(modifier.height(110.dp).width(155.dp)) {
         content()
     }
 }

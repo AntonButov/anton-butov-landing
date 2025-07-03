@@ -18,9 +18,11 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import antonbutov.composeapp.generated.resources.*
 import antonbutov.composeapp.generated.resources.Res
-import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.go
+import antonbutov.composeapp.generated.resources.iva
 import dev.butov.anton.Colors
 import dev.butov.anton.InterFonts
 import dev.butov.anton.TechnologiesEnum
@@ -47,9 +49,25 @@ fun MyProjects() {
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
+            ProjectIva()
             ProjectGo()
+            ProjectAlerton()
+            ProjectDaggerDsl()
         }
     }
+}
+
+@Composable
+private fun ProjectDaggerDsl() {
+    Project(
+        painter = painterResource(Res.drawable.go),
+        name = "Dagger DSL",
+        time = "2024-2025",
+        technologies = listOf(
+            { TechnologyButton(TechnologiesEnum.KotlinPoet) },
+            { TechnologyButton(TechnologiesEnum.KSP) },
+        )
+    )
 }
 
 @Composable
@@ -67,13 +85,39 @@ private fun ProjectGo() {
 }
 
 @Composable
+private fun ProjectAlerton() {
+    Project(
+        painter = painterResource(Res.drawable.alerton),
+        name = "Alerton",
+        time = "2022-2023",
+        technologies = listOf(
+            { TechnologyButton(TechnologiesEnum.WEBRTC) },
+            { TechnologyButton(TechnologiesEnum.JetpackCompose) },
+        )
+    )
+}
+
+@Composable
+private fun ProjectIva() {
+    Project(
+        painter = painterResource(Res.drawable.iva),
+        name = "Iva Connect",
+        time = "2022-2023",
+        technologies = listOf(
+            { TechnologyButton(TechnologiesEnum.WEBRTC) },
+            { TechnologyButton(TechnologiesEnum.JetpackCompose) },
+        )
+    )
+}
+
+@Composable
 private fun Project(painter: Painter, name: String, time: String, technologies: List<@Composable () -> Unit>) {
     Box(Modifier
-        .height(300.dp)
-        .width(270.dp)
+        .height(270.dp)
+        .width(300.dp)
         .clip(MaterialTheme.shapes.small)
-        .border(1.dp, Colors.primary.copy(alpha = 0.5f), MaterialTheme.shapes.small)
-        .background(Colors.background.copy(alpha = 0.4f))
+        .background(Colors.background.copy(alpha = 0.04f))
+        .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
         .padding(horizontal = 14.dp, vertical = 16.dp)
     ) {
         Row {
@@ -86,7 +130,7 @@ private fun Project(painter: Painter, name: String, time: String, technologies: 
             ClickIcon(Modifier.align(Alignment.CenterVertically))
         }
         Column(
-            modifier = Modifier.align(Alignment.BottomCenter),
+            modifier = Modifier.align(Alignment.BottomStart),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             ProjectName(name, time)
@@ -162,7 +206,7 @@ private fun TechnologyButton(technology: TechnologiesEnum) {
             Text(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 text = technology.text,
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Normal),
+                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Normal, letterSpacing = - 0.03.sp),
             )
         }
     }

@@ -17,8 +17,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun Message() {
     Row(Modifier.fillMaxWidth()) {
-        Spacer(Modifier.weight(230f))
-        Column(Modifier.weight(970f)) {
+        Spacer(Modifier.weight(1f))
+        Column(Modifier.weight(3f)) {
             Row(Modifier.height(140.dp).fillMaxWidth()) {
                 Icon(
                     modifier = Modifier.align(Alignment.Bottom),
@@ -33,6 +33,6 @@ fun Message() {
                 )
             }
         }
-        Spacer(Modifier.weight(230f))
+        Spacer(Modifier.weight(1f))
     }
 }

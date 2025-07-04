@@ -29,7 +29,7 @@ fun BackGround() {
             .background(Colors.background)
             .padding(horizontal = 80.dp),
     ) {
-        val dividerColor = Colors.primary.copy(alpha = 0.1f)
+        val dividerColor = Colors.primary.copy(alpha = 0.05f)
         VerticalDivider(color = dividerColor)
         Box(Modifier.weight(1f)) {
             Icon(

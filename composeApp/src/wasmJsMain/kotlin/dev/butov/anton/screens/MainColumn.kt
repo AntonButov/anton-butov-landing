@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.dp
 import dev.butov.anton.PhotoBlock
 import dev.butov.anton.Technologies
 import dev.butov.anton.uikit.Header
+import dev.butov.anton.uikit.Message
 import dev.butov.anton.uikit.MyProjects
 
 @Composable
@@ -21,5 +22,6 @@ fun MainColumn() {
         Technologies()
         Spacer(Modifier.size(150.dp))
         MyProjects()
+        Message()
     }
 }

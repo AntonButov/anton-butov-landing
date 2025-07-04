@@ -57,7 +57,7 @@ fun MyProjects() {
 @Composable
 private fun ProjectDaggerDsl() {
     Project(
-        painter = painterResource(Res.drawable.go),
+        painter = painterResource(Res.drawable.git),
         name = "Dagger DSL",
         time = "2024-2025",
         technologies =

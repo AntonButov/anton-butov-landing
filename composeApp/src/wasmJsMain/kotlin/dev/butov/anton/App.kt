@@ -10,13 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
-import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.screens.BackGround
 import dev.butov.anton.screens.MainColumn

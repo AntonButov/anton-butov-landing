@@ -2,13 +2,14 @@ package dev.butov.anton.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.butov.anton.PhotoBlock
-import dev.butov.anton.Technologies
-import dev.butov.anton.uikit.Header
+import dev.butov.anton.subscreens.Header
+import dev.butov.anton.subscreens.MyProjects
+import dev.butov.anton.subscreens.PhotoBlock
 import dev.butov.anton.uikit.Message
-import dev.butov.anton.uikit.MyProjects
+import dev.butov.anton.uikit.Technologies
 
 @Composable
 fun MainColumn() {
@@ -22,6 +23,6 @@ fun MainColumn() {
         Technologies()
         Spacer(Modifier.size(150.dp))
         MyProjects()
-        Message()
+        Message(Modifier.align(Alignment.CenterHorizontally))
     }
 }

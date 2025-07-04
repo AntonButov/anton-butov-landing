@@ -1,4 +1,4 @@
-package dev.butov.anton.uikit
+package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -10,6 +10,7 @@ import dev.butov.anton.myiconpack.AntonButov
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Arrow
 import dev.butov.anton.myiconpack.Gamburger
+import dev.butov.anton.uikit.CallButtonDark
 
 @Composable
 fun Header() {
@@ -26,7 +27,7 @@ fun Header() {
 }
 
 @Composable
-fun Hamburger() {
+private fun Hamburger() {
     Icon(
         imageVector = AntonIcons.Gamburger,
         contentDescription = "Gamburger",
@@ -34,7 +35,7 @@ fun Hamburger() {
 }
 
 @Composable
-fun BoxScope.Arrows() {
+private fun BoxScope.Arrows() {
     Row(
         modifier = Modifier.align(Alignment.Center),
     ) {
@@ -52,7 +53,7 @@ private fun Arrow() {
 }
 
 @Composable
-fun BoxScope.AntonButov() {
+private fun BoxScope.AntonButov() {
     Icon(
         modifier = Modifier.align(Alignment.Center),
         imageVector = AntonIcons.AntonButov,

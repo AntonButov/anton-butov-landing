@@ -2,37 +2,59 @@ package dev.butov.anton.uikit
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.AntonButovMessage
 import antonbutov.composeapp.generated.resources.Res
-import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.BrasesOn
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun Message() {
-    Row(Modifier.fillMaxWidth()) {
-        Spacer(Modifier.weight(1f))
-        Column(Modifier.weight(3f)) {
-            Row(Modifier.height(140.dp).fillMaxWidth()) {
-                Icon(
-                    modifier = Modifier.align(Alignment.Bottom),
-                    imageVector = AntonIcons.BrasesOn,
-                    contentDescription = null,
-                )
-                Icon(
-                    modifier = Modifier.align(Alignment.Top).size(100.dp),
-                    painter = painterResource(Res.drawable.AntonButovMessage),
-                    contentDescription = null,
-                    tint = Color.Unspecified,
-                )
-            }
+fun Message(modifier: Modifier) {
+    Column(modifier.fillMaxWidth(0.7f)) {
+        Box(Modifier.height(140.dp).fillMaxWidth()) {
+            Icon(
+                modifier = Modifier.align(Alignment.BottomStart),
+                imageVector = AntonIcons.BrasesOn,
+                contentDescription = null,
+            )
+            Icon(
+                modifier = Modifier.size(100.dp).align(Alignment.TopCenter),
+                painter = painterResource(Res.drawable.AntonButovMessage),
+                contentDescription = null,
+                tint = Color.Unspecified,
+            )
         }
-        Spacer(Modifier.weight(1f))
+        Text(
+            text =
+                buildAnnotatedString {
+                    SoftStyle {
+                        append("My mission is ")
+                    }
+                    FullStyle {
+                        append("to organize a team ")
+                    }
+                    SoftStyle {
+                        append("that leverages the most ")
+                    }
+                    FullStyle {
+                        append("powerful capabilities ")
+                    }
+                    SoftStyle {
+                        append("of Kotlin and modern frameworks,")
+                    }
+                    FullStyle {
+                        append("including AI tools.")
+                    }
+                },
+            style = MaterialTheme.typography.headlineMedium,
+        )
     }
 }

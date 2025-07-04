@@ -17,7 +17,29 @@ import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.*
 
 @Composable
-fun Technology(
+fun Technologies() {
+    FlowRow(
+        modifier =
+            Modifier
+                .clip(MaterialTheme.shapes.medium)
+                .background(Colors.background.copy(alpha = 0.45f))
+                .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(7.dp),
+        verticalArrangement = Arrangement.spacedBy(7.dp),
+    ) {
+        TechnologyHeader()
+        TechnologyKotlin()
+        TechnologyJava()
+        TechnologyCompose()
+        TechnologyDagger()
+        TechnologyCleanArchitecture()
+        TechnologyTDD()
+        TechnologyKMP()
+    }
+}
+
+@Composable
+private fun Technology(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit,
 ) {
@@ -27,7 +49,7 @@ fun Technology(
 }
 
 @Composable
-fun TechnologyHeader(modifier: Modifier = Modifier) {
+private fun TechnologyHeader(modifier: Modifier = Modifier) {
     Technology {
         Text(
             modifier = modifier.align(Alignment.TopStart),
@@ -38,7 +60,7 @@ fun TechnologyHeader(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TechnologyKotlin() {
+private fun TechnologyKotlin() {
     Technology(
         modifierIcon =
             Modifier
@@ -50,7 +72,7 @@ fun TechnologyKotlin() {
 }
 
 @Composable
-fun TechnologyJava() {
+private fun TechnologyJava() {
     Technology(
         modifierIcon =
             Modifier
@@ -62,7 +84,7 @@ fun TechnologyJava() {
 }
 
 @Composable
-fun TechnologyCompose() {
+private fun TechnologyCompose() {
     Technology(
         modifierIcon =
             Modifier
@@ -74,7 +96,7 @@ fun TechnologyCompose() {
 }
 
 @Composable
-fun TechnologyDagger() {
+private fun TechnologyDagger() {
     Technology(
         modifierIcon =
             Modifier
@@ -86,7 +108,7 @@ fun TechnologyDagger() {
 }
 
 @Composable
-fun TechnologyCleanArchitecture() {
+private fun TechnologyCleanArchitecture() {
     Technology(
         modifierIcon =
             Modifier
@@ -98,7 +120,7 @@ fun TechnologyCleanArchitecture() {
 }
 
 @Composable
-fun TechnologyTDD() {
+private fun TechnologyTDD() {
     Technology(
         modifierIcon =
             Modifier
@@ -110,7 +132,7 @@ fun TechnologyTDD() {
 }
 
 @Composable
-fun TechnologyKMP() {
+private fun TechnologyKMP() {
     Technology(
         modifierIcon =
             Modifier

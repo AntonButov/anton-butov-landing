@@ -1,4 +1,4 @@
-package dev.butov.anton.uikit
+package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,6 +24,8 @@ import antonbutov.composeapp.generated.resources.iva
 import dev.butov.anton.Colors
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.*
+import dev.butov.anton.uikit.FullStyle
+import dev.butov.anton.uikit.SoftStyle
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

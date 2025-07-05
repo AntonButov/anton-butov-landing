@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import dev.butov.anton.subscreens.Header
 import dev.butov.anton.subscreens.MyProjects
 import dev.butov.anton.subscreens.PhotoBlock
+import dev.butov.anton.subscreens.ContactMe
 import dev.butov.anton.uikit.Message
 import dev.butov.anton.uikit.Technologies
 
@@ -24,5 +25,7 @@ fun MainColumn() {
         Spacer(Modifier.size(150.dp))
         MyProjects()
         Message(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(Modifier.size(80.dp))
+        ContactMe()
     }
 }

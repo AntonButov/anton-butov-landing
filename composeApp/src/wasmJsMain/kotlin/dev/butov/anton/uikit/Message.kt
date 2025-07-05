@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.AntonButovMessage
 import antonbutov.composeapp.generated.resources.Res
@@ -48,13 +49,14 @@ fun Message(modifier: Modifier) {
                         append("powerful capabilities ")
                     }
                     SoftStyle {
-                        append("of Kotlin and modern frameworks,")
+                        append("of Kotlin and modern frameworks, ")
                     }
                     FullStyle {
                         append("including AI tools.")
                     }
                 },
             style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
         )
     }
 }

@@ -8,13 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import antonbutov.composeapp.generated.resources.AntonButovMessage
 import antonbutov.composeapp.generated.resources.Res
+import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.BrasesOn
+import dev.butov.anton.myiconpack.BrasessOff
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -58,5 +63,19 @@ fun Message(modifier: Modifier) {
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
         )
+        Spacer(Modifier.size(70.dp))
+        Box(Modifier.fillMaxWidth()) {
+            Text(
+                modifier = Modifier.align(Alignment.TopStart),
+                text = "• Anton Butov",
+                style = TextStyle.Default.copy(fontSize = 18.sp, fontWeight = FontWeight.Light),
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.TopEnd),
+                imageVector = AntonIcons.BrasessOff,
+                contentDescription = null,
+                tint = Colors.red,
+            )
+        }
     }
 }

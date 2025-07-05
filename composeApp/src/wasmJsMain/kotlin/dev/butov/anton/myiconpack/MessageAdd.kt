@@ -12,13 +12,19 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.MessageAdd: ImageVector by lazy {
     Builder(
-        name = "Message-add", defaultWidth = 15.0.dp, defaultHeight =
-        15.0.dp, viewportWidth = 15.0f, viewportHeight = 15.0f
+        name = "Message-add",
+        defaultWidth = 15.0.dp,
+        defaultHeight =
+            15.0.dp,
+        viewportWidth = 15.0f,
+        viewportHeight = 15.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f, strokeAlpha
-            = 0.4f, strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f,
+            strokeAlpha =
+            0.4f,
+            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f, pathFillType = NonZero,
         ) {
             moveTo(10.0f, 1.25f)
             horizontalLineTo(5.0f)
@@ -32,9 +38,13 @@ val AntonIcons.MessageAdd: ImageVector by lazy {
             close()
         }
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, strokeLineWidth = 0.0f,
-            strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
-            pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)),
+            stroke = null,
+            strokeLineWidth = 0.0f,
+            strokeLineCap = Butt,
+            strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f,
+            pathFillType = NonZero,
         ) {
             moveTo(9.6875f, 7.0313f)
             horizontalLineTo(7.9688f)

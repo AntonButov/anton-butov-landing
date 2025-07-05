@@ -12,14 +12,20 @@ import androidx.compose.ui.unit.dp
 
 val AntonIcons.Ss: ImageVector by lazy {
     Builder(
-        name = "Ss", defaultWidth = 20.0.dp, defaultHeight = 20.0.dp, viewportWidth =
+        name = "Ss",
+        defaultWidth = 20.0.dp,
+        defaultHeight = 20.0.dp,
+        viewportWidth =
 
-        20.0f, viewportHeight = 20.0f
+        20.0f,
+        viewportHeight = 20.0f,
     ).apply {
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f, strokeAlpha
-            = 0.4f, strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f,
+            strokeAlpha =
+            0.4f,
+            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f, pathFillType = NonZero,
         ) {
             moveTo(13.4532f, 1.2268f)
             curveTo(11.9747f, 0.8419f, 9.2451f, 0.5217f, 6.7835f, 1.6534f)
@@ -60,9 +66,11 @@ val AntonIcons.Ss: ImageVector by lazy {
             close()
         }
         path(
-            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f, strokeAlpha
-            = 0.4f, strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
-            strokeLineMiter = 4.0f, pathFillType = NonZero
+            fill = SolidColor(Color(0xFFffffff)), stroke = null, fillAlpha = 0.4f,
+            strokeAlpha =
+            0.4f,
+            strokeLineWidth = 0.0f, strokeLineCap = Butt, strokeLineJoin = Miter,
+            strokeLineMiter = 4.0f, pathFillType = NonZero,
         ) {
             moveTo(10.7466f, 6.5446f)
             curveTo(10.8985f, 6.0188f, 11.26f, 5.6642f, 11.7825f, 5.5147f)

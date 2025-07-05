@@ -20,9 +20,16 @@ ktlint {
     ktLintConfig()
 }
 
-//tasks.named(":composeApp:wasmJsBrowserDevelopmentRun") {
+// tasks.named(":composeApp:wasmJsBrowserDevelopmentRun") {
 //    dependsOn("check")
-//}
+// }
+
+gradle.projectsEvaluated {
+    // The task is created in the composeApp module, so we reference it by path
+    tasks.findByPath(":composeApp:wasmJsBrowserDevelopmentRun")?.apply {
+        dependsOn("ktlintFormat")
+    }
+}
 
 tasks.named("check") {
     dependsOn("ktlintFormat")
@@ -37,13 +44,15 @@ kotlin {
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
+                devServer =
+                    (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static =
+                            (static ?: mutableListOf()).apply {
+                                // Serve sources to debug inside browser
+                                add(rootDirPath)
+                                add(projectDirPath)
+                            }
                     }
-                }
             }
         }
         binaries.executable()

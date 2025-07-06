@@ -19,42 +19,48 @@ import dev.butov.anton.uikit.SoftStyle
 
 @Composable
 fun ContactMe() {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var message by remember { mutableStateOf("") }
-
     Row {
         LeftColumn(Modifier.weight(1f))
 
         Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
 
-        Column(
-            modifier = Modifier.weight(3f),
-            verticalArrangement = Arrangement.spacedBy(20.dp),
-        ) {
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Name") },
-                trailingIcon = { AntonIcons.Ss },
-            )
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                trailingIcon = { AntonIcons.Sms },
-            )
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth().height(120.dp),
-                value = message,
-                onValueChange = { message = it },
-                label = { Text("Message") },
-                trailingIcon = { AntonIcons.MessageAdd },
-            )
-            SendMessageButton(Modifier.align(Alignment.End))
-        }
+        SendMessageBlock(Modifier.weight(3f))
+    }
+}
+
+@Composable
+private fun SendMessageBlock(modifier: Modifier) {
+
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var message by remember { mutableStateOf("") }
+
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") },
+            trailingIcon = { AntonIcons.Ss },
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            trailingIcon = { AntonIcons.Sms },
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth().height(120.dp),
+            value = message,
+            onValueChange = { message = it },
+            label = { Text("Message") },
+            trailingIcon = { AntonIcons.MessageAdd },
+        )
+        SendMessageButton(Modifier.align(Alignment.End))
     }
 }
 

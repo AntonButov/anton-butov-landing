@@ -48,14 +48,14 @@ private fun SendMessageBlock(modifier: Modifier) {
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Name") },
-                trailingIcon = { AntonIcons.Ss },
+                trailingIcon = { Icon(AntonIcons.Ss, contentDescription = null) },
             )
             OutlinedTextField(
                 modifier = Modifier.weight(1f),
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
-                trailingIcon = { AntonIcons.Sms },
+                trailingIcon = { Icon(AntonIcons.Sms, contentDescription = null) },
             )
         }
         OutlinedTextField(
@@ -63,7 +63,7 @@ private fun SendMessageBlock(modifier: Modifier) {
             value = message,
             onValueChange = { message = it },
             label = { Text("Message") },
-            trailingIcon = { AntonIcons.MessageAdd },
+            trailingIcon = { Icon(AntonIcons.MessageAdd, contentDescription = null) },
         )
         SendMessageButton(Modifier.align(Alignment.End))
     }

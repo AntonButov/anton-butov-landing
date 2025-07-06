@@ -162,8 +162,8 @@ private fun Technology(
         modifier =
             Modifier
                 .clip(MaterialTheme.shapes.medium)
-                .border(1.dp, Colors.primary.copy(alpha = 0.4f), MaterialTheme.shapes.medium)
-                .background(Colors.primary.copy(alpha = 0.2f)),
+                .border(1.dp, Colors.primary.copy(alpha = 0.04f), MaterialTheme.shapes.medium)
+                .background(Colors.primary.copy(alpha = 0.02f)),
     ) {
         Icon(
             modifier = modifierIcon,

@@ -16,9 +16,9 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0AFFFFFF;; /* Цвет ползунка */
+    background: #111111; /* Цвет ползунка */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0AFFFFFF;; /* Цвет ползунка при наведении */
+    background: #111111; /* Цвет ползунка при наведении */
 }

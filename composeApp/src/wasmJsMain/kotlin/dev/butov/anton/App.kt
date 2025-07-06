@@ -1,6 +1,7 @@
 package dev.butov.anton
 
 import androidx.compose.foundation.*
+import androidx.compose.foundation.LocalScrollbarStyle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -38,9 +39,14 @@ fun App() {
                         }
                     }
                 }
+                val scrollbarStyle = LocalScrollbarStyle.current.copy(
+                    hoverColor = Colors.surface,
+                    unhoverColor = Colors.surface,
+                )
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(scrollState),
                     modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                    style = scrollbarStyle,
                 )
             }
         }

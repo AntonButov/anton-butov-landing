@@ -11,7 +11,7 @@ import dev.butov.anton.Colors
 
 @Composable
 fun CenteredLayout(
-    maxWith: Dp = 1300.dp,
+    maxWith: Dp = 1400.dp,
     content: @Composable () -> Unit,
 ) {
     Box(

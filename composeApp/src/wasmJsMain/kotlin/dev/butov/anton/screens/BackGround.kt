@@ -25,7 +25,6 @@ fun BackGround() {
         Modifier
             .height(3500.dp) // todo
             .fillMaxWidth(),
-        //  .padding(horizontal = 80.dp),
     ) {
         Divider()
         Box(Modifier.weight(1f)) {

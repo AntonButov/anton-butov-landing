@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
@@ -22,32 +22,16 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PhotoBlock() {
-    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-        if (maxWidth < 900.dp) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
-                    contentDescription = null,
-                    modifier = Modifier.height(350.dp),
-                    tint = Color.Unspecified,
-                )
-                Spacer(Modifier.height(24.dp))
-                Im(Modifier)
-            }
-        } else {
-            Box(modifier = Modifier.height(550.dp).fillMaxWidth()) {
-                Im(Modifier.align(Alignment.BottomStart))
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
-                    contentDescription = null,
-                    modifier = Modifier.align(Alignment.BottomEnd).height(550.dp),
-                    tint = Color.Unspecified,
-                )
-            }
-        }
+    Box(modifier = Modifier.height(550.dp).fillMaxWidth()) {
+        Im(Modifier.align(Alignment.BottomStart))
+        Icon(
+            painter = painterResource(Res.drawable.butov),
+            contentDescription = null,
+            modifier =
+                Modifier
+                    .align(Alignment.BottomEnd),
+            tint = Color.Unspecified,
+        )
     }
 }
 

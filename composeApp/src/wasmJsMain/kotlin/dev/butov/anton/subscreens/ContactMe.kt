@@ -39,20 +39,25 @@ private fun SendMessageBlock(modifier: Modifier) {
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        OutlinedTextField(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name") },
-            trailingIcon = { AntonIcons.Ss },
-        )
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            trailingIcon = { AntonIcons.Sms },
-        )
+            horizontalArrangement = Arrangement.spacedBy(30.dp),
+        ) {
+            OutlinedTextField(
+                modifier = Modifier.weight(1f),
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Name") },
+                trailingIcon = { AntonIcons.Ss },
+            )
+            OutlinedTextField(
+                modifier = Modifier.weight(1f),
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                trailingIcon = { AntonIcons.Sms },
+            )
+        }
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth().height(120.dp),
             value = message,
@@ -82,14 +87,12 @@ private fun LeftColumn(modifier: Modifier) {
                 },
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
         )
-        //    Spacer(Modifier.weight(1f))
         Text(
             text = "I'm open to new connections, ideas, and opportunities that can help me grow. I'm also open to feedback.",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Light,
             color = Colors.primary.copy(alpha = 0.6f),
         )
-        //   Spacer(Modifier.weight(1f))
         CallButtonLight(Modifier.align(Alignment.Start))
     }
 }

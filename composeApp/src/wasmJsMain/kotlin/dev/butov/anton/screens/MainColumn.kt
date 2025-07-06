@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.butov.anton.subscreens.ContactMe
 import dev.butov.anton.subscreens.Header
 import dev.butov.anton.subscreens.MyProjects
 import dev.butov.anton.subscreens.PhotoBlock
-import dev.butov.anton.subscreens.ContactMe
 import dev.butov.anton.uikit.Message
 import dev.butov.anton.uikit.Technologies
 

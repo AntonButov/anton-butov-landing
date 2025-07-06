@@ -21,8 +21,8 @@ fun ContactMe() {
         Text(
             text =
                 buildAnnotatedString {
-                    SoftStyle { append("Contact ") }
-                    FullStyle { append("Me") }
+                    FullStyle { append("Contact ") }
+                    SoftStyle { append("Me") }
                 },
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
         )

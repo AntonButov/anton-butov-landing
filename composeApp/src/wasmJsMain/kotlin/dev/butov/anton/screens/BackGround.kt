@@ -65,7 +65,7 @@ fun BackGround() {
         Divider()
     }
     Image(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 350.dp),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 350.dp),
         painter = painterResource(Res.drawable.redBack),
         contentDescription = null,
         contentScale = ContentScale.FillWidth,

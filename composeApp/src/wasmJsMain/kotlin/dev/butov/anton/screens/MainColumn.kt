@@ -15,7 +15,7 @@ import dev.butov.anton.uikit.Technologies
 @Composable
 fun MainColumn() {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 1.dp, vertical = 50.dp),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 50.dp),
     ) {
         Header()
         Spacer(modifier = Modifier.size(50.dp))

@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -18,23 +19,30 @@ import dev.butov.anton.myiconpack.*
 
 @Composable
 fun Technologies() {
-    FlowRow(
-        modifier =
+    Box {
+        Box(
             Modifier
+                .matchParentSize()
                 .clip(MaterialTheme.shapes.medium)
-                .background(Colors.background.copy(alpha = 0.45f))
-                .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(7.dp),
-        verticalArrangement = Arrangement.spacedBy(7.dp),
-    ) {
-        TechnologyHeader()
-        TechnologyKotlin()
-        TechnologyJava()
-        TechnologyCompose()
-        TechnologyDagger()
-        TechnologyCleanArchitecture()
-        TechnologyTDD()
-        TechnologyKMP()
+                .blur(48.8.dp)
+                .background(Colors.background.copy(alpha = 0.45f)),
+        )
+        FlowRow(
+            modifier =
+                Modifier
+                    .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(7.dp),
+            verticalArrangement = Arrangement.spacedBy(7.dp),
+        ) {
+            TechnologyHeader()
+            TechnologyKotlin()
+            TechnologyJava()
+            TechnologyCompose()
+            TechnologyDagger()
+            TechnologyCleanArchitecture()
+            TechnologyTDD()
+            TechnologyKMP()
+        }
     }
 }
 

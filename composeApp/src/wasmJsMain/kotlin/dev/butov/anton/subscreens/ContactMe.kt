@@ -39,6 +39,15 @@ private fun SendMessageBlock(modifier: Modifier) {
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
+        val textFieldColors =
+            OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Colors.primary,
+                unfocusedBorderColor = Colors.primary,
+                focusedLabelColor = Colors.primary,
+                unfocusedLabelColor = Colors.primary,
+                cursorColor = Colors.primary,
+            )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(30.dp),
@@ -55,6 +64,7 @@ private fun SendMessageBlock(modifier: Modifier) {
                         tint = Colors.primary,
                     )
                 },
+                colors = textFieldColors,
             )
             OutlinedTextField(
                 modifier = Modifier.height(70.dp).weight(1f),
@@ -68,6 +78,7 @@ private fun SendMessageBlock(modifier: Modifier) {
                         tint = Colors.primary,
                     )
                 },
+                colors = textFieldColors,
             )
         }
         Box(
@@ -79,6 +90,7 @@ private fun SendMessageBlock(modifier: Modifier) {
                 onValueChange = { message = it },
                 label = { Text("Message") },
                 trailingIcon = null,
+                colors = textFieldColors,
             )
             Icon(
                 modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),

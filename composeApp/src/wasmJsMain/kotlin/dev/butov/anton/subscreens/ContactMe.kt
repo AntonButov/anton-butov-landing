@@ -23,24 +23,15 @@ fun ContactMe() {
     var email by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
 
-    Box {
-        Column(Modifier.align(Alignment.TopStart)) {
-            Text(
-                text =
-                    buildAnnotatedString {
-                        FullStyle { append("Contact ") }
-                        SoftStyle { append("Me") }
-                    },
-                style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
-            )
-            Text(
-                text = "I'm open to new connections, ideas, and opportunities that can help me grow. I'm also open to feedback.",
-            )
-        }
+    Row {
+        LeftColumn(Modifier.weight(1f))
 
-        CallButtonLight(Modifier.align(Alignment.BottomStart))
+        Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
 
-        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Column(
+            modifier = Modifier.weight(3f),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = name,
@@ -64,5 +55,39 @@ fun ContactMe() {
             )
             SendMessageButton(Modifier.align(Alignment.End))
         }
+    }
+}
+
+@Composable
+private fun LeftColumn(modifier: Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+    ) {
+        Text(
+            buildAnnotatedString {
+                SoftStyle {
+                    append("I'm always open to ")
+                }
+                FullStyle {
+                    append("new ideas")
+                }
+            },
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+        )
+        Text(
+            buildAnnotatedString {
+                SoftStyle {
+                    append("I'm always open to ")
+                }
+                FullStyle {
+                    append("new ideas")
+                }
+            },
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        CallButtonLight(Modifier.align(Alignment.End))
     }
 }

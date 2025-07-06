@@ -43,6 +43,8 @@ private fun SendMessageBlock(modifier: Modifier) {
                 focusedLabelColor = Colors.primary,
                 unfocusedLabelColor = Colors.primary.copy(alpha = 0.4f),
                 cursorColor = Colors.primary,
+                focusedContainerColor = Colors.surface,
+                unfocusedContainerColor = Colors.surface,
             )
 
         Row(

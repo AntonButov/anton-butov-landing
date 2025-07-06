@@ -39,9 +39,9 @@ private fun SendMessageBlock(modifier: Modifier) {
         val textFieldColors =
             OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Colors.primary,
-                unfocusedBorderColor = Colors.primary,
+                unfocusedBorderColor = Colors.primary.copy(alpha = 0.05f),
                 focusedLabelColor = Colors.primary,
-                unfocusedLabelColor = Colors.primary,
+                unfocusedLabelColor = Colors.primary.copy(alpha = 0.4f),
                 cursorColor = Colors.primary,
             )
 

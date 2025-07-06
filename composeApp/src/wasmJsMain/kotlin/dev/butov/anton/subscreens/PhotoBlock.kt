@@ -16,7 +16,7 @@ import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
 import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
-import dev.butov.anton.uikit.FullStyleItalic
+import dev.butov.anton.uikit.FullStyleUnderline
 import dev.butov.anton.uikit.SoftStyle
 import org.jetbrains.compose.resources.painterResource
 
@@ -52,7 +52,7 @@ private fun Im(modifier: Modifier) {
                 FullStyle {
                     append("Senior Android ")
                 }
-                FullStyleItalic {
+                FullStyleUnderline {
                     append("Developer")
                 }
             }

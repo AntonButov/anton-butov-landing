@@ -30,7 +30,6 @@ fun ContactMe() {
 
 @Composable
 private fun SendMessageBlock(modifier: Modifier) {
-
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
@@ -67,30 +66,23 @@ private fun SendMessageBlock(modifier: Modifier) {
 @Composable
 private fun LeftColumn(modifier: Modifier) {
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(20.dp),
+        modifier = modifier.fillMaxHeight(),
+        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            buildAnnotatedString {
-                SoftStyle {
-                    append("I'm always open to ")
-                }
+            text = buildAnnotatedString {
                 FullStyle {
-                    append("new ideas")
+                    append("Contact ")
+                }
+                SoftStyle {
+                    append("me ")
                 }
             },
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
         )
         Text(
-            buildAnnotatedString {
-                SoftStyle {
-                    append("I'm always open to ")
-                }
-                FullStyle {
-                    append("new ideas")
-                }
-            },
+            text = "I'm open to new connections, ideas, and opportunities that can help me grow. I'm also open to feedback.",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
         )

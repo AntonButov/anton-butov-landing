@@ -64,6 +64,6 @@ private fun Im(modifier: Modifier) {
             color = Colors.primary.copy(alpha = 0.6f),
         )
         Spacer(Modifier.size(24.dp))
-        CallButtonLight(Modifier.height(50.dp))
+        CallButtonLight()
     }
 }

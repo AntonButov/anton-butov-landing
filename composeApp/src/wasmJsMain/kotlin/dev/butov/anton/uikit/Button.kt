@@ -19,20 +19,22 @@ import dev.butov.anton.myiconpack.Call
 import dev.butov.anton.myiconpack.MessageAdd
 
 @Composable
-fun SendMessageButton(modifier: Modifier) {
+fun SendMessageButton(modifier: Modifier = Modifier) {
     Button(
         modifier = modifier,
-        background = Colors.primary,
-        contentColor = Colors.background,
-        borderColor = Colors.primary,
+        text = "Send message",
+        background = Colors.primary.copy(alpha = 0.1f),
+        contentColor = Colors.primary,
+        borderColor = Colors.primary.copy(alpha = 0.2f),
         icon = AntonIcons.MessageAdd,
     )
 }
 
 @Composable
-fun CallButtonDark(modifier: Modifier) {
+fun CallButtonDark(modifier: Modifier = Modifier) {
     Button(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier,
+        text = "Assign a call",
         background = Colors.primary.copy(alpha = 0.1f),
         contentColor = Colors.primary,
         borderColor = Colors.primary.copy(alpha = 0.2f),
@@ -41,9 +43,10 @@ fun CallButtonDark(modifier: Modifier) {
 }
 
 @Composable
-fun CallButtonLight(modifier: Modifier) {
+fun CallButtonLight(modifier: Modifier = Modifier) {
     Button(
         modifier = modifier,
+        text = "Assign a call",
         background = Colors.primary,
         contentColor = Colors.background,
         borderColor = Colors.primary,
@@ -54,6 +57,7 @@ fun CallButtonLight(modifier: Modifier) {
 @Composable
 private fun Button(
     modifier: Modifier,
+    text: String,
     background: Color,
     contentColor: Color,
     borderColor: Color,
@@ -62,6 +66,7 @@ private fun Button(
     Box(
         modifier =
             modifier
+                .height(50.dp)
                 .width(160.dp)
                 .clip(MaterialTheme.shapes.small)
                 .background(background)
@@ -77,7 +82,7 @@ private fun Button(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Assign a call",
+                text = text,
                 color = contentColor,
                 style = MaterialTheme.typography.bodyMedium,
             )

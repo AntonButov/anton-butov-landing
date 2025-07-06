@@ -60,7 +60,8 @@ private fun Im(modifier: Modifier) {
         val secondText = "Nice to meet you."
         Text(
             text = secondText,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Light,
             color = Colors.primary.copy(alpha = 0.6f),
         )
         Spacer(Modifier.size(24.dp))

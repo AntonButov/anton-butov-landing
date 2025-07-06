@@ -44,27 +44,48 @@ private fun SendMessageBlock(modifier: Modifier) {
             horizontalArrangement = Arrangement.spacedBy(30.dp),
         ) {
             OutlinedTextField(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).height(70.dp),
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Name") },
-                trailingIcon = { AntonIcons.Ss },
+                trailingIcon = {
+                    Icon(
+                        imageVector = AntonIcons.Ss,
+                        contentDescription = null,
+                        tint = Colors.primary,
+                    )
+                },
             )
             OutlinedTextField(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.height(70.dp).weight(1f),
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
-                trailingIcon = { AntonIcons.Sms },
+                trailingIcon = {
+                    Icon(
+                        imageVector = AntonIcons.Sms,
+                        contentDescription = null,
+                        tint = Colors.primary,
+                    )
+                },
             )
         }
-        OutlinedTextField(
+        Box(
             modifier = Modifier.fillMaxWidth().height(120.dp),
-            value = message,
-            onValueChange = { message = it },
-            label = { Text("Message") },
-            trailingIcon = { AntonIcons.MessageAdd },
-        )
+        ) {
+            OutlinedTextField(
+                modifier = Modifier.matchParentSize(),
+                value = message,
+                onValueChange = { message = it },
+                label = { Text("Message") },
+                trailingIcon = null,
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),
+                imageVector = AntonIcons.MessageAdd,
+                contentDescription = null,
+            )
+        }
         SendMessageButton(Modifier.align(Alignment.End))
     }
 }

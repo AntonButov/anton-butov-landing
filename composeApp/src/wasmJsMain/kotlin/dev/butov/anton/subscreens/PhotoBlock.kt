@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.painterResource
 fun PhotoBlock() {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         Box(modifier = Modifier.height(550.dp).fillMaxWidth()) {
-            Im(Modifier.align(Alignment.BottomStart), maxWidth)
+            Im(Modifier.align(Alignment.BottomStart), this@BoxWithConstraints.maxWidth)
             Icon(
                 painter = painterResource(Res.drawable.butov),
                 contentDescription = null,
@@ -37,7 +37,10 @@ fun PhotoBlock() {
 }
 
 @Composable
-private fun Im(modifier: Modifier, width: Dp) {
+private fun Im(
+    modifier: Modifier,
+    width: Dp,
+) {
     Column(modifier = modifier) {
         val firstText =
             buildAnnotatedString {

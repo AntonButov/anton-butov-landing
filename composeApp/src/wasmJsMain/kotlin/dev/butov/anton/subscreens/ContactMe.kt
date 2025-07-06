@@ -19,7 +19,7 @@ import dev.butov.anton.uikit.SoftStyle
 
 @Composable
 fun ContactMe() {
-    Row {
+    Row(Modifier.height(280.dp)) {
         LeftColumn(Modifier.weight(1f))
 
         Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
@@ -70,22 +70,25 @@ private fun LeftColumn(modifier: Modifier) {
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            text = buildAnnotatedString {
-                FullStyle {
-                    append("Contact ")
-                }
-                SoftStyle {
-                    append("me ")
-                }
-            },
+            text =
+                buildAnnotatedString {
+                    FullStyle {
+                        append("Contact ")
+                    }
+                    SoftStyle {
+                        append("me ")
+                    }
+                },
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
         )
+        //    Spacer(Modifier.weight(1f))
         Text(
             text = "I'm open to new connections, ideas, and opportunities that can help me grow. I'm also open to feedback.",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
         )
-        CallButtonLight(Modifier.align(Alignment.End))
+        //   Spacer(Modifier.weight(1f))
+        CallButtonLight(Modifier.align(Alignment.Start))
     }
 }

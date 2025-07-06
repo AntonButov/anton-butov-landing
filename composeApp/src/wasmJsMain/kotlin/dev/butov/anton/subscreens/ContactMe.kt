@@ -25,7 +25,7 @@ fun ContactMe() {
 
         Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
 
-        SendMessageBlock(Modifier.weight(3f))
+        SendMessageBlock(Modifier.weight(3f).align(Alignment.Bottom))
     }
 }
 

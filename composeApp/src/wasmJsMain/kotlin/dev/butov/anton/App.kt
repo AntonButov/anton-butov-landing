@@ -12,6 +12,7 @@ import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.screens.BackGround
 import dev.butov.anton.screens.MainColumn
+import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.*
 
 @Composable
@@ -29,9 +30,11 @@ fun App() {
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(state = scrollState) {
                     item {
-                        Box {
-                            BackGround()
-                            MainColumn()
+                        CenteredLayout {
+                            Box {
+                                BackGround()
+                                MainColumn()
+                            }
                         }
                     }
                 }

@@ -1,7 +1,6 @@
 package dev.butov.anton.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.content.MediaType.Companion.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
@@ -25,12 +24,10 @@ fun BackGround() {
     Row(
         Modifier
             .height(3500.dp) // todo
-            .fillMaxWidth()
-            .background(Colors.background)
-            .padding(horizontal = 80.dp),
+            .fillMaxWidth(),
+        //  .padding(horizontal = 80.dp),
     ) {
-        val dividerColor = Colors.primary.copy(alpha = 0.05f)
-        VerticalDivider(color = dividerColor)
+        Divider()
         Box(Modifier.weight(1f)) {
             Icon(
                 modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
@@ -43,7 +40,7 @@ fun BackGround() {
                 contentDescription = null,
             )
         }
-        VerticalDivider(color = dividerColor)
+        Divider()
         Box(Modifier.weight(1f)) {
             Icon(
                 modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
@@ -56,7 +53,7 @@ fun BackGround() {
                 contentDescription = null,
             )
         }
-        VerticalDivider(color = dividerColor)
+        Divider()
         Box(Modifier.weight(1f)) {
             Icon(
                 modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
@@ -64,9 +61,9 @@ fun BackGround() {
                 contentDescription = null,
             )
         }
-        VerticalDivider(color = dividerColor)
+        Divider()
         Spacer(Modifier.weight(1f))
-        VerticalDivider(color = dividerColor)
+        Divider()
     }
     Image(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 80.dp, vertical = 350.dp),
@@ -74,4 +71,9 @@ fun BackGround() {
         contentDescription = null,
         contentScale = ContentScale.FillWidth,
     )
+}
+
+@Composable
+private fun Divider() {
+    VerticalDivider(color = Colors.primary.copy(alpha = 0.05f))
 }

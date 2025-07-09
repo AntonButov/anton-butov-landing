@@ -14,23 +14,22 @@ import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
 import dev.butov.anton.uikit.SendMessageButton
 import dev.butov.anton.uikit.SoftStyle
+import dev.butov.anton.viewmodel.SendMessageViewModel
 
 @Composable
 fun ContactMe() {
+    val viewModel = remember { SendMessageViewModel() }
     Row(Modifier.height(280.dp)) {
         LeftColumn(Modifier.weight(1f))
 
         Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
 
-        SendMessageBlock(Modifier.weight(3f).align(Alignment.Bottom))
+        SendMessageBlock(Modifier.weight(3f).align(Alignment.Bottom), viewModel)
     }
 }
 
 @Composable
-private fun SendMessageBlock(modifier: Modifier) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var message by remember { mutableStateOf("") }
+private fun SendMessageBlock(modifier: Modifier, viewModel: SendMessageViewModel) {
 
     Column(
         modifier = modifier,
@@ -53,8 +52,8 @@ private fun SendMessageBlock(modifier: Modifier) {
         ) {
             OutlinedTextField(
                 modifier = Modifier.weight(1f).height(70.dp),
-                value = name,
-                onValueChange = { name = it },
+                value = viewModel.name,
+                onValueChange = viewModel::onNameChange,
                 label = { Text("Name") },
                 trailingIcon = {
                     Icon(
@@ -67,8 +66,8 @@ private fun SendMessageBlock(modifier: Modifier) {
             )
             OutlinedTextField(
                 modifier = Modifier.height(70.dp).weight(1f),
-                value = email,
-                onValueChange = { email = it },
+                value = viewModel.email,
+                onValueChange = viewModel::onEmailChange,
                 label = { Text("Email") },
                 trailingIcon = {
                     Icon(
@@ -85,8 +84,8 @@ private fun SendMessageBlock(modifier: Modifier) {
         ) {
             OutlinedTextField(
                 modifier = Modifier.matchParentSize(),
-                value = message,
-                onValueChange = { message = it },
+                value = viewModel.message,
+                onValueChange = viewModel::onMessageChange,
                 label = { Text("Message") },
                 trailingIcon = null,
                 colors = textFieldColors,

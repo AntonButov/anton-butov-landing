@@ -17,11 +17,11 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #111111; /* Цвет ползунка */
+    background: #E20100; /* Цвет ползунка */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #111111; /* Цвет ползунка при наведении */
+    background: #E20100; /* Цвет ползунка при наведении */
 }
 
 canvas {

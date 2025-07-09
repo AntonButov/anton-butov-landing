@@ -41,8 +41,8 @@ fun App() {
                 }
                 val scrollbarStyle =
                     LocalScrollbarStyle.current.copy(
-                        hoverColor = Colors.surface,
-                        unhoverColor = Colors.surface,
+                        hoverColor = Colors.red,
+                        unhoverColor = Colors.red,
                     )
                 VerticalScrollbar(
                     adapter = rememberScrollbarAdapter(scrollState),

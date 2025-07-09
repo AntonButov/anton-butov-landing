@@ -10,9 +10,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.*
+import dev.butov.anton.subscreens.sendMessage.SendMessageBlock
 import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
-import dev.butov.anton.uikit.SendMessageButton
 import dev.butov.anton.uikit.SoftStyle
 
 @Composable
@@ -23,81 +23,6 @@ fun ContactMe() {
         Spacer(Modifier.weight(0.5f).defaultMinSize(minWidth = 20.dp))
 
         SendMessageBlock(Modifier.weight(3f).align(Alignment.Bottom))
-    }
-}
-
-@Composable
-private fun SendMessageBlock(modifier: Modifier) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var message by remember { mutableStateOf("") }
-
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-    ) {
-        val textFieldColors =
-            OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Colors.primary,
-                unfocusedBorderColor = Colors.primary.copy(alpha = 0.05f),
-                focusedLabelColor = Colors.primary,
-                unfocusedLabelColor = Colors.primary.copy(alpha = 0.4f),
-                cursorColor = Colors.primary,
-                focusedContainerColor = Colors.surface,
-                unfocusedContainerColor = Colors.surface,
-            )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(30.dp),
-        ) {
-            OutlinedTextField(
-                modifier = Modifier.weight(1f).height(70.dp),
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Name") },
-                trailingIcon = {
-                    Icon(
-                        imageVector = AntonIcons.Grid,
-                        contentDescription = null,
-                        tint = Colors.primary,
-                    )
-                },
-                colors = textFieldColors,
-            )
-            OutlinedTextField(
-                modifier = Modifier.height(70.dp).weight(1f),
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                trailingIcon = {
-                    Icon(
-                        imageVector = AntonIcons.Sms,
-                        contentDescription = null,
-                        tint = Colors.primary,
-                    )
-                },
-                colors = textFieldColors,
-            )
-        }
-        Box(
-            modifier = Modifier.fillMaxWidth().height(120.dp),
-        ) {
-            OutlinedTextField(
-                modifier = Modifier.matchParentSize(),
-                value = message,
-                onValueChange = { message = it },
-                label = { Text("Message") },
-                trailingIcon = null,
-                colors = textFieldColors,
-            )
-            Icon(
-                modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),
-                imageVector = AntonIcons.Message,
-                contentDescription = null,
-            )
-        }
-        SendMessageButton(Modifier.align(Alignment.End))
     }
 }
 

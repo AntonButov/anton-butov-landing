@@ -13,6 +13,7 @@ import org.w3c.dom.events.Event
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
+    document.body?.style?.backgroundColor = "#0B0B0B"
     ComposeViewport(document.body!!) {
         var windowSize = remember { mutableStateOf(IntSize(0, 0)) }.value
         WindowResizeListener { width, height ->

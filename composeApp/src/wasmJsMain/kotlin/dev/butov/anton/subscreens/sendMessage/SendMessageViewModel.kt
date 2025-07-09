@@ -44,4 +44,5 @@ class SendMessageViewModel {
         if (current is SendMessageState.Edit) {
             state = current.copy(message = value)
         }
-    }}
+    }
+}

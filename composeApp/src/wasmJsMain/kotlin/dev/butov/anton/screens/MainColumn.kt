@@ -9,8 +9,8 @@ import dev.butov.anton.subscreens.ContactMe
 import dev.butov.anton.subscreens.Header
 import dev.butov.anton.subscreens.MyProjects
 import dev.butov.anton.subscreens.PhotoBlock
+import dev.butov.anton.subscreens.Technologies
 import dev.butov.anton.uikit.Message
-import dev.butov.anton.uikit.Technologies
 
 @Composable
 fun MainColumn() {

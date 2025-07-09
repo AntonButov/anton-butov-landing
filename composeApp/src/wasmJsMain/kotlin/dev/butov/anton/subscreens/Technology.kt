@@ -1,4 +1,4 @@
-package dev.butov.anton.uikit
+package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,10 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
+import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.*
 
 @Composable
@@ -73,8 +73,7 @@ private fun TechnologyKotlin() {
         modifierIcon =
             Modifier
                 .padding(start = 15.dp, top = 14.dp),
-        icon = AntonIcons.Kotlin,
-        technology = "Kotlin",
+        technology = TechnologiesEnum.Kotlin,
         experience = "5 years", // todo by now
     )
 }
@@ -85,8 +84,7 @@ private fun TechnologyJava() {
         modifierIcon =
             Modifier
                 .padding(start = 15.dp, top = 10.dp),
-        icon = AntonIcons.Java,
-        technology = "Java",
+        technology = TechnologiesEnum.Java,
         experience = "5 years", // todo by now
     )
 }
@@ -97,8 +95,7 @@ private fun TechnologyCompose() {
         modifierIcon =
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
-        icon = AntonIcons.Compose,
-        technology = "Jetpack Compose",
+        technology = TechnologiesEnum.JetpackCompose,
         experience = "3 years", // todo by now
     )
 }
@@ -109,8 +106,7 @@ private fun TechnologyDagger() {
         modifierIcon =
             Modifier
                 .padding(start = 12.dp, top = 10.dp),
-        icon = AntonIcons.Google,
-        technology = "Dagger",
+        technology = TechnologiesEnum.Dagger,
         experience = "5 years", // todo by now
     )
 }
@@ -121,8 +117,7 @@ private fun TechnologyCleanArchitecture() {
         modifierIcon =
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
-        icon = AntonIcons.Android,
-        technology = "Clear Architecture",
+        technology = TechnologiesEnum.CleanArchitecture,
         experience = "5 years", // todo by now
     )
 }
@@ -133,8 +128,7 @@ private fun TechnologyTDD() {
         modifierIcon =
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
-        icon = AntonIcons.Android,
-        technology = "TDD",
+        technology = TechnologiesEnum.TDD,
         experience = "5 years", // todo by now
     )
 }
@@ -145,8 +139,7 @@ private fun TechnologyKMP() {
         modifierIcon =
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
-        icon = AntonIcons.Kotlin,
-        technology = "KMP",
+        technology = TechnologiesEnum.KMP,
         experience = "3 years", // todo by now
     )
 }
@@ -154,8 +147,7 @@ private fun TechnologyKMP() {
 @Composable
 private fun Technology(
     modifierIcon: Modifier,
-    icon: ImageVector,
-    technology: String,
+    technology: TechnologiesEnum,
     experience: String,
 ) {
     Technology(
@@ -167,12 +159,12 @@ private fun Technology(
     ) {
         Icon(
             modifier = modifierIcon,
-            imageVector = icon,
+            imageVector = technology.imageVector,
             contentDescription = null,
         )
         Column(modifier = Modifier.align(Alignment.BottomStart).padding(horizontal = 15.dp, vertical = 13.dp)) {
             Text(
-                text = technology,
+                text = technology.text,
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
             )
             Spacer(Modifier.height(4.dp))

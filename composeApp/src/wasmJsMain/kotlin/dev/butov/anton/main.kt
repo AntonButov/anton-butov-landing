@@ -9,7 +9,6 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.w3c.dom.Text
 import org.w3c.dom.events.Event
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -29,9 +28,9 @@ fun WindowResizeListener(onResize: (Int, Int) -> Unit) {
         val listener: (Event) -> Unit = {
             onResize(window.innerWidth, window.innerHeight)
         }
-        window.addEventListener("resize", listener)
+        window.addEventListener("beforeunload", listener)
         onDispose {
-            window.removeEventListener("resize", listener)
+            window.removeEventListener("beforeunload", listener)
         }
     }
 }

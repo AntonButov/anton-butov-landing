@@ -2,7 +2,8 @@ package dev.butov.anton.subscreens.sendMessage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,10 +17,11 @@ import dev.butov.anton.myiconpack.Ok
 fun Ok() {
     Row {
         Image(
-            modifier = Modifier.padding(horizontal = 20.dp),
+            modifier = Modifier,
             imageVector = AntonIcons.Ok,
             contentDescription = null,
         )
+        Spacer(Modifier.size(30.dp))
         Text(
             text = "Your message has been successfully sent",
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),

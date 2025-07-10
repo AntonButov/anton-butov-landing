@@ -4,45 +4,37 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-/** View model controlling SendMessage screen state. */
 class SendMessageViewModel {
-    /** Current state of the screen. */
-    var state: SendMessageState by mutableStateOf(SendMessageState.Edit("", "", ""))
+    var state: SendMessageState by mutableStateOf(SendMessageState.Edit("", "", "", false))
         private set
 
-    /** Current name value from [state] or empty if not editing. */
-    val name: String
-        get() = (state as? SendMessageState.Edit)?.name ?: ""
+    var name: String
+        get() = (state as SendMessageState.Edit).name
+        private set(value) {
+            state = (state as SendMessageState.Edit).copy(name = value)
+        }
 
-    /** Current email value from [state] or empty if not editing. */
-    val email: String
-        get() = (state as? SendMessageState.Edit)?.email ?: ""
+    var email: String
+        get() = (state as SendMessageState.Edit).email
+        private set(value) {
+            state = (state as SendMessageState.Edit).copy(email = value)
+        }
 
-    /** Current message value from [state] or empty if not editing. */
-    val message: String
-        get() = (state as? SendMessageState.Edit)?.message ?: ""
+    var message: String
+        get() = (state as SendMessageState.Edit).message
+        private set(value) {
+            state = (state as SendMessageState.Edit).copy(message = value)
+        }
 
-    /** Update name when in [SendMessageState.Edit] state. */
     fun onNameChange(value: String) {
-        val current = state
-        if (current is SendMessageState.Edit) {
-            state = current.copy(name = value)
-        }
+        name = value
     }
 
-    /** Update email when in [SendMessageState.Edit] state. */
     fun onEmailChange(value: String) {
-        val current = state
-        if (current is SendMessageState.Edit) {
-            state = current.copy(email = value)
-        }
+        email = value
     }
 
-    /** Update message when in [SendMessageState.Edit] state. */
     fun onMessageChange(value: String) {
-        val current = state
-        if (current is SendMessageState.Edit) {
-            state = current.copy(message = value)
-        }
+        message = value
     }
 }

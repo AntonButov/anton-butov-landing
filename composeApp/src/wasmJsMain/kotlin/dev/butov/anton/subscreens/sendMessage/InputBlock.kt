@@ -37,6 +37,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 cursorColor = Colors.primary,
                 focusedContainerColor = Colors.surface,
                 unfocusedContainerColor = Colors.surface,
+                errorBorderColor = Colors.red,
             )
 
         Row(
@@ -82,6 +83,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 label = { Text("Message") },
                 trailingIcon = null,
                 colors = textFieldColors,
+                isError = viewModel.isError,
             )
             Icon(
                 modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),

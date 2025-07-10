@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 class SendMessageViewModel {
-    var state: SendMessageState by mutableStateOf(SendMessageState.Edit("", "", "", false))
+    var state: SendMessageState by mutableStateOf(SendMessageState.Edit("", "", ""))
         private set
 
     var name: String

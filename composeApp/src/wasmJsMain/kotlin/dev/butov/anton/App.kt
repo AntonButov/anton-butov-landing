@@ -7,13 +7,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.myiconpack.*
-import dev.butov.anton.screens.BackGround
 import dev.butov.anton.screens.MainColumn
-import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.*
 
 @Composable
@@ -26,30 +23,24 @@ fun App() {
                 ),
             LocalContentColor provides Colors.primary,
         ) {
-            var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(state = scrollState) {
                     item {
-                        CenteredLayout {
-                            Box {
-                                BackGround()
-                                MainColumn()
-                            }
-                        }
+                        MainColumn()
                     }
                 }
-                val scrollbarStyle =
-                    LocalScrollbarStyle.current.copy(
-                        hoverColor = Colors.red,
-                        unhoverColor = Colors.red,
-                    )
-                VerticalScrollbar(
-                    adapter = rememberScrollbarAdapter(scrollState),
-                    modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
-                    style = scrollbarStyle,
-                )
             }
+            val scrollbarStyle =
+                LocalScrollbarStyle.current.copy(
+                    hoverColor = Colors.red,
+                    unhoverColor = Colors.red,
+                )
+            VerticalScrollbar(
+                adapter = rememberScrollbarAdapter(scrollState),
+                modifier = Modifier.fillMaxHeight(), // .align(Alignment.CenterEnd),
+                style = scrollbarStyle,
+            )
         }
     }
 }

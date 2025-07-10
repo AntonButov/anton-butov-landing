@@ -37,6 +37,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 cursorColor = Colors.primary,
                 focusedContainerColor = Colors.surface,
                 unfocusedContainerColor = Colors.surface,
+                focusedTextColor = Colors.primary,
                 errorBorderColor = Colors.red,
             )
 

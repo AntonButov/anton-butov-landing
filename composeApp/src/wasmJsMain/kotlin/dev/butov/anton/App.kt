@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.myiconpack.*
@@ -30,17 +31,18 @@ fun App() {
                         MainColumn()
                     }
                 }
-            }
-            val scrollbarStyle =
-                LocalScrollbarStyle.current.copy(
-                    hoverColor = Colors.red,
-                    unhoverColor = Colors.red,
+                val scrollbarStyle =
+                    LocalScrollbarStyle.current.copy(
+                        hoverColor = Colors.red,
+                        unhoverColor = Colors.red,
+                    )
+
+                VerticalScrollbar(
+                    modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                    adapter = rememberScrollbarAdapter(scrollState),
+                    style = scrollbarStyle,
                 )
-            VerticalScrollbar(
-                adapter = rememberScrollbarAdapter(scrollState),
-                modifier = Modifier.fillMaxHeight(), // .align(Alignment.CenterEnd),
-                style = scrollbarStyle,
-            )
+            }
         }
     }
 }

@@ -4,7 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class SendMessageViewModel {
+class SendMessageViewModel(
+    private val repository: SendMessageRepository = FormspreeSendMessageRepository(),
+) {
     var state: SendMessageState by mutableStateOf(SendMessageState.Edit("", "", ""))
         private set
 
@@ -39,5 +41,14 @@ class SendMessageViewModel {
 
     fun onMessageChange(value: String) {
         message = value
+    }
+
+    suspend fun send() {
+        try {
+            repository.send(name, email, message)
+            state = SendMessageState.Ok
+        } catch (_: Exception) {
+            state = (state as SendMessageState.Edit).copy(isError = true)
+        }
     }
 }

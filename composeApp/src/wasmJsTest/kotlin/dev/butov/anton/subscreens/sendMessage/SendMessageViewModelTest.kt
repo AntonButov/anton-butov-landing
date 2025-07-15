@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens.sendMessage
 
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -33,4 +34,45 @@ class SendMessageViewModelTest {
         assertEquals("hello", viewModel.message)
         assertEquals(SendMessageState.Edit("", "", "hello"), viewModel.state)
     }
+
+    @Test
+    fun `send success changes state to Ok`() =
+        runTest {
+            val repo =
+                object : SendMessageRepository {
+                    override suspend fun send(
+                        name: String,
+                        email: String,
+                        message: String,
+                    ) {}
+                }
+            val viewModel = SendMessageViewModel(repo)
+            viewModel.onNameChange("n")
+            viewModel.onEmailChange("e")
+            viewModel.onMessageChange("m")
+
+            viewModel.send()
+
+            assertEquals(SendMessageState.Ok, viewModel.state)
+        }
+
+    @Test
+    fun `send failure sets error`() =
+        runTest {
+            val repo =
+                object : SendMessageRepository {
+                    override suspend fun send(
+                        name: String,
+                        email: String,
+                        message: String,
+                    ) {
+                        throw RuntimeException()
+                    }
+                }
+            val viewModel = SendMessageViewModel(repo)
+
+            viewModel.send()
+
+            assertEquals(true, viewModel.isError)
+        }
 }

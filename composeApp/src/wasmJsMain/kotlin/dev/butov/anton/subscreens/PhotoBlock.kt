@@ -78,6 +78,6 @@ private fun Im(
             color = Colors.primary.copy(alpha = 0.6f),
         )
         Spacer(Modifier.size(24.dp))
-        CallButtonLight()
+        CallButtonLight {}
     }
 }

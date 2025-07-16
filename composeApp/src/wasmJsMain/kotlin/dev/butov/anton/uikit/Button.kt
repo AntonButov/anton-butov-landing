@@ -1,8 +1,10 @@
 package dev.butov.anton.uikit
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.onClick
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,10 +20,14 @@ import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Call
 import dev.butov.anton.myiconpack.MessageAdd
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SendMessageButton(modifier: Modifier = Modifier) {
+fun SendMessageButton(
+    modifier: Modifier = Modifier,
+    onSend: () -> Unit,
+) {
     Button(
-        modifier = modifier,
+        modifier = modifier.onClick(onClick = onSend),
         text = "Send message",
         background = Colors.primary.copy(alpha = 0.1f),
         contentColor = Colors.primary,
@@ -42,10 +48,14 @@ fun CallButtonDark(modifier: Modifier = Modifier) {
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CallButtonLight(modifier: Modifier = Modifier) {
+fun CallButtonLight(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
     Button(
-        modifier = modifier,
+        modifier = modifier.onClick(onClick = onClick),
         text = "Assign a call",
         background = Colors.primary,
         contentColor = Colors.background,

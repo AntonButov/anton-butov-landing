@@ -92,6 +92,6 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 contentDescription = null,
             )
         }
-        SendMessageButton(Modifier.align(Alignment.End))
+        SendMessageButton(Modifier.align(Alignment.End), viewModel::send)
     }
 }

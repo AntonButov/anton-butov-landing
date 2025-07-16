@@ -3,6 +3,7 @@ package dev.butov.anton.subscreens.sendMessage
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 
 class SendMessageViewModel(
     private val repository: SendMessageRepository = FormspreeSendMessageRepository(),
@@ -43,7 +44,8 @@ class SendMessageViewModel(
         message = value
     }
 
-    suspend fun send() {
+    fun send() {
+
         try {
             repository.send(name, email, message)
             state = SendMessageState.Ok

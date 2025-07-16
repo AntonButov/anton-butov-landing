@@ -50,6 +50,6 @@ private fun LeftColumn(modifier: Modifier) {
             fontWeight = FontWeight.Light,
             color = Colors.primary.copy(alpha = 0.6f),
         )
-        CallButtonLight(Modifier.align(Alignment.Start))
+        CallButtonLight(Modifier.align(Alignment.Start)) {}
     }
 }

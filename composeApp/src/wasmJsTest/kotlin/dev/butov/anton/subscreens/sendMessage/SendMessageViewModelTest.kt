@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens.sendMessage
 
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -52,6 +53,7 @@ class SendMessageViewModelTest {
             viewModel.onMessageChange("m")
 
             viewModel.send()
+            advanceUntilIdle()
 
             assertEquals(SendMessageState.Ok, viewModel.state)
         }
@@ -72,6 +74,7 @@ class SendMessageViewModelTest {
             val viewModel = SendMessageViewModel(repo)
 
             viewModel.send()
+            advanceUntilIdle()
 
             assertEquals(true, viewModel.isError)
         }

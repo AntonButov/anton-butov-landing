@@ -49,8 +49,9 @@ class SendMessageViewModel(
     fun send() {
         viewModelScope.launch {
             try {
-                repository.send(name, email, message)
-                state = SendMessageState.Ok
+                if (repository.send(name, email, message)) {
+                    state = SendMessageState.Ok
+                }
             } catch (_: Exception) {
                 state = (state as SendMessageState.Edit).copy(isError = true)
             }

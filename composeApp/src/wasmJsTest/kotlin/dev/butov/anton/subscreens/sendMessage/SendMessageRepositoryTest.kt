@@ -15,9 +15,11 @@ class SendMessageRepositoryTest {
     fun `send posts form data`() =
         runTest {
             var capturedBody: Any? = null
+            var capturedAccept: String? = null
             val engine =
                 MockEngine { request ->
                     capturedBody = request.body
+                    capturedAccept = request.headers["Accept"]
                     respond("", HttpStatusCode.Accepted)
                 }
             val client = HttpClient(engine)
@@ -30,5 +32,6 @@ class SendMessageRepositoryTest {
             assertEquals(listOf("john"), parameters.getAll("name"))
             assertEquals(listOf("a@b.c"), parameters.getAll("email"))
             assertEquals(listOf("hello"), parameters.getAll("message"))
+            assertEquals("application/json", capturedAccept)
         }
 }

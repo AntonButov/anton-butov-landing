@@ -45,7 +45,7 @@ class SendMessageViewModelTest {
                         name: String,
                         email: String,
                         message: String,
-                    ) {}
+                    ): Boolean = true
                 }
             val viewModel = SendMessageViewModel(repo)
             viewModel.onNameChange("n")
@@ -67,7 +67,7 @@ class SendMessageViewModelTest {
                         name: String,
                         email: String,
                         message: String,
-                    ) {
+                    ): Boolean {
                         throw RuntimeException()
                     }
                 }

@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens.sendMessage
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -36,6 +37,7 @@ class SendMessageViewModelTest {
         assertEquals(SendMessageState.Edit("", "", "hello"), viewModel.state)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `send success changes state to Ok`() =
         runTest {
@@ -58,6 +60,7 @@ class SendMessageViewModelTest {
             assertEquals(SendMessageState.Ok, viewModel.state)
         }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `send failure sets error`() =
         runTest {

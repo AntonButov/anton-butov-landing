@@ -56,6 +56,10 @@ class SendMessageViewModel(
     }
 
     fun send() {
+        if (email.isEmpty() || email.isBlank()) {
+            error = Error.Email
+            return
+        }
         if (message.isEmpty() || message.isBlank()) {
             error = Error.Message
             return

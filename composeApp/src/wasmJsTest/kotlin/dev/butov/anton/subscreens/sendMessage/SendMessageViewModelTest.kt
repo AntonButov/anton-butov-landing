@@ -75,6 +75,7 @@ class SendMessageViewModelTest {
                     }
                 }
             val viewModel = SendMessageViewModel(repo)
+            viewModel.onEmailChange("test@test.com")
             viewModel.onMessageChange("not emtpy meesage")
             viewModel.send()
             advanceUntilIdle()
@@ -100,9 +101,12 @@ class SendMessageViewModelTest {
             val viewModel = SendMessageViewModel(repo)
 
             viewModel.send()
-            advanceUntilIdle()
 
-            assertEquals(Error.Message, viewModel.error)
+            assertEquals(Error.Email, viewModel.error)
+
+            viewModel.onEmailChange("e@mail.com")
+
+            assertEquals(Error.Email, viewModel.error)
 
             viewModel.onMessageChange("message")
 

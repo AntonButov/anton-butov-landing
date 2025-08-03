@@ -39,9 +39,10 @@ class FormspreeSendMessageRepository(
                 )
                 header(HttpHeaders.Accept, "application/json")
             }.status.value
-        return when (resultCode) {
-            429 -> NetResult.WrongEmail
-            else -> NetResult.UnkownError
+        return when {
+            resultCode == 422 -> NetResult.WrongEmail
+            resultCode > 400 -> NetResult.UnkownError
+            else -> NetResult.Success
         }
     }
 }

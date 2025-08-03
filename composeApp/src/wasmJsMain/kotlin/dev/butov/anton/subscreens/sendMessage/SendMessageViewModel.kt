@@ -42,10 +42,16 @@ class SendMessageViewModel(
     }
 
     fun onEmailChange(value: String) {
+        if (error == Error.Email) {
+            error = null
+        }
         email = value
     }
 
     fun onMessageChange(value: String) {
+        if (error == Error.Message) {
+            error = null
+        }
         message = value
     }
 

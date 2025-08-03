@@ -68,10 +68,11 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                     Icon(
                         imageVector = AntonIcons.Sms,
                         contentDescription = null,
-                        tint = Colors.primary,
+                        tint = if (viewModel.error == Error.Email) Colors.red else Colors.primary,
                     )
                 },
                 colors = textFieldColors,
+                isError = viewModel.error == Error.Email,
             )
         }
         Box(
@@ -90,6 +91,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),
                 imageVector = AntonIcons.Message,
                 contentDescription = null,
+                tint = if (viewModel.error == Error.Message) Colors.red else Colors.primary,
             )
         }
         SendMessageButton(Modifier.align(Alignment.End), viewModel::send)

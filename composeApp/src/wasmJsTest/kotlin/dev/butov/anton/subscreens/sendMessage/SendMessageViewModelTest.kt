@@ -103,5 +103,9 @@ class SendMessageViewModelTest {
             advanceUntilIdle()
 
             assertEquals(Error.Message, viewModel.error)
+
+            viewModel.onMessageChange("message")
+
+            assertEquals(null, viewModel.error)
         }
 }

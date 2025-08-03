@@ -50,6 +50,10 @@ class SendMessageViewModel(
     }
 
     fun send() {
+        if (message.isEmpty() || message.isBlank()) {
+            error = Error.Message
+            return
+        }
         viewModelScope.launch {
             runCatching {
                 when (repository.send(name, email, message)) {

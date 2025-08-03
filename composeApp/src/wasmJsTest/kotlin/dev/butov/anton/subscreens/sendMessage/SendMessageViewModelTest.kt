@@ -75,10 +75,33 @@ class SendMessageViewModelTest {
                     }
                 }
             val viewModel = SendMessageViewModel(repo)
-
+            viewModel.onMessageChange("not emtpy meesage")
             viewModel.send()
             advanceUntilIdle()
 
             assertEquals(Error.Unknown, viewModel.error)
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `when message is empty should state message error`() =
+        runTest {
+            val repo =
+                object : SendMessageRepository {
+                    override suspend fun send(
+                        name: String,
+                        email: String,
+                        message: String,
+                    ): NetResult {
+                        error("Should not invoke")
+                    }
+                }
+
+            val viewModel = SendMessageViewModel(repo)
+
+            viewModel.send()
+            advanceUntilIdle()
+
+            assertEquals(Error.Message, viewModel.error)
         }
 }

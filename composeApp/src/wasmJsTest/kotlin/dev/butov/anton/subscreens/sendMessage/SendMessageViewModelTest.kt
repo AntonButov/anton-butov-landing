@@ -83,7 +83,6 @@ class SendMessageViewModelTest {
             assertEquals(Error.Unknown, viewModel.error)
         }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `when message is empty should state message error`() =
         runTest {
@@ -101,15 +100,12 @@ class SendMessageViewModelTest {
             val viewModel = SendMessageViewModel(repo)
 
             viewModel.send()
-
             assertEquals(Error.Email, viewModel.error)
-
             viewModel.onEmailChange("e@mail.com")
-
-            assertEquals(Error.Email, viewModel.error)
-
+            assertEquals(null, viewModel.error)
+            viewModel.send()
+            assertEquals(Error.Message, viewModel.error)
             viewModel.onMessageChange("message")
-
             assertEquals(null, viewModel.error)
         }
 }

@@ -1,12 +1,18 @@
 package dev.butov.anton.subscreens.sendMessage
 
 sealed interface SendMessageState {
-    object Ok : SendMessageState
+    data object Ok : SendMessageState
 
     data class Edit(
         val name: String,
         val email: String,
         val message: String,
-        val isError: Boolean = false,
+        val error: Error? = null,
     ) : SendMessageState
+}
+
+enum class Error {
+    Email,
+    Message,
+    Unknown,
 }

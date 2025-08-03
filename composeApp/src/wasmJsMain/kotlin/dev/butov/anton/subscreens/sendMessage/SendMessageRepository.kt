@@ -14,7 +14,7 @@ interface SendMessageRepository {
         name: String,
         email: String,
         message: String,
-    ): Boolean
+    ): NetResult
 }
 
 class FormspreeSendMessageRepository(
@@ -25,18 +25,29 @@ class FormspreeSendMessageRepository(
         name: String,
         email: String,
         message: String,
-    ): Boolean {
-        return client.post(endpoint) {
-            setBody(
-                FormDataContent(
-                    Parameters.build {
-                        append("name", name)
-                        append("email", email)
-                        append("message", message)
-                    },
-                ),
-            )
-            header(HttpHeaders.Accept, "application/json")
-        }.status.value < 400
+    ): NetResult {
+        val resultCode =
+            client.post(endpoint) {
+                setBody(
+                    FormDataContent(
+                        Parameters.build {
+                            append("name", name)
+                            append("email", email)
+                            append("message", message)
+                        },
+                    ),
+                )
+                header(HttpHeaders.Accept, "application/json")
+            }.status.value
+        return when (resultCode) {
+            429 -> NetResult.WrongEmail
+            else -> NetResult.UnkownError
+        }
     }
+}
+
+enum class NetResult {
+    Success,
+    WrongEmail,
+    UnkownError,
 }

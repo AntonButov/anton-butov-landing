@@ -47,7 +47,7 @@ class SendMessageViewModelTest {
                         name: String,
                         email: String,
                         message: String,
-                    ): Boolean = true
+                    ): NetResult = NetResult.Success
                 }
             val viewModel = SendMessageViewModel(repo)
             viewModel.onNameChange("n")
@@ -70,7 +70,7 @@ class SendMessageViewModelTest {
                         name: String,
                         email: String,
                         message: String,
-                    ): Boolean {
+                    ): NetResult {
                         throw RuntimeException()
                     }
                 }
@@ -79,6 +79,6 @@ class SendMessageViewModelTest {
             viewModel.send()
             advanceUntilIdle()
 
-            assertEquals(true, viewModel.isError)
+            assertEquals(Error.Unknown, viewModel.error)
         }
 }

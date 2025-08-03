@@ -84,7 +84,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 label = { Text("Message") },
                 trailingIcon = null,
                 colors = textFieldColors,
-                isError = viewModel.isError,
+                isError = viewModel.error == Error.Message,
             )
             Icon(
                 modifier = Modifier.align(Alignment.TopEnd).padding(vertical = 23.dp, horizontal = 26.dp),

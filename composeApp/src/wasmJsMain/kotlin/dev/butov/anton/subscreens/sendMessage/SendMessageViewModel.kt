@@ -16,23 +16,26 @@ class SendMessageViewModel(
     var name: String
         get() = (state as SendMessageState.Edit).name
         private set(value) {
-            state = (state as SendMessageState.Edit).copy(name = value, isError = false)
+            state = (state as SendMessageState.Edit).copy(name = value)
         }
 
     var email: String
         get() = (state as SendMessageState.Edit).email
         private set(value) {
-            state = (state as SendMessageState.Edit).copy(email = value, isError = false)
+            state = (state as SendMessageState.Edit).copy(email = value)
         }
 
     var message: String
         get() = (state as SendMessageState.Edit).message
         private set(value) {
-            state = (state as SendMessageState.Edit).copy(message = value, isError = false)
+            state = (state as SendMessageState.Edit).copy(message = value)
         }
 
-    val isError: Boolean
-        get() = (state as SendMessageState.Edit).isError
+    var error: Error?
+        get() = (state as SendMessageState.Edit).error
+        private set(value) {
+            state = (state as SendMessageState.Edit).copy(error = value)
+        }
 
     fun onNameChange(value: String) {
         name = value
@@ -49,11 +52,13 @@ class SendMessageViewModel(
     fun send() {
         viewModelScope.launch {
             runCatching {
-                if (repository.send(name, email, message)) {
-                    state = SendMessageState.Ok
+                when (repository.send(name, email, message)) {
+                    NetResult.Success -> state = SendMessageState.Ok
+                    NetResult.WrongEmail -> error = Error.Email
+                    NetResult.UnkownError -> error = Error.Unknown
                 }
             }.onFailure {
-                state = (state as SendMessageState.Edit).copy(isError = true)
+                error = Error.Unknown
             }
         }
     }

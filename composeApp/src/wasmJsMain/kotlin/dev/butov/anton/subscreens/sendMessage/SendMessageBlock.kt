@@ -9,9 +9,10 @@ import androidx.compose.ui.Modifier
 fun SendMessageBlock(modifier: Modifier) {
     val viewModel = remember { SendMessageViewModel() }
     Box(modifier) {
-        when (viewModel.state) {
+        when (val state = viewModel.state) {
             is SendMessageState.Edit -> InputBlock(viewModel)
             is SendMessageState.Ok -> Ok()
+            is SendMessageState.UnknounError -> Wrong(state.message)
         }
     }
 }

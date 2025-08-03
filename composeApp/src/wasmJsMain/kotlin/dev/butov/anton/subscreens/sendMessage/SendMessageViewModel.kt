@@ -66,13 +66,13 @@ class SendMessageViewModel(
         }
         viewModelScope.launch {
             runCatching {
-                when (repository.send(name, email, message)) {
+                when (val result = repository.send(name, email, message)) {
                     NetResult.Success -> state = SendMessageState.Ok
                     NetResult.WrongEmail -> error = Error.Email
-                    NetResult.UnkownError -> error = Error.Unknown
+                    is NetResult.UnkownError -> state = SendMessageState.UnknounError(result.message)
                 }
             }.onFailure {
-                error = Error.Unknown
+                state = SendMessageState.UnknounError(it.message.toString())
             }
         }
     }

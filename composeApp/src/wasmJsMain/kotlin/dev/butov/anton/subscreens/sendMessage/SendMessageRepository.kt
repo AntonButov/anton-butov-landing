@@ -6,6 +6,7 @@ import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.Parameters
 
@@ -26,7 +27,7 @@ class FormspreeSendMessageRepository(
         email: String,
         message: String,
     ): NetResult {
-        val resultCode =
+        val result =
             client.post(endpoint) {
                 setBody(
                     FormDataContent(
@@ -38,17 +39,21 @@ class FormspreeSendMessageRepository(
                     ),
                 )
                 header(HttpHeaders.Accept, "application/json")
-            }.status.value
+            }
+        val resultCode = result.status.value
+
         return when {
             resultCode == 422 -> NetResult.WrongEmail
-            resultCode > 400 -> NetResult.UnkownError
+            resultCode > 400 -> NetResult.UnkownError(result.bodyAsText())
             else -> NetResult.Success
         }
     }
 }
 
-enum class NetResult {
-    Success,
-    WrongEmail,
-    UnkownError,
+sealed interface NetResult {
+    data object Success : NetResult
+
+    data object WrongEmail : NetResult
+
+    data class UnkownError(val message: String) : NetResult
 }

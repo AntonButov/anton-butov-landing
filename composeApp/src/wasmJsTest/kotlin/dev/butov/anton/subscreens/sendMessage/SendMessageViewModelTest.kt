@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class SendMessageViewModelTest {
     @Test
@@ -80,7 +81,7 @@ class SendMessageViewModelTest {
             viewModel.send()
             advanceUntilIdle()
 
-            assertEquals(Error.Unknown, viewModel.error)
+            assertTrue { viewModel.state is SendMessageState.UnknounError }
         }
 
     @Test

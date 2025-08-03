@@ -38,6 +38,7 @@ fun InputBlock(viewModel: SendMessageViewModel) {
                 focusedContainerColor = Colors.surface,
                 unfocusedContainerColor = Colors.surface,
                 focusedTextColor = Colors.primary,
+                unfocusedTextColor = Colors.primary,
                 errorBorderColor = Colors.red,
             )
 

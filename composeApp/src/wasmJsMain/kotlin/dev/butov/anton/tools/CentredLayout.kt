@@ -25,10 +25,9 @@ fun CenteredLayout(
         contentAlignment = Alignment.TopCenter,
     ) {
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-            val maxContentWidth = maxWith
             val horizontalPadding =
-                if (maxWidth > maxContentWidth) {
-                    (maxWidth - maxContentWidth) / 2
+                if (maxWidth > maxWith) {
+                    (maxWidth - maxWith) / 2
                 } else {
                     80.dp
                 }

@@ -56,12 +56,6 @@ fun BoxScope.BackGround() {
         Spacer(Modifier.weight(1f))
         Divider()
     }
-    //   Image(
-    //       modifier = Modifier.fillMaxWidth().padding(vertical = 350.dp),
-//        painter = painterResource(Res.drawable.redBack),
-    //       contentDescription = null,
-//        contentScale = ContentScale.FillWidth,
-    //   )
 }
 
 @Composable

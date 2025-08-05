@@ -9,10 +9,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
+import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.screens.MainColumn
 import dev.butov.anton.uikit.*
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun App() {
@@ -31,6 +35,11 @@ fun App() {
                         MainColumn()
                     }
                 }
+                Image(
+                    painter = painterResource(Res.drawable.redBack),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillWidth,
+                )
                 val scrollbarStyle =
                     LocalScrollbarStyle.current.copy(
                         hoverColor = Colors.red,

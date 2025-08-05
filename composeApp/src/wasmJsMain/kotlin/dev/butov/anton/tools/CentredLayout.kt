@@ -38,8 +38,8 @@ fun CenteredLayout(
                         .fillMaxWidth()
                         .padding(horizontal = horizontalPadding),
             ) {
-                content()
                 BackLines()
+                content()
             }
         }
     }

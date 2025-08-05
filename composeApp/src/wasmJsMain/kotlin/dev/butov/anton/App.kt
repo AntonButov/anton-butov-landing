@@ -32,14 +32,16 @@ fun App() {
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(state = scrollState) {
                     item {
-                        MainColumn()
+                        Box {
+                            MainColumn()
+                            Image(
+                                painter = painterResource(Res.drawable.redBack),
+                                contentDescription = null,
+                                contentScale = ContentScale.FillWidth,
+                            )
+                        }
                     }
                 }
-                Image(
-                    painter = painterResource(Res.drawable.redBack),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillWidth,
-                )
                 val scrollbarStyle =
                     LocalScrollbarStyle.current.copy(
                         hoverColor = Colors.red,

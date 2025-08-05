@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background: #0B0B0B;
 }
 
 /* Стили для полосы прокрутки */
@@ -16,9 +17,13 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #0AFFFFFF;; /* Цвет ползунка */
+    background: #E20100; /* Цвет ползунка */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0AFFFFFF;; /* Цвет ползунка при наведении */
+    background: #E20100; /* Цвет ползунка при наведении */
+}
+
+canvas {
+    background: #0B0B0B;
 }

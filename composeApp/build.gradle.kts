@@ -69,11 +69,19 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.coroutines.core)
+            implementation(libs.ktor.client.core)
             //  implementation("io.coil-kt.coil3:coil-compose:3.2.0")
             // implementation("io.coil-kt:coil-svg:2.1.0")
         }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.coroutines.core)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.coroutines.test)
         }
     }
 }

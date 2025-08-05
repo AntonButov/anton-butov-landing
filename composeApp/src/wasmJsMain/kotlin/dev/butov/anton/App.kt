@@ -1,6 +1,7 @@
 package dev.butov.anton
 
 import androidx.compose.foundation.*
+import androidx.compose.foundation.LocalScrollbarStyle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -10,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.myiconpack.*
-import dev.butov.anton.screens.BackGround
 import dev.butov.anton.screens.MainColumn
 import dev.butov.anton.uikit.*
 
@@ -24,20 +24,23 @@ fun App() {
                 ),
             LocalContentColor provides Colors.primary,
         ) {
-            var showContent by remember { mutableStateOf(false) }
             val scrollState = rememberLazyListState()
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(state = scrollState) {
                     item {
-                        Box {
-                            BackGround()
-                            MainColumn()
-                        }
+                        MainColumn()
                     }
                 }
+                val scrollbarStyle =
+                    LocalScrollbarStyle.current.copy(
+                        hoverColor = Colors.red,
+                        unhoverColor = Colors.red,
+                    )
+
                 VerticalScrollbar(
-                    adapter = rememberScrollbarAdapter(scrollState),
                     modifier = Modifier.fillMaxHeight().align(Alignment.CenterEnd),
+                    adapter = rememberScrollbarAdapter(scrollState),
+                    style = scrollbarStyle,
                 )
             }
         }

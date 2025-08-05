@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
+import dev.butov.anton.screens.BackLines
 
 @Composable
 fun CenteredLayout(
@@ -38,6 +39,7 @@ fun CenteredLayout(
                         .padding(horizontal = horizontalPadding),
             ) {
                 content()
+                BackLines()
             }
         }
     }

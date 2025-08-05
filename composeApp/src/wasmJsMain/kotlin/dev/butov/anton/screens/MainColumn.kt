@@ -30,7 +30,7 @@ fun MainColumn() {
         CenteredLayout {
             Box {
                 PhotoBlock()
-                BackGround()
+                BackGroundRectangles()
             }
         }
         CenteredLayout {

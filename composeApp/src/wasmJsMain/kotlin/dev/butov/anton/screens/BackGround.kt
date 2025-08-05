@@ -21,12 +21,12 @@ fun BoxScope.BackGround() {
         Divider()
         Box(Modifier.weight(1f)) {
             Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
+                modifier = Modifier.align(Alignment.TopStart),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
             )
             Icon(
-                modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
+                modifier = Modifier.align(Alignment.Center).padding(top = 70.dp),
                 imageVector = AntonIcons.RectangleHard,
                 contentDescription = null,
             )
@@ -34,12 +34,12 @@ fun BoxScope.BackGround() {
         Divider()
         Box(Modifier.weight(1f)) {
             Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
+                modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp, start = 150.dp),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
             )
             Icon(
-                modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
+                modifier = Modifier.align(Alignment.TopEnd).padding(end = 100.dp),
                 imageVector = AntonIcons.RectangleHard,
                 contentDescription = null,
             )
@@ -47,7 +47,7 @@ fun BoxScope.BackGround() {
         Divider()
         Box(Modifier.weight(1f)) {
             Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
+                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp),
                 imageVector = AntonIcons.RectangleSoft,
                 contentDescription = null,
             )

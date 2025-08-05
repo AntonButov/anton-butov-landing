@@ -28,7 +28,10 @@ fun MainColumn() {
             Spacer(modifier = Modifier.size(50.dp))
         }
         CenteredLayout {
-            PhotoBlock()
+            Box {
+                PhotoBlock()
+                BackGround()
+            }
         }
         CenteredLayout {
             Spacer(Modifier.size(60.dp))

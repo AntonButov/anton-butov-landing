@@ -2,7 +2,6 @@ package dev.butov.anton.tools
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -17,7 +16,7 @@ fun CenteredLayout(
     Box(
         modifier =
             modifier
-                .fillMaxWidth()
+                .fillMaxWidth(),
     ) {
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val horizontalPadding =

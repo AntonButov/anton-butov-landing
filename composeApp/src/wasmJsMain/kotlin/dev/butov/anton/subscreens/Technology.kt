@@ -9,7 +9,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,8 +23,8 @@ fun Technologies() {
             Modifier
                 .matchParentSize()
                 .clip(MaterialTheme.shapes.medium)
-                .blur(48.8.dp)
-                .background(Colors.background.copy(alpha = 0.45f)),
+              //  .blur(48.8.dp)
+                .background(Colors.surface),
         )
         FlowRow(
             modifier =

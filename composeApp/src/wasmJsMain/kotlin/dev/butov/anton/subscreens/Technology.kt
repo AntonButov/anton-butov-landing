@@ -9,25 +9,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
 import dev.butov.anton.TechnologiesEnum
+import dev.butov.anton.currentYear
 import dev.butov.anton.myiconpack.*
 
 @Composable
 fun Technologies() {
-    Box {
-        Box(
-            Modifier
-                .matchParentSize()
-                .clip(MaterialTheme.shapes.medium)
-                .blur(48.8.dp)
-                .background(Colors.background),
-            //   .background(Colors.background.copy(alpha = 0.045f)),
-        )
+    Box(
+        Modifier
+            .clip(MaterialTheme.shapes.medium)
+            .background(Colors.background.copy(alpha = 0.94f).compositeOver(Colors.red)),
+    ) {
         FlowRow(
             modifier =
                 Modifier
@@ -75,7 +72,7 @@ private fun TechnologyKotlin() {
             Modifier
                 .padding(start = 15.dp, top = 14.dp),
         technology = TechnologiesEnum.Kotlin,
-        experience = "5 years", // todo by now
+        experience = "${currentYear - 2020} years",
     )
 }
 
@@ -86,7 +83,7 @@ private fun TechnologyJava() {
             Modifier
                 .padding(start = 15.dp, top = 10.dp),
         technology = TechnologiesEnum.Java,
-        experience = "5 years", // todo by now
+        experience = "${currentYear - 2020} years",
     )
 }
 
@@ -97,7 +94,7 @@ private fun TechnologyCompose() {
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
         technology = TechnologiesEnum.JetpackCompose,
-        experience = "3 years", // todo by now
+        experience = "${currentYear - 2022} years",
     )
 }
 
@@ -108,7 +105,7 @@ private fun TechnologyDagger() {
             Modifier
                 .padding(start = 12.dp, top = 10.dp),
         technology = TechnologiesEnum.Dagger,
-        experience = "5 years", // todo by now
+        experience = "${currentYear - 2020} years",
     )
 }
 
@@ -119,7 +116,7 @@ private fun TechnologyCleanArchitecture() {
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
         technology = TechnologiesEnum.CleanArchitecture,
-        experience = "5 years", // todo by now
+        experience = "${currentYear - 2020} years",
     )
 }
 
@@ -130,7 +127,7 @@ private fun TechnologyTDD() {
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
         technology = TechnologiesEnum.TDD,
-        experience = "5 years", // todo by now
+        experience = "${currentYear - 2020} years",
     )
 }
 
@@ -141,7 +138,7 @@ private fun TechnologyKMP() {
             Modifier
                 .padding(start = 13.dp, top = 10.dp),
         technology = TechnologiesEnum.KMP,
-        experience = "3 years", // todo by now
+        experience = "${currentYear - 2022} years",
     )
 }
 

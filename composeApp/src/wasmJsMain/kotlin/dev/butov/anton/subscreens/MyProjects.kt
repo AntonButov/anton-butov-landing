@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.buildAnnotatedString
@@ -125,7 +126,7 @@ private fun Project(
             .height(270.dp)
             .width(300.dp)
             .clip(MaterialTheme.shapes.small)
-            .background(Colors.surface)
+            .background(Colors.surface.copy(alpha = 0.97f).compositeOver(Colors.red))
             .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
             .padding(horizontal = 14.dp, vertical = 16.dp),
     ) {

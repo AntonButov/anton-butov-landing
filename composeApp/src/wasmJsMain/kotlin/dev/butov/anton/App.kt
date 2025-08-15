@@ -2,6 +2,7 @@ package dev.butov.anton
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.LocalScrollbarStyle
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -9,14 +10,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import antonbutov.composeapp.generated.resources.Res
-import antonbutov.composeapp.generated.resources.butov
-import antonbutov.composeapp.generated.resources.redBack
-import dev.butov.anton.myiconpack.*
-import dev.butov.anton.screens.MainColumn
-import dev.butov.anton.uikit.*
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.unit.dp
+import dev.butov.anton.screens.Contacts
+import dev.butov.anton.screens.Home
+import dev.butov.anton.screens.Projects
+import dev.butov.anton.subscreens.Redback
+import dev.butov.anton.subscreens.burger.MenuViewModel
+import dev.butov.anton.uikit.Message
 
 @Composable
 fun App() {
@@ -29,6 +29,20 @@ fun App() {
             LocalContentColor provides Colors.primary,
         ) {
             val scrollState = rememberLazyListState()
+            val menuViewModel = remember { MenuViewModel() }
+
+            LaunchedEffect(menuViewModel.scrollRequests) {
+                menuViewModel.scrollRequests.let { index ->
+                    when (index) {
+                        0 -> scrollState.animateScrollBy(0f) // Home - остаемся в начале
+                        1 -> scrollState.animateScrollBy(700.dp.value) // Technologies - скролл к секции технологий
+                        2 -> scrollState.animateScrollBy(1000.dp.value) // Projects - скролл к проектам
+                        3 -> scrollState.animateScrollBy(2400.dp.value) // Contact - скролл к контактам
+                        else -> error("Index not found.")
+                    }
+                }
+            }
+
             Box(
                 modifier =
                     Modifier
@@ -38,15 +52,15 @@ fun App() {
                 LazyColumn(state = scrollState) {
                     item {
                         Box {
-                            Image(
-                                modifier =
-                                    Modifier
-                                        .fillMaxWidth(),
-                                painter = painterResource(Res.drawable.redBack),
-                                contentDescription = null,
-                                contentScale = ContentScale.FillWidth,
-                            )
-                            MainColumn()
+                            Redback()
+                            Column {
+                                Box {
+                                    Home(menuViewModel)
+                                }
+                                Projects()
+                                Message()
+                                Contacts()
+                            }
                         }
                     }
                 }

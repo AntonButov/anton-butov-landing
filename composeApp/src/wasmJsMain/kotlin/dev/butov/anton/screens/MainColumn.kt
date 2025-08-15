@@ -12,69 +12,47 @@ import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.Message
 
 @Composable
-fun MainColumn() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        CenteredLayout {
-            Spacer(Modifier.size(50.dp))
-        }
-        CenteredLayout {
-            Header()
-        }
-        CenteredLayout {
-            Spacer(modifier = Modifier.size(50.dp))
-        }
+fun Home() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        CenteredLayout { Spacer(Modifier.size(50.dp)) }
+        CenteredLayout { Header() }
+        CenteredLayout { Spacer(modifier = Modifier.size(50.dp)) }
         CenteredLayout {
             Box {
                 PhotoBlock()
                 BackGroundRectangles()
             }
         }
-        CenteredLayout {
-            Spacer(Modifier.size(60.dp))
-        }
-        CenteredLayout {
-            Technologies()
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(150.dp))
-        }
-        CenteredLayout {
-            MyProjects()
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(110.dp))
-        }
-        CenteredLayout {
-            Message(Modifier.align(Alignment.CenterHorizontally))
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(130.dp))
-        }
-        CenteredLayout {
-            ContactMe()
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(110.dp))
-        }
+        CenteredLayout { Spacer(Modifier.size(60.dp)) }
+        CenteredLayout { Technologies() }
+        CenteredLayout { Spacer(Modifier.size(150.dp)) }
+    }
+}
+
+@Composable
+fun Projects() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        CenteredLayout { MyProjects() }
+    }
+}
+
+@Composable
+fun Contacts() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        CenteredLayout { Spacer(Modifier.size(110.dp)) }
+        CenteredLayout { Message(Modifier.align(Alignment.CenterHorizontally)) }
+        CenteredLayout { Spacer(Modifier.size(130.dp)) }
+        CenteredLayout { ContactMe() }
+        CenteredLayout { Spacer(Modifier.size(110.dp)) }
         CenteredLayout(
             modifier = Modifier.background(Colors.surface),
             renderLines = false,
         ) {
             Footer()
         }
-        CenteredLayout {
-            Spacer(Modifier.size(50.dp))
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(30.dp))
-        }
-        CenteredLayout {
-            Smirnov()
-        }
-        CenteredLayout {
-            Spacer(Modifier.size(30.dp))
-        }
+        CenteredLayout { Spacer(Modifier.size(50.dp)) }
+        CenteredLayout { Spacer(Modifier.size(30.dp)) }
+        CenteredLayout { Smirnov() }
+        CenteredLayout { Spacer(Modifier.size(30.dp)) }
     }
 }

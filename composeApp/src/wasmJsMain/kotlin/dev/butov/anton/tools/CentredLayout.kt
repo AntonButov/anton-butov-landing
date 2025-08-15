@@ -16,9 +16,8 @@ fun CenteredLayout(
 ) {
     Box(
         modifier =
-            Modifier
-                .fillMaxWidth(),
-        contentAlignment = Alignment.TopCenter,
+            modifier
+                .fillMaxWidth()
     ) {
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val horizontalPadding =
@@ -30,9 +29,9 @@ fun CenteredLayout(
 
             Box(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = horizontalPadding),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = horizontalPadding),
             ) {
                 BackLines()
                 content()

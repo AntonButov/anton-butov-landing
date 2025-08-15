@@ -1,15 +1,13 @@
 package dev.butov.anton.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.butov.anton.subscreens.ContactMe
-import dev.butov.anton.subscreens.Header
-import dev.butov.anton.subscreens.MyProjects
-import dev.butov.anton.subscreens.PhotoBlock
-import dev.butov.anton.subscreens.Technologies
+import dev.butov.anton.Colors
+import dev.butov.anton.subscreens.*
 import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.Message
 
@@ -56,6 +54,12 @@ fun MainColumn() {
         }
         CenteredLayout {
             ContactMe()
+        }
+        CenteredLayout {
+            Spacer(Modifier.size(110.dp))
+        }
+        CenteredLayout(Modifier.background(Colors.surface)) {
+            Footer()
         }
         CenteredLayout {
             Spacer(Modifier.size(50.dp))

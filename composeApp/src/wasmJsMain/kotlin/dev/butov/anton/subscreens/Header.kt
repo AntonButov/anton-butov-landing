@@ -21,7 +21,7 @@ fun Header() {
     ) {
         Hamburger()
         Arrows()
-        AntonButov()
+        AntonButov(Modifier.align(Alignment.Center))
         CallButtonDark(Modifier.align(Alignment.CenterEnd))
     }
 }
@@ -53,9 +53,9 @@ private fun Arrow() {
 }
 
 @Composable
-private fun BoxScope.AntonButov() {
+fun BoxScope.AntonButov(modifier: Modifier) {
     Icon(
-        modifier = Modifier.align(Alignment.Center),
+        modifier = modifier,
         imageVector = AntonIcons.AntonButov,
         contentDescription = "AntonButov",
     )

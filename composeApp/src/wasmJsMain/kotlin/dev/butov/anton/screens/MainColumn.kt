@@ -67,5 +67,11 @@ fun MainColumn() {
         CenteredLayout {
             Spacer(Modifier.size(50.dp))
         }
+        CenteredLayout {
+            Spacer(Modifier.size(30.dp))
+        }
+        CenteredLayout {
+            Smirnov()
+        }
     }
 }

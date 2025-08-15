@@ -1,5 +1,7 @@
-package dev.butov.anton;
+package dev.butov.anton
 
+import dev.butov.anton.subscreens.burger.MenuItem
+import dev.butov.anton.subscreens.burger.MenuViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.first
@@ -27,11 +29,12 @@ class MenuViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun onMenuItemClickEmitsIndexCloses() = runTest {
-        val viewModel = MenuViewModel()
-        val result = async { viewModel.scrollRequests.first() }
-        viewModel.onMenuItemClick(MenuItem.PROJECTS)
-        assertEquals(MenuItem.PROJECTS.index, result.await())
-        assertFalse(viewModel.isMenuOpen)
-    }
+    fun onMenuItemClickEmitsIndexCloses() =
+        runTest {
+            val viewModel = MenuViewModel()
+            val result = async { viewModel.scrollRequests.first() }
+            viewModel.onMenuItemClick(MenuItem.PROJECTS)
+            assertEquals(MenuItem.PROJECTS.index, result.await())
+            assertFalse(viewModel.isMenuOpen)
+        }
 }

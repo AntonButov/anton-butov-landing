@@ -14,7 +14,9 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
-import dev.butov.anton.screens.MainColumn
+import dev.butov.anton.screens.Contacts
+import dev.butov.anton.screens.Home
+import dev.butov.anton.screens.Projects
 import dev.butov.anton.uikit.*
 import org.jetbrains.compose.resources.painterResource
 
@@ -46,8 +48,14 @@ fun App() {
                                 contentDescription = null,
                                 contentScale = ContentScale.FillWidth,
                             )
-                            MainColumn()
+                            Home()
                         }
+                    }
+                    item {
+                        Projects()
+                    }
+                    item {
+                        Contacts()
                     }
                 }
                 val scrollbarStyle =

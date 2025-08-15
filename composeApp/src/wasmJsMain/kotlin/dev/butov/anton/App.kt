@@ -37,17 +37,17 @@ fun App() {
                         .fillMaxSize()
                         .background(Colors.background),
             ) {
+                Image(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth(),
+                    painter = painterResource(Res.drawable.redBack),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillWidth,
+                )
                 LazyColumn(state = scrollState) {
                     item {
                         Box {
-                            Image(
-                                modifier =
-                                    Modifier
-                                        .fillMaxWidth(),
-                                painter = painterResource(Res.drawable.redBack),
-                                contentDescription = null,
-                                contentScale = ContentScale.FillWidth,
-                            )
                             Home()
                         }
                     }

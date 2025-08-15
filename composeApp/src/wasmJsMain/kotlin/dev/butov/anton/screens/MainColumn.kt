@@ -58,7 +58,10 @@ fun MainColumn() {
         CenteredLayout {
             Spacer(Modifier.size(110.dp))
         }
-        CenteredLayout(Modifier.background(Colors.surface)) {
+        CenteredLayout(
+            modifier = Modifier.background(Colors.surface),
+            renderLines = false,
+        ) {
             Footer()
         }
         CenteredLayout {

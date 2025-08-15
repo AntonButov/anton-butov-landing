@@ -10,6 +10,7 @@ import dev.butov.anton.screens.BackLines
 @Composable
 fun CenteredLayout(
     modifier: Modifier = Modifier,
+    renderLines: Boolean = true,
     maxWith: Dp = 1400.dp,
     content: @Composable () -> Unit,
 ) {
@@ -32,7 +33,9 @@ fun CenteredLayout(
                         .fillMaxWidth()
                         .padding(horizontal = horizontalPadding),
             ) {
-                BackLines()
+                if (renderLines) {
+                    BackLines()
+                }
                 content()
             }
         }

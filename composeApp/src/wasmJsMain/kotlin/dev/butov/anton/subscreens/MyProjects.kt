@@ -125,7 +125,7 @@ private fun Project(
             .height(270.dp)
             .width(300.dp)
             .clip(MaterialTheme.shapes.small)
-            .background(Colors.background.copy(alpha = 0.04f))
+            .background(Colors.surface)
             .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
             .padding(horizontal = 14.dp, vertical = 16.dp),
     ) {

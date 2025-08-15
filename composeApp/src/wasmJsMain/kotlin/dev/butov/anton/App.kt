@@ -29,7 +29,12 @@ fun App() {
             LocalContentColor provides Colors.primary,
         ) {
             val scrollState = rememberLazyListState()
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(Colors.background),
+            ) {
                 LazyColumn(state = scrollState) {
                     item {
                         Box {

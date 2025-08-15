@@ -33,12 +33,15 @@ fun App() {
                 LazyColumn(state = scrollState) {
                     item {
                         Box {
-                            MainColumn()
                             Image(
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth(),
                                 painter = painterResource(Res.drawable.redBack),
                                 contentDescription = null,
                                 contentScale = ContentScale.FillWidth,
                             )
+                            MainColumn()
                         }
                     }
                 }

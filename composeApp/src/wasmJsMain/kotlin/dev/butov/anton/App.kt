@@ -16,6 +16,7 @@ import antonbutov.composeapp.generated.resources.redBack
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.screens.MainColumn
 import dev.butov.anton.uikit.*
+import dev.butov.anton.subscreens.MenuViewModel
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -29,6 +30,12 @@ fun App() {
             LocalContentColor provides Colors.primary,
         ) {
             val scrollState = rememberLazyListState()
+            val menuViewModel = remember { MenuViewModel() }
+            LaunchedEffect(menuViewModel) {
+                menuViewModel.scrollRequests.collect { index ->
+                    scrollState.animateScrollToItem(index)
+                }
+            }
             Box(
                 modifier =
                     Modifier
@@ -46,7 +53,7 @@ fun App() {
                                 contentDescription = null,
                                 contentScale = ContentScale.FillWidth,
                             )
-                            MainColumn()
+                            MainColumn(menuViewModel)
                         }
                     }
                 }

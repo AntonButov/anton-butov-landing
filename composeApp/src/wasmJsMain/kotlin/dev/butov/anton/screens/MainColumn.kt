@@ -12,7 +12,7 @@ import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.Message
 
 @Composable
-fun MainColumn() {
+fun MainColumn(viewModel: MenuViewModel) {
     Column(
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -20,7 +20,7 @@ fun MainColumn() {
             Spacer(Modifier.size(50.dp))
         }
         CenteredLayout {
-            Header()
+            Header(viewModel)
         }
         CenteredLayout {
             Spacer(modifier = Modifier.size(50.dp))

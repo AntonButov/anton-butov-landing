@@ -71,6 +71,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.coroutines.core)
             implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.datetime)
             //  implementation("io.coil-kt.coil3:coil-compose:3.2.0")
             // implementation("io.coil-kt:coil-svg:2.1.0")
         }

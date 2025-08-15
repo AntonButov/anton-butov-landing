@@ -13,55 +13,62 @@ import dev.butov.anton.myiconpack.RectangleHard
 import dev.butov.anton.myiconpack.RectangleSoft
 
 @Composable
-fun BoxScope.BackGround() {
+fun BoxScope.BackGroundRectangles() {
+    Row(
+        // Modifier
+        //     .matchParentSize(),
+    ) {
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(start = 1.dp, top = 50.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.Center).padding(top = 130.dp),
+                imageVector = AntonIcons.RectangleHard,
+                contentDescription = null,
+            )
+        }
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(top = 250.dp, start = 150.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+            )
+            Icon(
+                modifier = Modifier.align(Alignment.TopEnd).padding(top = 50.dp, end = 100.dp),
+                imageVector = AntonIcons.RectangleHard,
+                contentDescription = null,
+            )
+        }
+        Box(Modifier.weight(1f)) {
+            Icon(
+                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 50.dp),
+                imageVector = AntonIcons.RectangleSoft,
+                contentDescription = null,
+            )
+        }
+        Spacer(Modifier.weight(1f))
+    }
+}
+
+@Composable
+fun BoxScope.BackLines() {
     Row(
         Modifier
             .matchParentSize(),
     ) {
         Divider()
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 200.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-            Icon(
-                modifier = Modifier.align(Alignment.Center).padding(top = 270.dp),
-                imageVector = AntonIcons.RectangleHard,
-                contentDescription = null,
-            )
-        }
+        Spacer(Modifier.weight(1f))
         Divider()
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(top = 400.dp, start = 150.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-            Icon(
-                modifier = Modifier.align(Alignment.TopEnd).padding(top = 200.dp, end = 100.dp),
-                imageVector = AntonIcons.RectangleHard,
-                contentDescription = null,
-            )
-        }
+        Spacer(Modifier.weight(1f))
         Divider()
-        Box(Modifier.weight(1f)) {
-            Icon(
-                modifier = Modifier.align(Alignment.TopStart).padding(start = 140.dp, top = 200.dp),
-                imageVector = AntonIcons.RectangleSoft,
-                contentDescription = null,
-            )
-        }
+        Spacer(Modifier.weight(1f))
         Divider()
         Spacer(Modifier.weight(1f))
         Divider()
     }
-    //   Image(
-    //       modifier = Modifier.fillMaxWidth().padding(vertical = 350.dp),
-//        painter = painterResource(Res.drawable.redBack),
-    //       contentDescription = null,
-//        contentScale = ContentScale.FillWidth,
-    //   )
 }
 
 @Composable

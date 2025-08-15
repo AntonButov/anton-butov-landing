@@ -25,7 +25,8 @@ fun Technologies() {
                 .matchParentSize()
                 .clip(MaterialTheme.shapes.medium)
                 .blur(48.8.dp)
-                .background(Colors.background.copy(alpha = 0.45f)),
+                .background(Colors.background),
+            //   .background(Colors.background.copy(alpha = 0.045f)),
         )
         FlowRow(
             modifier =

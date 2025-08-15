@@ -28,7 +28,10 @@ fun MainColumn() {
             Spacer(modifier = Modifier.size(50.dp))
         }
         CenteredLayout {
-            PhotoBlock()
+            Box {
+                PhotoBlock()
+                BackGroundRectangles()
+            }
         }
         CenteredLayout {
             Spacer(Modifier.size(60.dp))
@@ -43,10 +46,13 @@ fun MainColumn() {
             MyProjects()
         }
         CenteredLayout {
+            Spacer(Modifier.size(110.dp))
+        }
+        CenteredLayout {
             Message(Modifier.align(Alignment.CenterHorizontally))
         }
         CenteredLayout {
-            Spacer(Modifier.size(80.dp))
+            Spacer(Modifier.size(130.dp))
         }
         CenteredLayout {
             ContactMe()

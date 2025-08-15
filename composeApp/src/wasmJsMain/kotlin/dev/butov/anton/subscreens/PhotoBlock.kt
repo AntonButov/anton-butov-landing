@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PhotoBlock() {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-        Box(modifier = Modifier.height(550.dp).fillMaxWidth()) {
+        Box(modifier = Modifier.fillMaxWidth()) {
             Im(Modifier.align(Alignment.BottomStart), this@BoxWithConstraints.maxWidth)
             Icon(
                 painter = painterResource(Res.drawable.butov),

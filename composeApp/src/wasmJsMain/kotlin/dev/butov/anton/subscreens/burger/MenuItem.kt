@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 enum class MenuItem(val title: String, val index: Int) {
-    HEADER("Header", 0),
+    HEADER("Home", 0),
     TECHNOLOGIES("Technologies", 1),
-    PROJECTS("Projects", 2),
+    PROJECTS("Contact", 2),
     CONTACT("Contact", 3),
 }
 

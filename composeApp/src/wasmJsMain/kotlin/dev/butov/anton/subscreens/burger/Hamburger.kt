@@ -19,7 +19,7 @@ fun Hamburger(viewModel: MenuViewModel) {
                     text = {
                         Text(
                             text = item.title,
-                            color = Colors.background,
+                            color = if (item.index == 0) Colors.red else Colors.background,
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium),
                         )
                     },

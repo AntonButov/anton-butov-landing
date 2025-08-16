@@ -38,9 +38,9 @@ fun App() {
                 menuViewModel.scrollRequests.let { index ->
                     when (index) {
                         0 -> scrollState.animateScrollBy(0f) // Home - остаемся в начале
-                        1 -> scrollState.animateScrollBy(600.dp.value) // Technologies - скролл к секции технологий
+                        1 -> scrollState.animateScrollBy(700.dp.value) // Technologies - скролл к секции технологий
                         2 -> scrollState.animateScrollBy(1000.dp.value) // Projects - скролл к проектам
-                        3 -> scrollState.animateScrollBy(2000f) // Contact - скролл к контактам
+                        3 -> scrollState.scrollToItem(index) // Contact - скролл к контактам
                         else -> error("Index not found.")
                     }
                 }

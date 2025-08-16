@@ -37,3 +37,16 @@ canvas {
     background: #0B0B0B;
     min-width: calc(1200 * var(--dp));
 }
+
+@media (max-width: 600px) {
+    :root {
+        --dp: 0.5px;
+    }
+    html, body {
+        min-width: 100%;
+        overflow-x: hidden;
+    }
+    canvas {
+        min-width: 100%;
+    }
+}

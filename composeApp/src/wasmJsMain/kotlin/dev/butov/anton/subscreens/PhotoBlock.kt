@@ -26,13 +26,14 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PhotoBlock(menuViewModel: MenuViewModel) {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Hamburger(viewModel = menuViewModel)
-            Im(Modifier.align(Alignment.BottomStart), this@BoxWithConstraints.maxWidth)
+            Im(modifier = Modifier.align(Alignment.Bottom), width = this@BoxWithConstraints.maxWidth)
+            Spacer(Modifier.weight(1f))
             Icon(
                 painter = painterResource(Res.drawable.butov),
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.BottomEnd).height(600.dp),
+                modifier = Modifier.height(600.dp),
                 tint = Color.Unspecified,
             )
         }
@@ -41,7 +42,7 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
 
 @Composable
 private fun Im(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     width: Dp,
 ) {
     Column(modifier = modifier) {

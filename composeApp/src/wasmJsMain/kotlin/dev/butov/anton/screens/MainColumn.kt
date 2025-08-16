@@ -46,7 +46,6 @@ fun Contacts() {
         ) {
             Footer()
         }
-        CenteredLayout { Spacer(Modifier.size(50.dp)) }
         CenteredLayout { Spacer(Modifier.size(30.dp)) }
         CenteredLayout { Smirnov() }
         CenteredLayout { Spacer(Modifier.size(30.dp)) }

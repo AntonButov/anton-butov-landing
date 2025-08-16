@@ -69,11 +69,9 @@ fun App() {
                                 }
                                 Projects()
                                 Message()
+                                Contacts()
                             }
                         }
-                    }
-                    item {
-                        Contacts()
                     }
                 }
                 val scrollbarStyle =

@@ -7,7 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import dev.butov.anton.myiconpack.AntonIcons
-import dev.butov.anton.myiconpack.Gamburger
+import dev.butov.anton.myiconpack.Hamburger
 import io.ktor.websocket.Frame
 
 @Composable
@@ -15,7 +15,7 @@ fun Hamburger(viewModel: MenuViewModel) {
     Box {
         IconButton(onClick = viewModel::onHamburgerClick) {
             Icon(
-                imageVector = AntonIcons.Gamburger,
+                imageVector = AntonIcons.Hamburger,
                 contentDescription = "Gamburger",
             )
         }

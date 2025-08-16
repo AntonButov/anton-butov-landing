@@ -3,23 +3,26 @@ package dev.butov.anton.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
 import dev.butov.anton.subscreens.*
+import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.tools.CenteredLayout
 import dev.butov.anton.uikit.Message
 
 @Composable
 fun Home() {
+    val menuViewModel = remember { MenuViewModel() }
     Column(modifier = Modifier.fillMaxWidth()) {
         CenteredLayout { Spacer(Modifier.size(50.dp)) }
-        CenteredLayout { Header() }
+        CenteredLayout { Header(menuViewModel) }
         CenteredLayout { Spacer(modifier = Modifier.size(50.dp)) }
         CenteredLayout {
             Box {
-                PhotoBlock()
+                PhotoBlock(menuViewModel)
                 BackGroundRectangles()
             }
         }

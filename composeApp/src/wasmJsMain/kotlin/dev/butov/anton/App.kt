@@ -2,6 +2,7 @@ package dev.butov.anton
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.LocalScrollbarStyle
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -10,14 +11,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
-import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
-import dev.butov.anton.myiconpack.*
 import dev.butov.anton.screens.Contacts
 import dev.butov.anton.screens.Home
 import dev.butov.anton.screens.Projects
-import dev.butov.anton.uikit.*
+import dev.butov.anton.subscreens.burger.MenuViewModel
+import dev.butov.anton.uikit.Message
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -31,6 +32,20 @@ fun App() {
             LocalContentColor provides Colors.primary,
         ) {
             val scrollState = rememberLazyListState()
+            val menuViewModel = remember { MenuViewModel() }
+
+            LaunchedEffect(menuViewModel.scrollRequests) {
+                menuViewModel.scrollRequests.let { index ->
+                    when (index) {
+                        0 -> scrollState.animateScrollBy(0f) // Home - остаемся в начале
+                        1 -> scrollState.animateScrollBy(600.dp.value) // Technologies - скролл к секции технологий
+                        2 -> scrollState.animateScrollBy(1000.dp.value) // Projects - скролл к проектам
+                        3 -> scrollState.animateScrollBy(2000f) // Contact - скролл к контактам
+                        else -> error("Index not found.")
+                    }
+                }
+            }
+
             Box(
                 modifier =
                     Modifier
@@ -50,12 +65,15 @@ fun App() {
                             )
                             Column {
                                 Box {
-                                    Home()
+                                    Home(menuViewModel)
                                 }
                                 Projects()
-                                Contacts()
+                                Message()
                             }
                         }
+                    }
+                    item {
+                        Contacts()
                     }
                 }
                 val scrollbarStyle =

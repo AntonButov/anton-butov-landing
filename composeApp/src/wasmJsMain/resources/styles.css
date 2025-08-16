@@ -3,8 +3,10 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     background: #0B0B0B;
+    min-width: 1000px;
 }
 
 /* Стили для полосы прокрутки */
@@ -26,4 +28,5 @@ html, body {
 
 canvas {
     background: #0B0B0B;
+    min-width: 1000px;
 }

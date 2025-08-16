@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
+import dev.butov.anton.subscreens.burger.Hamburger
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
@@ -26,11 +27,12 @@ import org.jetbrains.compose.resources.painterResource
 fun PhotoBlock(menuViewModel: MenuViewModel) {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         Box(modifier = Modifier.fillMaxWidth()) {
+            Hamburger(viewModel = menuViewModel)
             Im(Modifier.align(Alignment.BottomStart), this@BoxWithConstraints.maxWidth)
             Icon(
                 painter = painterResource(Res.drawable.butov),
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.BottomEnd).height(550.dp),
+                modifier = Modifier.align(Alignment.BottomEnd).height(600.dp),
                 tint = Color.Unspecified,
             )
         }

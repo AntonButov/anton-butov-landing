@@ -19,7 +19,6 @@ fun Home() {
     Column(modifier = Modifier.fillMaxWidth()) {
         CenteredLayout { Spacer(Modifier.size(50.dp)) }
         CenteredLayout { Header(menuViewModel) }
-        CenteredLayout { Spacer(modifier = Modifier.size(50.dp)) }
         CenteredLayout {
             Box {
                 PhotoBlock(menuViewModel)

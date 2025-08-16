@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import antonbutov.composeapp.generated.resources.redBack
@@ -37,14 +38,18 @@ fun App() {
                         .fillMaxSize()
                         .background(Colors.background),
             ) {
+                // Фоновое изображение - скроллится вместе с контентом
                 Image(
                     modifier =
                         Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .offset(y = (-scrollState.firstVisibleItemScrollOffset).dp),
                     painter = painterResource(Res.drawable.redBack),
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
                 )
+                
+                // Контент поверх фона
                 LazyColumn(state = scrollState) {
                     item {
                         Box {
@@ -58,6 +63,7 @@ fun App() {
                         Contacts()
                     }
                 }
+                
                 val scrollbarStyle =
                     LocalScrollbarStyle.current.copy(
                         hoverColor = Colors.red,

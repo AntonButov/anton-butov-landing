@@ -37,25 +37,25 @@ fun App() {
                         .fillMaxSize()
                         .background(Colors.background),
             ) {
-                Image(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth(),
-                    painter = painterResource(Res.drawable.redBack),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillWidth,
-                )
                 LazyColumn(state = scrollState) {
                     item {
                         Box {
-                            Home()
+                            Image(
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth(),
+                                painter = painterResource(Res.drawable.redBack),
+                                contentDescription = null,
+                                contentScale = ContentScale.FillWidth,
+                            )
+                            Column {
+                                Box {
+                                    Home()
+                                }
+                                Projects()
+                                Contacts()
+                            }
                         }
-                    }
-                    item {
-                        Projects()
-                    }
-                    item {
-                        Contacts()
                     }
                 }
                 val scrollbarStyle =

@@ -3,7 +3,6 @@ package dev.butov.anton.subscreens.burger
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import dev.butov.anton.Colors
 
@@ -13,6 +12,7 @@ fun Hamburger(viewModel: MenuViewModel) {
         DropdownMenu(
             expanded = viewModel.isMenuOpen,
             onDismissRequest = viewModel::onDismissMenu,
+            shape = MaterialTheme.shapes.medium,
         ) {
             MenuItem.entries.forEach { item ->
                 DropdownMenuItem(
@@ -20,7 +20,7 @@ fun Hamburger(viewModel: MenuViewModel) {
                         Text(
                             text = item.title,
                             color = Colors.background,
-                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium)
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium),
                         )
                     },
                     onClick = { viewModel.onMenuItemClick(item) },

@@ -3,8 +3,6 @@ package dev.butov.anton
 import dev.butov.anton.subscreens.burger.MenuItem
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -32,9 +30,9 @@ class MenuViewModelTest {
     fun onMenuItemClickEmitsIndexCloses() =
         runTest {
             val viewModel = MenuViewModel()
-            val result = async { viewModel.scrollRequests.first() }
             viewModel.onMenuItemClick(MenuItem.PROJECTS)
-            assertEquals(MenuItem.PROJECTS.index, result.await())
+            val result = viewModel.scrollRequests
+            assertEquals(MenuItem.PROJECTS.index, result)
             assertFalse(viewModel.isMenuOpen)
         }
 }

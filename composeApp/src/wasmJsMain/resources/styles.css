@@ -1,3 +1,7 @@
+:root {
+    --dp: 1px;
+}
+
 html, body {
     width: 100%;
     height: 100%;
@@ -6,16 +10,19 @@ html, body {
     overflow-x: auto;
     overflow-y: hidden;
     background: #0B0B0B;
-    min-width: 1000px;
+    min-width: calc(1200 * var(--dp));
+    scrollbar-width: thin; /* Firefox: make scrollbar thinner */
+    scrollbar-color: #E20100 #000; /* Thumb and track colors */
 }
 
 /* Стили для полосы прокрутки */
 ::-webkit-scrollbar {
-    width: 12px; /* Ширина полосы прокрутки */
+    width: 6px;  /* Толщина вертикальной полосы */
+    height: 6px; /* Толщина горизонтальной полосы */
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Цвет фона полосы прокрутки */
+    background: #000; /* Цвет фона полосы прокрутки */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -28,5 +35,5 @@ html, body {
 
 canvas {
     background: #0B0B0B;
-    min-width: 1000px;
+    min-width: calc(1200 * var(--dp));
 }

@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
@@ -23,29 +23,23 @@ fun Technologies() {
     Box(
         Modifier
             .clip(MaterialTheme.shapes.medium)
-            .background(Colors.red)
+            .background(Colors.background.copy(alpha = 0.94f).compositeOver(Colors.red)),
     ) {
-        Box(
-            Modifier
-                .clip(MaterialTheme.shapes.medium)
-                .background(Colors.background.copy(alpha = 0.95f)),
+        FlowRow(
+            modifier =
+                Modifier
+                    .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(7.dp),
+            verticalArrangement = Arrangement.spacedBy(7.dp),
         ) {
-            FlowRow(
-                modifier =
-                    Modifier
-                        .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(7.dp),
-                verticalArrangement = Arrangement.spacedBy(7.dp),
-            ) {
-                TechnologyHeader()
-                TechnologyKotlin()
-                TechnologyJava()
-                TechnologyCompose()
-                TechnologyDagger()
-                TechnologyCleanArchitecture()
-                TechnologyTDD()
-                TechnologyKMP()
-            }
+            TechnologyHeader()
+            TechnologyKotlin()
+            TechnologyJava()
+            TechnologyCompose()
+            TechnologyDagger()
+            TechnologyCleanArchitecture()
+            TechnologyTDD()
+            TechnologyKMP()
         }
     }
 }

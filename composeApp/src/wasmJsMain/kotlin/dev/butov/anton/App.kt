@@ -22,7 +22,7 @@ import dev.butov.anton.uikit.Message
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun App() {
+fun App(isMobile: Boolean) {
     MaterialTheme {
         CompositionLocalProvider(
             LocalTextStyle provides
@@ -65,7 +65,7 @@ fun App() {
                             )
                             Column {
                                 Box {
-                                    Home(menuViewModel)
+                                    Home(menuViewModel, isMobile)
                                 }
                                 Projects()
                                 Message()

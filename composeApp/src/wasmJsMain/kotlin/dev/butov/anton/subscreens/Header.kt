@@ -12,13 +12,18 @@ import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.CallButtonDark
 
 @Composable
-fun Header(menuViewModel: MenuViewModel) {
+fun Header(
+    menuViewModel: MenuViewModel,
+    isMobile: Boolean,
+) {
     Box(
         Modifier
             .height(50.dp)
             .fillMaxWidth(),
     ) {
-        Hamburger(menuViewModel)
+        if (isMobile) {
+            Hamburger(menuViewModel)
+        }
         Arrows()
         AntonButov(Modifier.align(Alignment.Center))
         CallButtonDark(Modifier.align(Alignment.CenterEnd))

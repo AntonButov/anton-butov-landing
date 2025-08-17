@@ -11,10 +11,13 @@ import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.tools.CenteredLayout
 
 @Composable
-fun Home(menuViewModel: MenuViewModel) {
+fun Home(
+    menuViewModel: MenuViewModel,
+    isMobile: Boolean,
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CenteredLayout { Spacer(Modifier.size(50.dp)) }
-        CenteredLayout { Header(menuViewModel) }
+        CenteredLayout { Header(menuViewModel, isMobile) }
         CenteredLayout {
             Box {
                 PhotoBlock(menuViewModel)

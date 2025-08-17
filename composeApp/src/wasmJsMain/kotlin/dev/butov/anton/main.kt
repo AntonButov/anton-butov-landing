@@ -1,9 +1,6 @@
 package dev.butov.anton
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.window.ComposeViewport
@@ -15,11 +12,12 @@ import org.w3c.dom.events.Event
 fun main() {
     document.body?.style?.backgroundColor = "#0B0B0B"
     ComposeViewport(document.body!!) {
-        var windowSize = remember { mutableStateOf(IntSize(0, 0)) }.value
+        var windowSize by remember { mutableStateOf(IntSize(window.innerWidth, window.innerHeight)) }
         WindowResizeListener { width, height ->
             windowSize = IntSize(width, height)
         }
-        App()
+        val isMobile = windowSize.width <= 768
+        App(isMobile)
     }
 }
 
@@ -29,9 +27,9 @@ fun WindowResizeListener(onResize: (Int, Int) -> Unit) {
         val listener: (Event) -> Unit = {
             onResize(window.innerWidth, window.innerHeight)
         }
-        window.addEventListener("beforeunload", listener)
+        window.addEventListener("resize", listener)
         onDispose {
-            window.removeEventListener("beforeunload", listener)
+            window.removeEventListener("resize", listener)
         }
     }
 }

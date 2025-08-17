@@ -2,7 +2,6 @@ package dev.butov.anton.tools
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -10,14 +9,15 @@ import dev.butov.anton.screens.BackLines
 
 @Composable
 fun CenteredLayout(
+    modifier: Modifier = Modifier,
+    renderLines: Boolean = true,
     maxWith: Dp = 1400.dp,
     content: @Composable () -> Unit,
 ) {
     Box(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth(),
-        contentAlignment = Alignment.TopCenter,
     ) {
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val horizontalPadding =
@@ -33,7 +33,9 @@ fun CenteredLayout(
                         .fillMaxWidth()
                         .padding(horizontal = horizontalPadding),
             ) {
-                BackLines()
+                if (renderLines) {
+                    BackLines()
+                }
                 content()
             }
         }

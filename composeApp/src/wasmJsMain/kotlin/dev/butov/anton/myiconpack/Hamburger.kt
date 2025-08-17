@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val AntonIcons.Gamburger: ImageVector by lazy {
+val AntonIcons.Hamburger: ImageVector by lazy {
     Builder(
         name = "Group 5",
         defaultWidth = 46.0.dp,

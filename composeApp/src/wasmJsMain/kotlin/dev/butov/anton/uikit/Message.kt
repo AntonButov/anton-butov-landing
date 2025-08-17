@@ -20,66 +20,70 @@ import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.BrasesOn
 import dev.butov.anton.myiconpack.BrasessOff
+import dev.butov.anton.tools.CenteredLayout
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun Message(modifier: Modifier) {
-    Box(
-        modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Column(modifier.fillMaxWidth(0.7f)) {
-            Box(Modifier.height(140.dp).fillMaxWidth()) {
-                Icon(
-                    modifier = Modifier.align(Alignment.BottomStart),
-                    imageVector = AntonIcons.BrasesOn,
-                    contentDescription = null,
-                )
-                Icon(
-                    modifier = Modifier.size(100.dp).align(Alignment.TopCenter),
-                    painter = painterResource(Res.drawable.AntonButovMessage),
-                    contentDescription = null,
-                    tint = Color.Unspecified,
-                )
-            }
-            Text(
-                text =
-                    buildAnnotatedString {
-                        SoftStyle {
-                            append("My mission is ")
-                        }
-                        FullStyle {
-                            append("to organize a team ")
-                        }
-                        SoftStyle {
-                            append("that leverages the most ")
-                        }
-                        FullStyle {
-                            append("powerful capabilities ")
-                        }
-                        SoftStyle {
-                            append("of Kotlin and modern frameworks, ")
-                        }
-                        FullStyle {
-                            append("including AI tools.")
-                        }
-                    },
-                style = MaterialTheme.typography.headlineMedium,
-                textAlign = TextAlign.Center,
-            )
-            Spacer(Modifier.size(70.dp))
-            Box(Modifier.fillMaxWidth()) {
+fun Message(modifier: Modifier = Modifier) {
+    CenteredLayout {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Column(modifier.fillMaxWidth(0.7f)) {
+                Spacer(Modifier.size(110.dp))
+                Box(Modifier.height(140.dp).fillMaxWidth()) {
+                    Icon(
+                        modifier = Modifier.align(Alignment.BottomStart),
+                        imageVector = AntonIcons.BrasesOn,
+                        contentDescription = null,
+                    )
+                    Icon(
+                        modifier = Modifier.size(100.dp).align(Alignment.TopCenter),
+                        painter = painterResource(Res.drawable.AntonButovMessage),
+                        contentDescription = null,
+                        tint = Color.Unspecified,
+                    )
+                }
                 Text(
-                    modifier = Modifier.align(Alignment.TopStart),
-                    text = "• Anton Butov",
-                    style = TextStyle.Default.copy(fontSize = 18.sp, fontWeight = FontWeight.Light),
+                    text =
+                        buildAnnotatedString {
+                            SoftStyle {
+                                append("My mission is ")
+                            }
+                            FullStyle {
+                                append("to organize a team ")
+                            }
+                            SoftStyle {
+                                append("that leverages the most ")
+                            }
+                            FullStyle {
+                                append("powerful capabilities ")
+                            }
+                            SoftStyle {
+                                append("of Kotlin and modern frameworks, ")
+                            }
+                            FullStyle {
+                                append("including AI tools.")
+                            }
+                        },
+                    style = MaterialTheme.typography.headlineMedium,
+                    textAlign = TextAlign.Center,
                 )
-                Icon(
-                    modifier = Modifier.align(Alignment.TopEnd),
-                    imageVector = AntonIcons.BrasessOff,
-                    contentDescription = null,
-                    tint = Colors.red,
-                )
+                Spacer(Modifier.size(70.dp))
+                Box(Modifier.fillMaxWidth()) {
+                    Text(
+                        modifier = Modifier.align(Alignment.TopStart),
+                        text = "• Anton Butov",
+                        style = TextStyle.Default.copy(fontSize = 18.sp, fontWeight = FontWeight.Light),
+                    )
+                    Icon(
+                        modifier = Modifier.align(Alignment.TopEnd),
+                        imageVector = AntonIcons.BrasessOff,
+                        contentDescription = null,
+                        tint = Colors.red,
+                    )
+                }
             }
         }
     }

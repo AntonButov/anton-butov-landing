@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SendMessageBlock(modifier: Modifier) {
+fun SendMessageBlock(modifier: Modifier = Modifier) {
     val viewModel = remember { SendMessageViewModel() }
     Box(modifier) {
         when (val state = viewModel.state) {

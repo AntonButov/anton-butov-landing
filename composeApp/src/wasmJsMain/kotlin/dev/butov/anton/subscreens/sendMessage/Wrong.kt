@@ -9,15 +9,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import dev.butov.anton.Colors
+import dev.butov.anton.LocalIsMobile
 
 @Composable
 fun BoxScope.Wrong(message: String) {
+    val isMobile = LocalIsMobile.current
     Column(
         Modifier.align(Alignment.Center),
     ) {
         Text(
             text = "Some problem:",
-            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
+            style =
+                (if (isMobile) MaterialTheme.typography.displaySmall else MaterialTheme.typography.displayMedium)
+                    .copy(fontWeight = FontWeight.Medium),
             color = Colors.red,
         )
         Text(

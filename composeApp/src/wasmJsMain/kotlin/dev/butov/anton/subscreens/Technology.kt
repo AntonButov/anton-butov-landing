@@ -14,16 +14,20 @@ import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.Colors
+import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.currentYear
-import dev.butov.anton.myiconpack.*
 
 @Composable
 fun Technologies() {
-    Box(
+    val isMobile = LocalIsMobile.current
+    Column(
         Modifier
             .clip(MaterialTheme.shapes.medium)
-            .background(Colors.background.copy(alpha = 0.94f).compositeOver(Colors.red)),
+            .background(
+                Colors.background.copy(alpha = 0.94f).compositeOver(Colors.red),
+            ).then(if (isMobile) Modifier.fillMaxWidth() else Modifier),
+        horizontalAlignment = if (isMobile) Alignment.CenterHorizontally else Alignment.Start,
     ) {
         FlowRow(
             modifier =
@@ -32,7 +36,11 @@ fun Technologies() {
             horizontalArrangement = Arrangement.spacedBy(7.dp),
             verticalArrangement = Arrangement.spacedBy(7.dp),
         ) {
-            TechnologyHeader()
+            if (isMobile) {
+                TextTechnology(Modifier.fillMaxWidth().padding(vertical = 10.dp))
+            } else {
+                TechnologyHeader()
+            }
             TechnologyKotlin()
             TechnologyJava()
             TechnologyCompose()
@@ -55,13 +63,18 @@ private fun Technology(
 }
 
 @Composable
-private fun TechnologyHeader(modifier: Modifier = Modifier) {
+private fun TextTechnology(modifier: Modifier) {
+    Text(
+        modifier = modifier,
+        text = "My technologies:",
+        style = MaterialTheme.typography.bodyMedium,
+    )
+}
+
+@Composable
+private fun TechnologyHeader() {
     Technology {
-        Text(
-            modifier = modifier.align(Alignment.TopStart),
-            text = "My technologies:",
-            style = MaterialTheme.typography.bodyMedium,
-        )
+        TextTechnology(Modifier.align(Alignment.TopStart))
     }
 }
 

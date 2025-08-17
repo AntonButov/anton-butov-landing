@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import antonbutov.composeapp.generated.resources.AntonButovMessage
 import antonbutov.composeapp.generated.resources.Res
 import dev.butov.anton.Colors
+import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.BrasesOn
 import dev.butov.anton.myiconpack.BrasessOff
@@ -30,6 +31,7 @@ fun Message(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
+            val isMobile = LocalIsMobile.current
             Column(modifier.fillMaxWidth(0.7f)) {
                 Spacer(Modifier.size(110.dp))
                 Box(Modifier.height(140.dp).fillMaxWidth()) {
@@ -67,10 +69,10 @@ fun Message(modifier: Modifier = Modifier) {
                                 append("including AI tools.")
                             }
                         },
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = if (isMobile) MaterialTheme.typography.headlineSmall else MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center,
                 )
-                Spacer(Modifier.size(70.dp))
+                Spacer(Modifier.size(if (isMobile) 30.dp else 70.dp))
                 Box(Modifier.fillMaxWidth()) {
                     Text(
                         modifier = Modifier.align(Alignment.TopStart),

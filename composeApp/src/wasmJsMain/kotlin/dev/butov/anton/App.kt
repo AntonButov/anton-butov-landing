@@ -40,7 +40,7 @@ fun App() {
                         0 -> scrollState.animateScrollBy(0f) // Home - остаемся в начале
                         1 -> scrollState.animateScrollBy(700.dp.value) // Technologies - скролл к секции технологий
                         2 -> scrollState.animateScrollBy(1000.dp.value) // Projects - скролл к проектам
-                        3 -> scrollState.animateScrollBy(2200.dp.value) // Contact - скролл к контактам
+                        3 -> scrollState.animateScrollBy(2400.dp.value) // Contact - скролл к контактам
                         else -> error("Index not found.")
                     }
                 }

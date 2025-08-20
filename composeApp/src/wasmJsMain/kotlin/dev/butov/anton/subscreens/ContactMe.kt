@@ -52,7 +52,7 @@ private fun LeftColumn(modifier: Modifier = Modifier) {
             Spacer(Modifier.height(20.dp))
             IAmOpenText()
             Spacer(Modifier.height(20.dp))
-            CallButtonLight { }
+            CallButtonLight()
         }
     } else {
         Column(
@@ -61,7 +61,7 @@ private fun LeftColumn(modifier: Modifier = Modifier) {
         ) {
             ContactMeText()
             IAmOpenText()
-            CallButtonLight(Modifier.align(Alignment.Start)) {}
+            CallButtonLight(Modifier.align(Alignment.Start))
         }
     }
 }

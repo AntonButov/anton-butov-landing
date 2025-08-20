@@ -19,6 +19,7 @@ import dev.butov.anton.Colors
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Call
 import dev.butov.anton.myiconpack.MessageAdd
+import kotlinx.browser.window
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -36,10 +37,11 @@ fun SendMessageButton(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CallButtonDark(modifier: Modifier = Modifier) {
     Button(
-        modifier = modifier,
+        modifier = modifier.onClick(onClick = { window.open("https://cal.com/antonbutov", "_blank") }),
         text = "Assign a call",
         background = Colors.primary.copy(alpha = 0.1f),
         contentColor = Colors.primary,
@@ -50,12 +52,9 @@ fun CallButtonDark(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CallButtonLight(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-) {
+fun CallButtonLight(modifier: Modifier = Modifier) {
     Button(
-        modifier = modifier.onClick(onClick = onClick),
+        modifier = modifier.onClick(onClick = { window.open("https://cal.com/antonbutov", "_blank") }),
         text = "Assign a call",
         background = Colors.primary,
         contentColor = Colors.background,

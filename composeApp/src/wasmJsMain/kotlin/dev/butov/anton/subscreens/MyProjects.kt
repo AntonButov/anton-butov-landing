@@ -49,7 +49,6 @@ fun MyProjects() {
             ProjectGo()
             ProjectAlerton()
             ProjectDaggerDsl()
-            ProjectCodeFactory()
         }
     }
 }
@@ -139,20 +138,7 @@ private fun ProjectIva() {
     )
 }
 
-@Composable
-private fun ProjectCodeFactory() {
-    Project(
-        painter = painterResource(Res.drawable.git),
-        name = "Code Factory",
-        time = "2023-2024",
-        technologies =
-            listOf(
-                { TechnologyButton(TechnologiesEnum.KSP) },
-                { TechnologyButton(TechnologiesEnum.Kotlin) },
-            ),
-        onClick = { window.open("https://github.com/AntonButov/code-factory", "_blank") }
-    )
-}
+
 
 @Composable
 private fun Project(

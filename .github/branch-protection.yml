@@ -1,0 +1,26 @@
+# Branch Protection Configuration
+# This file contains instructions for setting up branch protection rules
+
+# To enable branch protection for master branch:
+# 1. Go to your repository on GitHub
+# 2. Navigate to Settings > Branches
+# 3. Click "Add rule" or edit existing rule for "master"
+# 4. Configure the following settings:
+
+branch_protection_rules:
+  master:
+    required_status_checks:
+      - "build-and-test"  # This should match the job name in ci.yml
+    require_branches_to_be_up_to_date: true
+    require_pull_request_reviews: true
+    required_approving_review_count: 1
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: false
+    enforce_admins: true
+    restrictions: null
+
+# This ensures that:
+# - CI/CD pipeline must pass before merge
+# - Branch must be up to date with master
+# - At least one review is required
+# - Stale reviews are dismissed when new commits are pushed

@@ -12,7 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import dev.butov.anton.AppVersion
 import dev.butov.anton.Colors
 import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.myiconpack.AntonIcons
@@ -36,6 +39,8 @@ fun Footer() {
                 Messagers()
                 Spacer(Modifier.size(10.dp))
                 EMail(Modifier.fillMaxWidth())
+                Spacer(Modifier.size(15.dp))
+                AppVersionInfo()
             }
             Spacer(Modifier.weight(1f))
         }
@@ -131,4 +136,17 @@ private fun Button(
     ) {
         content()
     }
+}
+
+@Composable
+private fun AppVersionInfo() {
+    Text(
+        text = AppVersion.getFullVersion(),
+        style = MaterialTheme.typography.labelSmall.copy(
+            fontWeight = FontWeight.Normal,
+            fontSize = 10.sp
+        ),
+        color = Colors.primary.copy(alpha = 0.4f),
+        textAlign = TextAlign.Center,
+    )
 }

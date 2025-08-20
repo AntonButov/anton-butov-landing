@@ -10,11 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Ok
 
 @Composable
 fun Ok() {
+    val isMobile = LocalIsMobile.current
     Row {
         Image(
             modifier = Modifier,
@@ -24,7 +26,9 @@ fun Ok() {
         Spacer(Modifier.size(30.dp))
         Text(
             text = "Your message has been successfully sent",
-            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
+            style =
+                (if (isMobile) MaterialTheme.typography.displaySmall else MaterialTheme.typography.displayMedium)
+                    .copy(fontWeight = FontWeight.Medium),
         )
     }
 }

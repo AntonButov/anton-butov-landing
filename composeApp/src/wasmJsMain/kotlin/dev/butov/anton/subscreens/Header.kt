@@ -7,12 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.CallButtonDark
 
 @Composable
 fun Header(menuViewModel: MenuViewModel) {
+    val isMobile = LocalIsMobile.current
     Box(
         Modifier
             .height(50.dp)
@@ -21,6 +23,9 @@ fun Header(menuViewModel: MenuViewModel) {
         Hamburger(menuViewModel)
         Arrows()
         AntonButov(Modifier.align(Alignment.Center))
+        if (isMobile) {
+            return
+        }
         CallButtonDark(Modifier.align(Alignment.CenterEnd))
     }
 }
@@ -53,7 +58,7 @@ private fun Arrow() {
 }
 
 @Composable
-fun AntonButov(modifier: Modifier) {
+fun AntonButov(modifier: Modifier = Modifier) {
     Icon(
         modifier = modifier,
         imageVector = AntonIcons.AntonButov,

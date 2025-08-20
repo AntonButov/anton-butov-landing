@@ -23,6 +23,7 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.go
 import antonbutov.composeapp.generated.resources.iva
 import dev.butov.anton.Colors
+import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.FullStyle
@@ -31,19 +32,12 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MyProjects() {
-    Column {
-        Text(
-            text =
-                buildAnnotatedString {
-                    SoftStyle {
-                        append("My ")
-                    }
-                    FullStyle {
-                        append("Projects:")
-                    }
-                },
-            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Medium),
-        )
+    val isMobile = LocalIsMobile.current
+    Column(
+        modifier = if (isMobile) Modifier.fillMaxWidth() else Modifier,
+        horizontalAlignment = if (isMobile) Alignment.CenterHorizontally else Alignment.Start,
+    ) {
+        TitleMyProjects()
         Spacer(Modifier.size(36.dp))
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(20.dp),
@@ -55,6 +49,30 @@ fun MyProjects() {
             ProjectDaggerDsl()
         }
     }
+}
+
+@Composable
+private fun TitleMyProjects() {
+    val isMobile = LocalIsMobile.current
+    Text(
+        text =
+            buildAnnotatedString {
+                SoftStyle {
+                    append("My ")
+                }
+                FullStyle {
+                    append("Projects:")
+                }
+            },
+        style =
+            if (isMobile) {
+                MaterialTheme.typography.displaySmall
+            } else {
+                MaterialTheme.typography.displayMedium.copy(
+                    fontWeight = FontWeight.Medium,
+                )
+            },
+    )
 }
 
 @Composable

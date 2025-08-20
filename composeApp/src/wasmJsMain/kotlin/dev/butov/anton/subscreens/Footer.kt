@@ -2,6 +2,7 @@ package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.onClick
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Github
 import dev.butov.anton.myiconpack.Ln
 import dev.butov.anton.myiconpack.Teleg
+import kotlinx.browser.window
 
 @Composable
 fun Footer() {
@@ -54,7 +56,11 @@ fun Footer() {
 
 @Composable
 private fun EMail(modifier: Modifier = Modifier) {
-    Button(modifier) {
+    Button(
+        modifier = modifier.onClick(onClick = { 
+            window.open("mailto:mail@antonbutov.com", "_blank") 
+        })
+    ) {
         Text(
             text = "mail@antonbutov.com",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Normal),
@@ -65,21 +71,33 @@ private fun EMail(modifier: Modifier = Modifier) {
 @Composable
 private fun Messagers() {
     Row {
-        Button {
+        Button(
+            modifier = Modifier.onClick(onClick = { 
+                window.open("https://t.me/antonbutov", "_blank") 
+            })
+        ) {
             Icon(
                 AntonIcons.Teleg,
                 contentDescription = "telega",
             )
         }
         Spacer(modifier = Modifier.width(10.dp))
-        Button {
+        Button(
+            modifier = Modifier.onClick(onClick = { 
+                window.open("https://github.com/AntonButov", "_blank") 
+            })
+        ) {
             Icon(
                 imageVector = AntonIcons.Github,
                 contentDescription = "github",
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        Button {
+        Button(
+            modifier = Modifier.onClick(onClick = { 
+                window.open("https://www.linkedin.com/in/antonbutov", "_blank") 
+            })
+        ) {
             Icon(
                 imageVector = AntonIcons.Ln,
                 contentDescription = "linkedin",

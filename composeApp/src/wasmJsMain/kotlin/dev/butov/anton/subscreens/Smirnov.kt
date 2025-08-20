@@ -4,6 +4,7 @@ import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.onClick
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,6 +21,7 @@ import dev.butov.anton.Colors
 import dev.butov.anton.currentYear
 import dev.butov.anton.myiconpack.AntonIcons
 import dev.butov.anton.myiconpack.Ss
+import kotlinx.browser.window
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -37,6 +39,9 @@ fun Smirnov() {
         )
         Spacer(Modifier.weight(1f))
         Text(
+            modifier = Modifier.onClick(onClick = { 
+                window.open("https://smirnov-studio.com/", "_blank") 
+            }),
             text =
                 "Design by\n" +
                     "Smirnov Studio",
@@ -46,6 +51,9 @@ fun Smirnov() {
         )
         Spacer(Modifier.size(5.dp))
         Icon(
+            modifier = Modifier.onClick(onClick = { 
+                window.open("https://smirnov-studio.com/", "_blank") 
+            }),
             imageVector = AntonIcons.Ss,
             contentDescription = "Smirnov",
             tint = Colors.primary,

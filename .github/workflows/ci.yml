@@ -36,18 +36,6 @@ jobs:
     - name: Run Gradle Check
       run: ./gradlew check
       
-    - name: Run Gradle Build
-      run: ./gradlew build
-      
-    - name: Run Tests
-      run: ./gradlew test
-      
-    - name: Check Code Style
-      run: ./gradlew ktlintCheck
-      
-    - name: Format Code
-      run: ./gradlew ktlintFormat
-      
     - name: Upload build reports
       uses: actions/upload-artifact@v4
       if: always()

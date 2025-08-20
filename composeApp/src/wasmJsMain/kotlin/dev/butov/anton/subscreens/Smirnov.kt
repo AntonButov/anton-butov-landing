@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import dev.butov.anton.myiconpack.Ss
 import kotlinx.browser.window
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Smirnov() {
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -39,9 +41,10 @@ fun Smirnov() {
         )
         Spacer(Modifier.weight(1f))
         Text(
-            modifier = Modifier.onClick(onClick = { 
-                window.open("https://smirnov-studio.com/", "_blank") 
-            }),
+            modifier =
+                Modifier.onClick(onClick = {
+                    window.open("https://smirnov-studio.com/", "_blank")
+                }),
             text =
                 "Design by\n" +
                     "Smirnov Studio",
@@ -51,9 +54,10 @@ fun Smirnov() {
         )
         Spacer(Modifier.size(5.dp))
         Icon(
-            modifier = Modifier.onClick(onClick = { 
-                window.open("https://smirnov-studio.com/", "_blank") 
-            }),
+            modifier =
+                Modifier.onClick(onClick = {
+                    window.open("https://smirnov-studio.com/", "_blank")
+                }),
             imageVector = AntonIcons.Ss,
             contentDescription = "Smirnov",
             tint = Colors.primary,

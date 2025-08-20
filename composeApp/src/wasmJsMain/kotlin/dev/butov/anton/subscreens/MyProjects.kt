@@ -3,6 +3,7 @@ package dev.butov.anton.subscreens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.onClick
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ import dev.butov.anton.TechnologiesEnum
 import dev.butov.anton.myiconpack.*
 import dev.butov.anton.uikit.FullStyle
 import dev.butov.anton.uikit.SoftStyle
+import kotlinx.browser.window
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -47,6 +49,7 @@ fun MyProjects() {
             ProjectGo()
             ProjectAlerton()
             ProjectDaggerDsl()
+            ProjectCodeFactory()
         }
     }
 }
@@ -86,6 +89,7 @@ private fun ProjectDaggerDsl() {
                 { TechnologyButton(TechnologiesEnum.KotlinPoet) },
                 { TechnologyButton(TechnologiesEnum.KSP) },
             ),
+        onClick = { window.open("https://github.com/AntonButov/dagger-dsl", "_blank") }
     )
 }
 
@@ -101,6 +105,7 @@ private fun ProjectGo() {
                 { TechnologyButton(TechnologiesEnum.Java) },
                 { TechnologyButton(TechnologiesEnum.Dagger) },
             ),
+        onClick = { window.open("https://go.yandex/#download-app", "_blank") }
     )
 }
 
@@ -115,6 +120,7 @@ private fun ProjectAlerton() {
                 { TechnologyButton(TechnologiesEnum.WEBRTC) },
                 { TechnologyButton(TechnologiesEnum.JetpackCompose) },
             ),
+        onClick = { window.open("https://play.google.com/store/apps/details?id=ru.profsoft.alerton", "_blank") }
     )
 }
 
@@ -129,6 +135,22 @@ private fun ProjectIva() {
                 { TechnologyButton(TechnologiesEnum.WEBRTC) },
                 { TechnologyButton(TechnologiesEnum.JetpackCompose) },
             ),
+        onClick = { window.open("https://iva.ru/ru/products/iva-connect/", "_blank") }
+    )
+}
+
+@Composable
+private fun ProjectCodeFactory() {
+    Project(
+        painter = painterResource(Res.drawable.git),
+        name = "Code Factory",
+        time = "2023-2024",
+        technologies =
+            listOf(
+                { TechnologyButton(TechnologiesEnum.KSP) },
+                { TechnologyButton(TechnologiesEnum.Kotlin) },
+            ),
+        onClick = { window.open("https://github.com/AntonButov/code-factory", "_blank") }
     )
 }
 
@@ -138,15 +160,17 @@ private fun Project(
     name: String,
     time: String,
     technologies: List<@Composable () -> Unit>,
+    onClick: () -> Unit,
 ) {
     Box(
-        Modifier
+        modifier = Modifier
             .height(270.dp)
             .width(300.dp)
             .clip(MaterialTheme.shapes.small)
             .background(Colors.surface.copy(alpha = 0.97f).compositeOver(Colors.red))
             .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
-            .padding(horizontal = 14.dp, vertical = 16.dp),
+            .padding(horizontal = 14.dp, vertical = 16.dp)
+            .onClick(onClick = onClick),
     ) {
         Row {
             Icon(

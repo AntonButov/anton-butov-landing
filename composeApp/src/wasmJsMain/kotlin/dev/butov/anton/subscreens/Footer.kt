@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.onClick
@@ -54,12 +55,14 @@ fun Footer() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun EMail(modifier: Modifier = Modifier) {
     Button(
-        modifier = modifier.onClick(onClick = { 
-            window.open("mailto:mail@antonbutov.com", "_blank") 
-        })
+        modifier =
+            modifier.onClick(onClick = {
+                window.open("mailto:mail@antonbutov.com", "_blank")
+            }),
     ) {
         Text(
             text = "mail@antonbutov.com",
@@ -68,13 +71,15 @@ private fun EMail(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Messagers() {
     Row {
         Button(
-            modifier = Modifier.onClick(onClick = { 
-                window.open("https://t.me/antonbutov", "_blank") 
-            })
+            modifier =
+                Modifier.onClick(onClick = {
+                    window.open("https://t.me/antonbutov", "_blank")
+                }),
         ) {
             Icon(
                 AntonIcons.Teleg,
@@ -83,9 +88,10 @@ private fun Messagers() {
         }
         Spacer(modifier = Modifier.width(10.dp))
         Button(
-            modifier = Modifier.onClick(onClick = { 
-                window.open("https://github.com/AntonButov", "_blank") 
-            })
+            modifier =
+                Modifier.onClick(onClick = {
+                    window.open("https://github.com/AntonButov", "_blank")
+                }),
         ) {
             Icon(
                 imageVector = AntonIcons.Github,
@@ -94,9 +100,10 @@ private fun Messagers() {
         }
         Spacer(modifier = Modifier.size(10.dp))
         Button(
-            modifier = Modifier.onClick(onClick = { 
-                window.open("https://www.linkedin.com/in/antonbutov", "_blank") 
-            })
+            modifier =
+                Modifier.onClick(onClick = {
+                    window.open("https://www.linkedin.com/in/antonbutov", "_blank")
+                }),
         ) {
             Icon(
                 imageVector = AntonIcons.Ln,

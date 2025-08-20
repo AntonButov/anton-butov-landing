@@ -1,5 +1,6 @@
 package dev.butov.anton.subscreens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -88,7 +89,7 @@ private fun ProjectDaggerDsl() {
                 { TechnologyButton(TechnologiesEnum.KotlinPoet) },
                 { TechnologyButton(TechnologiesEnum.KSP) },
             ),
-        onClick = { window.open("https://github.com/AntonButov/dagger-dsl", "_blank") }
+        onClick = { window.open("https://github.com/AntonButov/dagger-dsl", "_blank") },
     )
 }
 
@@ -104,7 +105,7 @@ private fun ProjectGo() {
                 { TechnologyButton(TechnologiesEnum.Java) },
                 { TechnologyButton(TechnologiesEnum.Dagger) },
             ),
-        onClick = { window.open("https://go.yandex/#download-app", "_blank") }
+        onClick = { window.open("https://go.yandex/#download-app", "_blank") },
     )
 }
 
@@ -119,7 +120,7 @@ private fun ProjectAlerton() {
                 { TechnologyButton(TechnologiesEnum.WEBRTC) },
                 { TechnologyButton(TechnologiesEnum.JetpackCompose) },
             ),
-        onClick = { window.open("https://play.google.com/store/apps/details?id=ru.profsoft.alerton", "_blank") }
+        onClick = { window.open("https://play.google.com/store/apps/details?id=ru.profsoft.alerton", "_blank") },
     )
 }
 
@@ -134,12 +135,11 @@ private fun ProjectIva() {
                 { TechnologyButton(TechnologiesEnum.WEBRTC) },
                 { TechnologyButton(TechnologiesEnum.JetpackCompose) },
             ),
-        onClick = { window.open("https://iva.ru/ru/products/iva-connect/", "_blank") }
+        onClick = { window.open("https://iva.ru/ru/products/iva-connect/", "_blank") },
     )
 }
 
-
-
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun Project(
     painter: Painter,
@@ -149,14 +149,15 @@ private fun Project(
     onClick: () -> Unit,
 ) {
     Box(
-        modifier = Modifier
-            .height(270.dp)
-            .width(300.dp)
-            .clip(MaterialTheme.shapes.small)
-            .background(Colors.surface.copy(alpha = 0.97f).compositeOver(Colors.red))
-            .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
-            .padding(horizontal = 14.dp, vertical = 16.dp)
-            .onClick(onClick = onClick),
+        modifier =
+            Modifier
+                .height(270.dp)
+                .width(300.dp)
+                .clip(MaterialTheme.shapes.small)
+                .background(Colors.surface.copy(alpha = 0.97f).compositeOver(Colors.red))
+                .border(1.dp, Colors.primary.copy(alpha = 0.05f), MaterialTheme.shapes.small)
+                .padding(horizontal = 14.dp, vertical = 16.dp)
+                .onClick(onClick = onClick),
     ) {
         Row {
             Icon(

@@ -142,10 +142,11 @@ private fun Button(
 private fun AppVersionInfo() {
     Text(
         text = AppVersion.getFullVersion(),
-        style = MaterialTheme.typography.labelSmall.copy(
-            fontWeight = FontWeight.Normal,
-            fontSize = 10.sp
-        ),
+        style =
+            MaterialTheme.typography.labelSmall.copy(
+                fontWeight = FontWeight.Normal,
+                fontSize = 10.sp,
+            ),
         color = Colors.primary.copy(alpha = 0.4f),
         textAlign = TextAlign.Center,
     )

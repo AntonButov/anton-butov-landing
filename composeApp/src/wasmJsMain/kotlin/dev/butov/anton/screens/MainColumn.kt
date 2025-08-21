@@ -10,12 +10,13 @@ import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.subscreens.*
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.tools.CenteredLayout
+import dev.butov.anton.vs
 
 @Composable
 fun Home(menuViewModel: MenuViewModel) {
     val isMobile = LocalIsMobile.current
     Column(modifier = Modifier.fillMaxWidth()) {
-        CenteredLayout { Spacer(Modifier.size(50.dp)) }
+        CenteredLayout { Spacer(Modifier.size(24.dp vs 50.dp)) }
         CenteredLayout { Header(menuViewModel) }
         CenteredLayout {
             Box {

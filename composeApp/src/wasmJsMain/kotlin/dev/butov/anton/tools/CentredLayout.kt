@@ -7,15 +7,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dev.butov.anton.LocalIsMobile
 import dev.butov.anton.screens.BackLines
+import dev.butov.anton.vs
 
 @Composable
 fun CenteredLayout(
     modifier: Modifier = Modifier,
-    renderLines: Boolean = true,
+    renderLines: Boolean = LocalIsMobile.current.not(),
     maxWith: Dp = 1400.dp,
     content: @Composable () -> Unit,
 ) {
-    val isMobile = LocalIsMobile.current
     Box(
         modifier =
             modifier
@@ -26,7 +26,7 @@ fun CenteredLayout(
                 if (maxWidth > maxWith) {
                     (maxWidth - maxWith) / 2
                 } else {
-                    if (isMobile) 10.dp else 80.dp
+                    16.dp vs 80.dp
                 }
 
             Box(

@@ -31,13 +31,17 @@ fun App() {
             val scrollState = rememberLazyListState()
             val menuViewModel = remember { MenuViewModel() }
 
+            val technologiesDp = 600.dp vs 700.dp
+            val projectsDp = 1100.dp vs 1000.dp
+            val contactDp = 3000.dp vs 2400.dp
+
             LaunchedEffect(menuViewModel.scrollRequests) {
                 menuViewModel.scrollRequests.let { index ->
-                    when (index) {
+                    when (index) { // https://github.com/AntonButov/anton-butov-landing/issues/39
                         0 -> scrollState.animateScrollBy(0f) // Home - остаемся в начале
-                        1 -> scrollState.animateScrollBy(700.dp.value) // Technologies - скролл к секции технологий
-                        2 -> scrollState.animateScrollBy(1000.dp.value) // Projects - скролл к проектам
-                        3 -> scrollState.animateScrollBy(2400.dp.value) // Contact - скролл к контактам
+                        1 -> scrollState.animateScrollBy(technologiesDp.value) // Technologies - скролл к секции технологий
+                        2 -> scrollState.animateScrollBy(projectsDp.value) // Projects - скролл к проектам
+                        3 -> scrollState.animateScrollBy(contactDp.value) // Contact - скролл к контактам
                         else -> error("Index not found.")
                     }
                 }

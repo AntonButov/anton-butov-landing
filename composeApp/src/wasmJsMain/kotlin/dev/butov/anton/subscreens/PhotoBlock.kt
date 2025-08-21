@@ -28,12 +28,12 @@ import org.jetbrains.compose.resources.painterResource
 fun PhotoBlock(menuViewModel: MenuViewModel) {
     val isMobile = LocalIsMobile.current
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+        HamburgerMenu(viewModel = menuViewModel)
         if (isMobile) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                HamburgerMenu(viewModel = menuViewModel)
                 Icon(
                     painter = painterResource(Res.drawable.butov),
                     contentDescription = "Butov",
@@ -45,7 +45,6 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
             }
         } else {
             Row(modifier = Modifier.fillMaxWidth()) {
-                HamburgerMenu(viewModel = menuViewModel)
                 Im(modifier = Modifier.align(Alignment.Bottom), isMobile)
                 Spacer(Modifier.weight(1f))
                 Icon(

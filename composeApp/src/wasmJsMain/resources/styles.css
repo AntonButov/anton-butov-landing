@@ -15,6 +15,13 @@ html, body {
     scrollbar-color: #E20100 #000; /* Thumb and track colors */
 }
 
+#loading {
+    color: #FFFFFF;
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 20vh;
+}
+
 /* Стили для полосы прокрутки */
 ::-webkit-scrollbar {
     width: 6px;  /* Толщина вертикальной полосы */

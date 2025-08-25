@@ -11,7 +11,14 @@
     <link type="text/css" rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="loading">Loading...</div>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+    <script>
+        const loading = document.getElementById('loading');
+        const timer = setTimeout(() => loading.classList.add('visible'), 500);
+        window.addEventListener('load', () => clearTimeout(timer));
+    </script>
     <script defer src="composeApp.js"></script>
 </body>
 </html>

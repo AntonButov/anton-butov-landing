@@ -21,10 +21,13 @@ import dev.butov.anton.uikit.Message
 @Composable
 fun App() {
     MaterialTheme {
+        // Load Inter font family once and reuse it across recompositions
+        val fontFamily = rememberInterFontFamily()
+
         CompositionLocalProvider(
             LocalTextStyle provides
                 LocalTextStyle.current.copy(
-                    fontFamily = InterFonts(),
+                    fontFamily = fontFamily,
                 ),
             LocalContentColor provides Colors.primary,
         ) {

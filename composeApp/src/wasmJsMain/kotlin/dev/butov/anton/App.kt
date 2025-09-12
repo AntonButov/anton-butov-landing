@@ -17,7 +17,9 @@ import dev.butov.anton.screens.Projects
 import dev.butov.anton.subscreens.Redback
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.Message
-import dev.butov.anton.utils.hideLoadingScreen
+
+// Hide loading screen when app starts - must be top-level for Kotlin/Wasm
+val hideLoadingScreen: () -> Unit = js("window.hideLoadingScreen")
 
 @Composable
 fun App() {

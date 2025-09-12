@@ -10,9 +10,10 @@ import org.w3c.dom.events.Event
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
+    // Optimize initial rendering
     document.body?.style?.backgroundColor = "#0B0B0B"
+
     ComposeViewport(document.body!!) {
-        document.getElementById("loading")?.remove()
         var windowSize by remember { mutableStateOf(IntSize(window.innerWidth, window.innerHeight)) }
         WindowResizeListener { width, height ->
             windowSize = IntSize(width, height)

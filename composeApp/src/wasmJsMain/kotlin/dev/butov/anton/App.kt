@@ -18,11 +18,19 @@ import dev.butov.anton.subscreens.Redback
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.Message
 
+// Hide loading screen when app starts - must be top-level for Kotlin/Wasm
+val hideLoadingScreen: () -> Unit = js("window.hideLoadingScreen")
+
 @Composable
 fun App() {
     MaterialTheme {
         // Load Inter font family once and reuse it across recompositions
         val fontFamily = rememberInterFontFamily()
+
+        // Hide loading screen when app is fully initialized
+        LaunchedEffect(Unit) {
+            hideLoadingScreen()
+        }
 
         CompositionLocalProvider(
             LocalTextStyle provides

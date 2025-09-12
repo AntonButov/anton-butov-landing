@@ -14,11 +14,6 @@ fun main() {
     document.body?.style?.backgroundColor = "#0B0B0B"
 
     ComposeViewport(document.body!!) {
-        // Hide loading screen when app starts
-        LaunchedEffect(Unit) {
-            js("window.hideLoadingScreen()")
-        }
-
         var windowSize by remember { mutableStateOf(IntSize(window.innerWidth, window.innerHeight)) }
         WindowResizeListener { width, height ->
             windowSize = IntSize(width, height)

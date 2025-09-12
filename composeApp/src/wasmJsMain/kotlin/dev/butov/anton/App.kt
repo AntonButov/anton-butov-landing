@@ -17,12 +17,18 @@ import dev.butov.anton.screens.Projects
 import dev.butov.anton.subscreens.Redback
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.Message
+import dev.butov.anton.utils.hideLoadingScreen
 
 @Composable
 fun App() {
     MaterialTheme {
         // Load Inter font family once and reuse it across recompositions
         val fontFamily = rememberInterFontFamily()
+
+        // Hide loading screen when app is fully initialized
+        LaunchedEffect(Unit) {
+            hideLoadingScreen()
+        }
 
         CompositionLocalProvider(
             LocalTextStyle provides

@@ -92,48 +92,73 @@
         </div>
     </div>
     
-    <!-- Loading progress simulation -->
+    <!-- Loading progress simulation and app initialization -->
     <script>
-        // Simulate loading progress
         let progress = 0;
-        const progressBar = document.getElementById('progressBar');
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 90) progress = 90;
-            progressBar.style.width = progress + '%';
-        }, 200);
+        let progressInterval = null;
+        let isAppReady = false;
         
-        // Hide loading screen when app is ready
-        window.addEventListener('load', () => {
-            clearInterval(interval);
-            progressBar.style.width = '100%';
-        });
+        const progressBar = document.getElementById('progressBar');
+        
+        // Start progress simulation
+        function startProgressSimulation() {
+            progressInterval = setInterval(() => {
+                if (!isAppReady) {
+                    progress += Math.random() * 10;
+                    if (progress > 85) progress = 85; // Don't go to 100% until app is ready
+                    progressBar.style.width = progress + '%';
+                }
+            }, 150);
+        }
         
         // Function to hide loading screen (called from Kotlin app)
         window.hideLoadingScreen = function() {
+            isAppReady = true;
+            
+            // Clear progress interval
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+            
+            // Complete progress bar
+            progressBar.style.width = '100%';
+            
+            // Hide loading screen after a short delay
             setTimeout(() => {
                 const loading = document.getElementById('loading');
                 if (loading) {
                     loading.style.opacity = '0';
-                    setTimeout(() => loading.remove(), 300);
+                    setTimeout(() => {
+                        if (loading.parentNode) {
+                            loading.remove();
+                        }
+                    }, 300);
                 }
-            }, 500);
+            }, 300);
         };
-    </script>
-    
-    <!-- Register Service Worker for caching -->
-    <script>
+        
+        // Start progress simulation immediately
+        startProgressSimulation();
+        
+        // Register Service Worker for caching (only once)
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch((registrationError) => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
         }
+        
+        // Fallback: hide loading screen after 10 seconds if app doesn't call hideLoadingScreen
+        setTimeout(() => {
+            if (!isAppReady) {
+                console.warn('Loading timeout - hiding loading screen');
+                window.hideLoadingScreen();
+            }
+        }, 10000);
     </script>
     
     <script defer src="composeApp.js"></script>

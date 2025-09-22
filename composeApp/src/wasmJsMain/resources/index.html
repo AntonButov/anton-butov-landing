@@ -3,11 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AntonButov</title>
-    <meta property="og:title" content="Anton Butov – Kotlin Multiplatform Demo" />
-    <meta property="og:description" content="My first web application using Kotlin Multiplatform and Compose Multiplatform." />
-    <meta property="og:image" content="https://antonbutov.com/preview.png" />
+    <title>Anton Butov — Android/Kotlin Developer | KMP, Compose, Mobile Development</title>
+    <meta name="description" content="Anton Butov - Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development. View portfolio and projects." />
+    <meta name="keywords" content="Anton Butov, Android Developer, Kotlin Developer, KMP, Kotlin Multiplatform, Jetpack Compose, Mobile Development, Android Apps" />
+    <meta name="author" content="Anton Butov" />
+    <link rel="canonical" href="https://antonbutov.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://antonbutov.com/" />
+    <meta property="og:title" content="Anton Butov — Android/Kotlin Developer" />
+    <meta property="og:description" content="Experienced Android/Kotlin Developer specializing in KMP, Jetpack Compose, and mobile development." />
+    <meta property="og:image" content="https://antonbutov.com/preview.png" />
+    <meta property="og:site_name" content="Anton Butov" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://antonbutov.com/" />
+    <meta name="twitter:title" content="Anton Butov — Android/Kotlin Developer" />
+    <meta name="twitter:description" content="Experienced Android/Kotlin Developer specializing in KMP, Jetpack Compose, and mobile development." />
+    <meta name="twitter:image" content="https://antonbutov.com/preview.png" />
+    
+    <!-- Additional SEO meta tags -->
+    <meta name="theme-color" content="#E20100" />
+    <meta name="msapplication-TileColor" content="#E20100" />
+    
+    <!-- Favicon and app icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     
     <!-- Preload critical resources for faster cold start -->
     <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
@@ -19,6 +46,38 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     
     <link type="text/css" rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anton Butov",
+        "url": "https://antonbutov.com/",
+        "description": "Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development",
+        "jobTitle": "Android/Kotlin Developer",
+        "sameAs": [
+            "https://www.linkedin.com/in/antonbutov",
+            "https://github.com/AntonButov"
+        ],
+        "knowsAbout": [
+            "Android Development",
+            "Kotlin",
+            "Kotlin Multiplatform",
+            "Jetpack Compose",
+            "Mobile Development",
+            "Cross-platform Development"
+        ],
+        "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Android Developer",
+            "occupationLocation": {
+                "@type": "Country",
+                "name": "Russia"
+            }
+        }
+    }
+    </script>
     
     <!-- Add loading optimization -->
     <style>
@@ -84,6 +143,53 @@
     </style>
 </head>
 <body>
+    <!-- Static content for SEO (visible to search engines) -->
+    <header style="display: none;" id="seo-header">
+        <h1>Anton Butov — Android/Kotlin Developer</h1>
+    </header>
+    
+    <main style="display: none;" id="seo-main">
+        <p>Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development.</p>
+        <p>Passionate about creating high-quality mobile applications using modern Android technologies and cross-platform solutions.</p>
+        
+        <h2>Core Expertise</h2>
+        <ul>
+            <li>Android Development with Kotlin</li>
+            <li>Kotlin Multiplatform (KMP) for cross-platform development</li>
+            <li>Jetpack Compose for modern UI development</li>
+            <li>Mobile application architecture and design patterns</li>
+            <li>Cross-platform development solutions</li>
+        </ul>
+        
+        <h2>Technologies & Skills</h2>
+        <ul>
+            <li>Kotlin, Java</li>
+            <li>Android SDK, Jetpack Compose</li>
+            <li>Kotlin Multiplatform Mobile (KMM)</li>
+            <li>MVVM, Clean Architecture</li>
+            <li>Git, Gradle</li>
+        </ul>
+        
+        <h2>Contact & Portfolio</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/antonbutov">LinkedIn Profile</a></li>
+            <li><a href="https://github.com/AntonButov">GitHub Projects</a></li>
+        </ul>
+    </main>
+    
+    <noscript>
+        <div style="padding: 20px; background: #0B0B0B; color: #FFFFFF; font-family: sans-serif;">
+            <h1>Anton Butov — Android/Kotlin Developer</h1>
+            <p>Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development.</p>
+            <p>Page loaded without JavaScript. All content is available.</p>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/antonbutov" style="color: #E20100;">LinkedIn</a></li>
+                <li><a href="https://github.com/AntonButov" style="color: #E20100;">GitHub</a></li>
+            </ul>
+        </div>
+    </noscript>
+    
+    <!-- Loading screen (hidden from search engines) -->
     <div id="loading">
         <div class="loading-spinner"></div>
         <div class="loading-text">Loading Anton Butov...</div>

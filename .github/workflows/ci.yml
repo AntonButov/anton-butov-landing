@@ -5,6 +5,7 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+    types: [opened, synchronize, reopened, closed]
 
 permissions:
   contents: write
@@ -54,7 +55,12 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    # Deploy on:
+    #  - direct pushes to master
+    #  - merged pull requests with base branch master
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
+      (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -74,6 +80,24 @@ jobs:
       
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
+
+    # Ensure WASM artifacts and service files are present in the publish directory
+    - name: Prepare publish directory (copy WASM, CNAME, .nojekyll)
+      run: |
+        PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
+        mkdir -p "$PUBLISH_DIR"
+        # copy wasm artifacts produced under build/js/packages
+        if [ -f build/js/packages/composeApp/kotlin/composeApp.wasm ]; then
+          cp -v build/js/packages/composeApp/kotlin/composeApp.wasm "$PUBLISH_DIR"/
+        fi
+        if [ -f build/js/packages/composeApp/kotlin/skiko.wasm ]; then
+          cp -v build/js/packages/composeApp/kotlin/skiko.wasm "$PUBLISH_DIR"/
+        fi
+        # service files
+        if [ -f CNAME ]; then
+          cp -v CNAME "$PUBLISH_DIR"/
+        fi
+        touch "$PUBLISH_DIR/.nojekyll"
       
     - name: Deploy to GitHub Pages
       id: deployment

@@ -1,9 +1,8 @@
 // Service Worker for caching critical resources
-const CACHE_NAME = 'anton-butov-v1';
+const CACHE_NAME = 'anton-butov-v2';
 const CRITICAL_RESOURCES = [
     '/',
     '/composeApp.js',
-    '/composeApp.wasm',
     '/styles.css',
     '/index.html'
 ];

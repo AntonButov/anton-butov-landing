@@ -82,17 +82,29 @@ jobs:
       run: ./gradlew wasmJsBrowserDistribution
 
     # Ensure WASM artifacts and service files are present in the publish directory
-    - name: Prepare publish directory (copy WASM, CNAME, .nojekyll)
+    - name: Prepare publish directory (copy WASM with hash names, CNAME, .nojekyll)
       run: |
         PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
         mkdir -p "$PUBLISH_DIR"
-        # copy wasm artifacts produced under build/js/packages
-        if [ -f build/js/packages/composeApp/kotlin/composeApp.wasm ]; then
-          cp -v build/js/packages/composeApp/kotlin/composeApp.wasm "$PUBLISH_DIR"/
+        
+        # Find and copy WASM files with hash names, then rename to expected names
+        echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
+        ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
+        
+        # Copy the largest WASM file as composeApp.wasm (main app)
+        LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
+        if [ -n "$LARGEST_WASM" ] && [ -f "$LARGEST_WASM" ]; then
+          echo "Copying largest WASM as composeApp.wasm: $LARGEST_WASM"
+          cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
         fi
-        if [ -f build/js/packages/composeApp/kotlin/skiko.wasm ]; then
-          cp -v build/js/packages/composeApp/kotlin/skiko.wasm "$PUBLISH_DIR"/
+        
+        # Copy the second largest WASM file as skiko.wasm (runtime)
+        SECOND_LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | sed -n '2p' | awk '{print $NF}')
+        if [ -n "$SECOND_LARGEST_WASM" ] && [ -f "$SECOND_LARGEST_WASM" ]; then
+          echo "Copying second largest WASM as skiko.wasm: $SECOND_LARGEST_WASM"
+          cp -v "$SECOND_LARGEST_WASM" "$PUBLISH_DIR/skiko.wasm"
         fi
+        
         # service files
         if [ -f CNAME ]; then
           cp -v CNAME "$PUBLISH_DIR"/

@@ -77,35 +77,27 @@ jobs:
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
 
-    # Ensure WASM artifacts and service files are present in the publish directory
-    - name: Prepare publish directory (copy WASM with hash names, CNAME, .nojekyll)
+    # Copy WASM files with hash names (no duplication) and create gzip versions
+    - name: Prepare publish directory (copy hashed WASM files, CNAME, .nojekyll)
       run: |
         PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
         mkdir -p "$PUBLISH_DIR"
         
-        # Find and copy WASM files with hash names, then rename to expected names
         echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
         ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
         
-        # Copy the largest WASM file as composeApp.wasm (main app)
-        LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
-        if [ -n "$LARGEST_WASM" ] && [ -f "$LARGEST_WASM" ]; then
-          echo "Copying largest WASM as composeApp.wasm: $LARGEST_WASM"
-          cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
-          # Create gzipped version for better compression
-          gzip -9 -c "$LARGEST_WASM" > "$PUBLISH_DIR/composeApp.wasm.gz"
-          echo "Created compressed version: composeApp.wasm.gz ($(du -h "$PUBLISH_DIR/composeApp.wasm.gz" | cut -f1))"
-        fi
+        # Copy all WASM files with their original hash names (no renaming)
+        echo "Copying WASM files with hash names..."
+        find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec cp -v {} "$PUBLISH_DIR/" \;
         
-        # Copy the second largest WASM file as skiko.wasm (runtime)
-        SECOND_LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | sed -n '2p' | awk '{print $NF}')
-        if [ -n "$SECOND_LARGEST_WASM" ] && [ -f "$SECOND_LARGEST_WASM" ]; then
-          echo "Copying second largest WASM as skiko.wasm: $SECOND_LARGEST_WASM"
-          cp -v "$SECOND_LARGEST_WASM" "$PUBLISH_DIR/skiko.wasm"
-          # Create gzipped version for better compression
-          gzip -9 -c "$SECOND_LARGEST_WASM" > "$PUBLISH_DIR/skiko.wasm.gz"
-          echo "Created compressed version: skiko.wasm.gz ($(du -h "$PUBLISH_DIR/skiko.wasm.gz" | cut -f1))"
-        fi
+        # Create gzipped versions for all WASM files
+        echo "Creating gzipped versions..."
+        for wasm_file in "$PUBLISH_DIR"/*.wasm; do
+          if [ -f "$wasm_file" ]; then
+            gzip -9 -c "$wasm_file" > "${wasm_file}.gz"
+            echo "Created compressed version: $(basename "${wasm_file}.gz") ($(du -h "${wasm_file}.gz" | cut -f1))"
+          fi
+        done
         
         # service files
         if [ -f CNAME ]; then

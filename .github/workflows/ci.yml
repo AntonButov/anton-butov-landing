@@ -96,6 +96,9 @@ jobs:
         if [ -n "$LARGEST_WASM" ] && [ -f "$LARGEST_WASM" ]; then
           echo "Copying largest WASM as composeApp.wasm: $LARGEST_WASM"
           cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
+          # Create gzipped version for better compression
+          gzip -9 -c "$LARGEST_WASM" > "$PUBLISH_DIR/composeApp.wasm.gz"
+          echo "Created compressed version: composeApp.wasm.gz ($(du -h "$PUBLISH_DIR/composeApp.wasm.gz" | cut -f1))"
         fi
         
         # Copy the second largest WASM file as skiko.wasm (runtime)
@@ -103,6 +106,9 @@ jobs:
         if [ -n "$SECOND_LARGEST_WASM" ] && [ -f "$SECOND_LARGEST_WASM" ]; then
           echo "Copying second largest WASM as skiko.wasm: $SECOND_LARGEST_WASM"
           cp -v "$SECOND_LARGEST_WASM" "$PUBLISH_DIR/skiko.wasm"
+          # Create gzipped version for better compression
+          gzip -9 -c "$SECOND_LARGEST_WASM" > "$PUBLISH_DIR/skiko.wasm.gz"
+          echo "Created compressed version: skiko.wasm.gz ($(du -h "$PUBLISH_DIR/skiko.wasm.gz" | cut -f1))"
         fi
         
         # service files

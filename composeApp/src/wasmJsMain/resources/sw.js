@@ -5,8 +5,6 @@ const CRITICAL_RESOURCES = [
     '/composeApp.js',
     '/styles.css',
     '/index.html',
-    '/8bc1b48ee28fd6b51bb9.wasm',
-    '/a1cbd4d261be1cd50659.wasm',
     '/android-chrome-192x192.png',
     '/android-chrome-512x512.png'
 ];

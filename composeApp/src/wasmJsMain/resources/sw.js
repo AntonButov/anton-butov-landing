@@ -1,23 +1,18 @@
 // Service Worker for caching critical resources
-const CACHE_NAME = 'anton-butov-v1';
+const CACHE_NAME = 'anton-butov-v2';
 const CRITICAL_RESOURCES = [
     '/',
     '/composeApp.js',
-    '/composeApp.wasm',
     '/styles.css',
-    '/index.html'
+    '/index.html',
+    '/android-chrome-192x192.png',
+    '/android-chrome-512x512.png'
 ];
 
-// Install event - cache critical resources
+// Install event - skip caching for faster first load
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                return cache.addAll(CRITICAL_RESOURCES);
-            })
-            .then(() => {
-                return self.skipWaiting();
-            })
+        self.skipWaiting()
     );
 });
 

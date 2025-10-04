@@ -5,6 +5,7 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+    types: [opened, synchronize, reopened, closed]
 
 permissions:
   contents: write
@@ -54,7 +55,12 @@ jobs:
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    # Deploy on:
+    #  - direct pushes to master
+    #  - merged pull requests with base branch master
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
+      (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -74,6 +80,42 @@ jobs:
       
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
+
+    # Ensure WASM artifacts and service files are present in the publish directory
+    - name: Prepare publish directory (copy WASM with hash names, CNAME, .nojekyll)
+      run: |
+        PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
+        mkdir -p "$PUBLISH_DIR"
+        
+        # Find and copy WASM files with hash names, then rename to expected names
+        echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
+        ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
+        
+        # Copy the largest WASM file as composeApp.wasm (main app)
+        LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
+        if [ -n "$LARGEST_WASM" ] && [ -f "$LARGEST_WASM" ]; then
+          echo "Copying largest WASM as composeApp.wasm: $LARGEST_WASM"
+          cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
+          # Create gzipped version for better compression
+          gzip -9 -c "$LARGEST_WASM" > "$PUBLISH_DIR/composeApp.wasm.gz"
+          echo "Created compressed version: composeApp.wasm.gz ($(du -h "$PUBLISH_DIR/composeApp.wasm.gz" | cut -f1))"
+        fi
+        
+        # Copy the second largest WASM file as skiko.wasm (runtime)
+        SECOND_LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | sed -n '2p' | awk '{print $NF}')
+        if [ -n "$SECOND_LARGEST_WASM" ] && [ -f "$SECOND_LARGEST_WASM" ]; then
+          echo "Copying second largest WASM as skiko.wasm: $SECOND_LARGEST_WASM"
+          cp -v "$SECOND_LARGEST_WASM" "$PUBLISH_DIR/skiko.wasm"
+          # Create gzipped version for better compression
+          gzip -9 -c "$SECOND_LARGEST_WASM" > "$PUBLISH_DIR/skiko.wasm.gz"
+          echo "Created compressed version: skiko.wasm.gz ($(du -h "$PUBLISH_DIR/skiko.wasm.gz" | cut -f1))"
+        fi
+        
+        # service files
+        if [ -f CNAME ]; then
+          cp -v CNAME "$PUBLISH_DIR"/
+        fi
+        touch "$PUBLISH_DIR/.nojekyll"
       
     - name: Deploy to GitHub Pages
       id: deployment

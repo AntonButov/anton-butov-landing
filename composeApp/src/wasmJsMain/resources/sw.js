@@ -9,16 +9,10 @@ const CRITICAL_RESOURCES = [
     '/android-chrome-512x512.png'
 ];
 
-// Install event - cache critical resources
+// Install event - skip caching for faster first load
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => {
-                return cache.addAll(CRITICAL_RESOURCES);
-            })
-            .then(() => {
-                return self.skipWaiting();
-            })
+        self.skipWaiting()
     );
 });
 

@@ -75,6 +75,42 @@ jobs:
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
       
+    # Copy only hashed WASM files (no static duplicates) and create gzip versions
+    - name: Prepare publish directory (copy hashed WASM files, CNAME, .nojekyll)
+      run: |
+        PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
+        mkdir -p "$PUBLISH_DIR"
+        
+        echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
+        ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
+        
+        # Copy all WASM files with their original hash names (no renaming)
+        echo "Copying WASM files with hash names..."
+        find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec cp -v {} "$PUBLISH_DIR/" \;
+        
+        # Create gzipped versions for all WASM files
+        echo "Creating gzipped versions..."
+        for wasm_file in "$PUBLISH_DIR"/*.wasm; do
+          if [ -f "$wasm_file" ]; then
+            gzip -9 -c "$wasm_file" > "${wasm_file}.gz"
+            echo "Created compressed version: $(basename "${wasm_file}.gz") ($(du -h "${wasm_file}.gz" | cut -f1))"
+          fi
+        done
+        
+        # Remove any static WASM files to prevent duplication
+        echo "Removing static WASM files to prevent duplication..."
+        rm -f "$PUBLISH_DIR/composeApp.wasm" "$PUBLISH_DIR/skiko.wasm"
+        rm -f "$PUBLISH_DIR/composeApp.wasm.gz" "$PUBLISH_DIR/skiko.wasm.gz"
+        
+        # service files
+        if [ -f CNAME ]; then
+          cp -v CNAME "$PUBLISH_DIR"/
+        fi
+        touch "$PUBLISH_DIR/.nojekyll"
+        
+        echo "Final WASM files in publish directory:"
+        ls -la "$PUBLISH_DIR"/*.wasm* || echo "No WASM files found"
+      
     - name: Deploy to GitHub Pages
       id: deployment
       uses: peaceiris/actions-gh-pages@v4.0.0

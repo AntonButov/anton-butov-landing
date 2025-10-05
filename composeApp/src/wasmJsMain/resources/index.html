@@ -257,13 +257,13 @@
                 });
         }
         
-        // Fallback: hide loading screen after 10 seconds if app doesn't call hideLoadingScreen
+        // Fallback: hide loading screen after 5 seconds if app doesn't call hideLoadingScreen
         setTimeout(() => {
             if (!isAppReady) {
                 console.warn('Loading timeout - hiding loading screen');
                 window.hideLoadingScreen();
             }
-        }, 10000);
+        }, 5000);
     </script>
     
     <script defer src="composeApp.js"></script>

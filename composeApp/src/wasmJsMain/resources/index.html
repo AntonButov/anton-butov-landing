@@ -246,16 +246,16 @@
         // Start progress simulation immediately
         startProgressSimulation();
         
-        // Service Worker temporarily disabled for mobile performance
-        // if ('serviceWorker' in navigator) {
-        //     navigator.serviceWorker.register('/sw.js')
-        //         .then((registration) => {
-        //             console.log('SW registered: ', registration);
-        //         })
-        //         .catch((registrationError) => {
-        //             console.log('SW registration failed: ', registrationError);
-        //         });
-        // }
+        // Register Service Worker for caching (only once)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
         
         // Fallback: hide loading screen after 5 seconds if app doesn't call hideLoadingScreen
         setTimeout(() => {

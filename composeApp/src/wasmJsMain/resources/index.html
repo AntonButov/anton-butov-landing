@@ -45,6 +45,15 @@
     <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
     
+    <!-- Preload critical images for faster visual rendering -->
+    <link rel="preload" href="butov.png" as="image" type="image/png">
+    <link rel="preload" href="AntonButovMessage.png" as="image" type="image/png">
+    <link rel="preload" href="redBack.svg" as="image" type="image/svg+xml">
+    
+    <!-- Preload additional resources for better UX -->
+    <link rel="preload" href="go.png" as="image" type="image/png">
+    <link rel="preload" href="git.png" as="image" type="image/png">
+    
     <!-- Inline critical CSS for instant render -->
     <style>
         :root { --dp: 1px; }

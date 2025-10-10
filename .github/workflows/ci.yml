@@ -115,9 +115,19 @@ jobs:
         # Update references in composeApp.js from hash names to static names
         echo "Updating WASM references in composeApp.js..."
         if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
-          # Replace hash-based WASM references with static names
-          sed -i 's/[a-f0-9]\\{20,\\}\\.wasm/composeApp.wasm/g' "$PUBLISH_DIR/composeApp.js"
+          # Get the actual hash names from the JavaScript file
+          COMPOSEAPP_HASH=$(echo "$LARGEST_WASM" | sed 's/.*\///')
+          SKIKO_HASH=$(echo "$SECOND_WASM" | sed 's/.*\///')
+          
+          echo "Found hash names: composeApp=$COMPOSEAPP_HASH, skiko=$SKIKO_HASH"
+          
+          # Replace specific hash-based WASM references with static names
+          sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$PUBLISH_DIR/composeApp.js"
+          sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$PUBLISH_DIR/composeApp.js"
+          
           echo "Updated composeApp.js to use static WASM names"
+          echo "Verifying changes:"
+          grep -o '[a-f0-9]\{20,\}\.wasm' "$PUBLISH_DIR/composeApp.js" || echo "No hash-based WASM references found"
         fi
         
         # Copy favicon and other static resources

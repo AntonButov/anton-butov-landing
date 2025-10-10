@@ -177,31 +177,10 @@ jobs:
             cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
             cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
             
-            # Optimize and copy images with compression
-            echo "Optimizing images for faster loading..."
-            if command -v convert &> /dev/null; then
-              # Optimize large PNG images
-              for img in butov.png AntonButovMessage.png; do
-                if [ -f "composeApp/src/wasmJsMain/resources/$img" ]; then
-                  echo "Optimizing $img..."
-                  convert "composeApp/src/wasmJsMain/resources/$img" -strip -quality 85 -define png:compression-level=9 "composeApp/src/wasmJsMain/resources/${img%.*}_optimized.png"
-                  # Use optimized version if significantly smaller
-                  ORIGINAL_SIZE=$(stat -c%s "composeApp/src/wasmJsMain/resources/$img")
-                  OPTIMIZED_SIZE=$(stat -c%s "composeApp/src/wasmJsMain/resources/${img%.*}_optimized.png" 2>/dev/null || echo "0")
-                  if [ "$OPTIMIZED_SIZE" -gt 0 ] && [ "$OPTIMIZED_SIZE" -lt "$ORIGINAL_SIZE" ]; then
-                    mv "composeApp/src/wasmJsMain/resources/${img%.*}_optimized.png" "$PUBLISH_DIR/$img"
-                    echo "Optimized $img: $((ORIGINAL_SIZE/1024))KB -> $((OPTIMIZED_SIZE/1024))KB"
-                  else
-                    cp "composeApp/src/wasmJsMain/resources/$img" "$PUBLISH_DIR/"
-                    rm -f "composeApp/src/wasmJsMain/resources/${img%.*}_optimized.png"
-                  fi
-                fi
-              done
-            else
-              echo "ImageMagick not available, copying images as-is..."
-              cp -v composeApp/src/wasmJsMain/resources/*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No PNG images found"
-              cp -v composeApp/src/wasmJsMain/resources/*.svg "$PUBLISH_DIR/" 2>/dev/null || echo "No SVG images found"
-            fi
+            # Copy images as-is (AsyncImage handles optimization)
+            echo "Copying images for async loading..."
+            cp -v composeApp/src/wasmJsMain/resources/*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No PNG images found"
+            cp -v composeApp/src/wasmJsMain/resources/*.svg "$PUBLISH_DIR/" 2>/dev/null || echo "No SVG images found"
         
         # service files
         if [ -f CNAME ]; then

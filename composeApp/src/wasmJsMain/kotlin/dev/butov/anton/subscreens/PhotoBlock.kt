@@ -16,6 +16,7 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
 import dev.butov.anton.LocalIsMobile
+import dev.butov.anton.components.AsyncImage
 import dev.butov.anton.subscreens.burger.HamburgerMenu
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.CallButtonLight
@@ -34,11 +35,10 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
+                AsyncImage(
+                    resource = Res.drawable.butov,
                     contentDescription = "Butov",
-                    modifier = Modifier.height(300.dp),
-                    tint = Color.Unspecified,
+                    modifier = Modifier.height(300.dp)
                 )
                 Spacer(Modifier.size(6.dp))
                 Im(isMobile = isMobile)
@@ -47,11 +47,10 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Im(modifier = Modifier.align(Alignment.Bottom), isMobile)
                 Spacer(Modifier.weight(1f))
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
+                AsyncImage(
+                    resource = Res.drawable.butov,
                     contentDescription = "Butov",
-                    modifier = Modifier.height(600.dp),
-                    tint = Color.Unspecified,
+                    modifier = Modifier.height(600.dp)
                 )
             }
         }

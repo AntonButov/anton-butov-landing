@@ -116,7 +116,7 @@ jobs:
         echo "Updating WASM references in composeApp.js..."
         if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
           # Replace hash-based WASM references with static names
-          sed -i 's/[a-f0-9]\{20,\}\.wasm/composeApp.wasm/g' "$PUBLISH_DIR/composeApp.js"
+          sed -i 's/[a-f0-9]\\{20,\\}\\.wasm/composeApp.wasm/g' "$PUBLISH_DIR/composeApp.js"
           echo "Updated composeApp.js to use static WASM names"
         fi
         

@@ -135,7 +135,6 @@ jobs:
         
         echo "Final WASM files in publish directory:"
         ls -la "$PUBLISH_DIR"/*.wasm* || echo "No WASM files found"
-      
     - name: Deploy to GitHub Pages
       id: deployment
       uses: peaceiris/actions-gh-pages@v4.0.0

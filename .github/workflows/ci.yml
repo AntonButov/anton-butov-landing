@@ -138,8 +138,9 @@ jobs:
             # Find and update ALL files that might contain WASM references
             echo "Searching for files with WASM references..."
             
-            # Search in publish directory and build directory for comprehensive coverage
-            ALL_FILES=$(find "$PUBLISH_DIR" build/js/packages/composeApp/kotlin/ -name "*.js" -o -name "*.mjs" -o -name "*.ts" 2>/dev/null | head -50)
+            # Search in ALL possible directories for comprehensive coverage
+            echo "Searching for WASM references in all build directories..."
+            ALL_FILES=$(find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -o -name "*.ts" 2>/dev/null | head -100)
             
             if [ -z "$ALL_FILES" ]; then
               echo "WARNING: No JS/MJS files found"
@@ -169,7 +170,7 @@ jobs:
               
               # Verify the changes more thoroughly
               echo "Verifying changes..."
-              REMAINING_HASHES=$(find "$PUBLISH_DIR" build/js/packages/composeApp/kotlin/ -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
+              REMAINING_HASHES=$(find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
               
               if [ -n "$REMAINING_HASHES" ]; then
                 echo "WARNING: Some files still contain hash-based WASM references:"
@@ -178,6 +179,14 @@ jobs:
                 for hash_file in $REMAINING_HASHES; do
                   echo "In $hash_file:"
                   grep -o '[a-f0-9]\{20,\}\.wasm' "$hash_file" | head -5 || echo "No hash patterns found"
+                done
+                
+                # Additional check for specific known hashes from Network tab
+                echo "Checking for specific known problematic hashes..."
+                KNOWN_PROBLEM_HASHES="8bc1b48ee28fd6b51bb9.wasm fe1f72a3fb2a7d000613.wasm"
+                for known_hash in $KNOWN_PROBLEM_HASHES; do
+                  echo "Searching for $known_hash..."
+                  find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -exec grep -l "$known_hash" {} \; 2>/dev/null || echo "Not found in current build"
                 done
               else
                 echo "✅ All hash-based WASM references successfully replaced with static names"

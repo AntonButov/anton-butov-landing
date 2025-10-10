@@ -10,12 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 /**
@@ -29,21 +28,21 @@ fun AsyncImage(
     contentDescription: String? = null,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Fit,
-    loadingPlaceholder: @Composable () -> Unit = { 
-        DefaultLoadingPlaceholder(modifier = modifier) 
+    loadingPlaceholder: @Composable () -> Unit = {
+        DefaultLoadingPlaceholder(modifier = modifier)
     },
-    errorPlaceholder: @Composable () -> Unit = { 
-        DefaultErrorPlaceholder(modifier = modifier) 
-    }
+    errorPlaceholder: @Composable () -> Unit = {
+        DefaultErrorPlaceholder(modifier = modifier)
+    },
 ) {
     var isLoading by remember { mutableStateOf(true) }
-    
+
     LaunchedEffect(resource) {
         // Simulate async loading with a small delay for better UX
         delay(50)
         isLoading = false
     }
-    
+
     if (isLoading) {
         loadingPlaceholder()
     } else {
@@ -52,7 +51,7 @@ fun AsyncImage(
             painter = painterResource(resource),
             contentDescription = contentDescription,
             modifier = modifier,
-            contentScale = contentScale
+            contentScale = contentScale,
         )
     }
 }
@@ -66,61 +65,60 @@ fun AsyncImage(
     contentDescription: String? = null,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Fit,
-    loadingPlaceholder: @Composable () -> Unit = { 
-        DefaultLoadingPlaceholder(modifier = modifier) 
+    loadingPlaceholder: @Composable () -> Unit = {
+        DefaultLoadingPlaceholder(modifier = modifier)
     },
-    errorPlaceholder: @Composable () -> Unit = { 
-        DefaultErrorPlaceholder(modifier = modifier) 
-    }
+    errorPlaceholder: @Composable () -> Unit = {
+        DefaultErrorPlaceholder(modifier = modifier)
+    },
 ) {
     // Placeholder implementation for URL images
     // In a real implementation, you would load the image from URL
     Box(
-        modifier = modifier
-            .background(Color.Gray.copy(alpha = 0.3f))
-            .clip(MaterialTheme.shapes.medium),
-        contentAlignment = Alignment.Center
+        modifier =
+            modifier
+                .background(Color.Gray.copy(alpha = 0.3f))
+                .clip(MaterialTheme.shapes.medium),
+        contentAlignment = Alignment.Center,
     ) {
         androidx.compose.material3.Text(
             text = "Image: ${imageUrl.take(20)}...",
             style = MaterialTheme.typography.bodySmall,
-            color = Color.Gray
+            color = Color.Gray,
         )
     }
 }
 
 @Composable
-private fun DefaultLoadingPlaceholder(
-    modifier: Modifier = Modifier
-) {
+private fun DefaultLoadingPlaceholder(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .background(Color.Gray.copy(alpha = 0.1f))
-            .clip(MaterialTheme.shapes.medium),
-        contentAlignment = Alignment.Center
+        modifier =
+            modifier
+                .background(Color.Gray.copy(alpha = 0.1f))
+                .clip(MaterialTheme.shapes.medium),
+        contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(24.dp),
             color = MaterialTheme.colorScheme.primary,
-            strokeWidth = 2.dp
+            strokeWidth = 2.dp,
         )
     }
 }
 
 @Composable
-private fun DefaultErrorPlaceholder(
-    modifier: Modifier = Modifier
-) {
+private fun DefaultErrorPlaceholder(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier
-            .background(Color.Red.copy(alpha = 0.1f))
-            .clip(MaterialTheme.shapes.medium),
-        contentAlignment = Alignment.Center
+        modifier =
+            modifier
+                .background(Color.Red.copy(alpha = 0.1f))
+                .clip(MaterialTheme.shapes.medium),
+        contentAlignment = Alignment.Center,
     ) {
         androidx.compose.material3.Text(
             text = "Failed to load",
             style = MaterialTheme.typography.bodySmall,
-            color = Color.Red
+            color = Color.Red,
         )
     }
 }

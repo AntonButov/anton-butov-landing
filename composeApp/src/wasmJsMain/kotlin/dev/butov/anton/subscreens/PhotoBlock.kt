@@ -1,13 +1,11 @@
 package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -23,7 +21,6 @@ import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
 import dev.butov.anton.uikit.FullStyleUnderline
 import dev.butov.anton.uikit.SoftStyle
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PhotoBlock(menuViewModel: MenuViewModel) {
@@ -38,7 +35,7 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
                 AsyncImage(
                     resource = Res.drawable.butov,
                     contentDescription = "Butov",
-                    modifier = Modifier.height(300.dp)
+                    modifier = Modifier.height(300.dp),
                 )
                 Spacer(Modifier.size(6.dp))
                 Im(isMobile = isMobile)
@@ -50,7 +47,7 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
                 AsyncImage(
                     resource = Res.drawable.butov,
                     contentDescription = "Butov",
-                    modifier = Modifier.height(600.dp)
+                    modifier = Modifier.height(600.dp),
                 )
             }
         }

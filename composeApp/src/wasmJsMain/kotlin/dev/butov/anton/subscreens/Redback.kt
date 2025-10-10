@@ -17,6 +17,6 @@ fun Redback() {
         resource = if (isMobile) Res.drawable.redBackMobile else Res.drawable.redBack,
         contentDescription = null,
         modifier = Modifier.fillMaxWidth(),
-        contentScale = ContentScale.FillWidth
+        contentScale = ContentScale.FillWidth,
     )
 }

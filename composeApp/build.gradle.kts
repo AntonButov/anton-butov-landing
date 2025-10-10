@@ -73,9 +73,9 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.datetime)
         }
-                wasmJsMain.dependencies {
-                    implementation(libs.ktor.client.js)
-                }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.coroutines.core)

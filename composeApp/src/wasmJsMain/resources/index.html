@@ -42,7 +42,8 @@
     
     <!-- Preload critical resources for faster cold start -->
     <link rel="preload" href="composeApp.js" as="script">
-    <!-- WASM preload links will be generated dynamically in CI/CD -->
+    <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
+    <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
     
     <!-- Inline critical CSS for instant render -->
     <style>

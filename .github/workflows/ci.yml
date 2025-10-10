@@ -77,8 +77,8 @@ jobs:
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
 
-    # Copy WASM files with hash names and generate dynamic preload links
-    - name: Prepare publish directory (copy hashed WASM files, generate dynamic preload)
+    # Rename WASM files to static names and update references
+    - name: Prepare publish directory (rename WASM files to static names)
       run: |
         PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
         mkdir -p "$PUBLISH_DIR"
@@ -86,9 +86,39 @@ jobs:
         echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
         ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
         
-        # Copy all WASM files with their original hash names
-        echo "Copying WASM files with hash names..."
-        find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec cp -v {} "$PUBLISH_DIR/" \;
+        # Find and rename WASM files to static names
+        echo "Renaming WASM files to static names..."
+        
+        # Find the largest WASM file (usually composeApp.wasm) and rename to composeApp.wasm
+        LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
+        if [ -n "$LARGEST_WASM" ]; then
+          cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
+          echo "Renamed $(basename "$LARGEST_WASM") -> composeApp.wasm"
+        fi
+        
+        # Find the second largest WASM file (usually skiko.wasm) and rename to skiko.wasm
+        SECOND_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -2 | tail -1 | awk '{print $NF}')
+        if [ -n "$SECOND_WASM" ] && [ "$SECOND_WASM" != "$LARGEST_WASM" ]; then
+          cp -v "$SECOND_WASM" "$PUBLISH_DIR/skiko.wasm"
+          echo "Renamed $(basename "$SECOND_WASM") -> skiko.wasm"
+        fi
+        
+        # Create gzipped versions for static WASM files
+        echo "Creating gzipped versions..."
+        for wasm_file in "$PUBLISH_DIR"/composeApp.wasm "$PUBLISH_DIR"/skiko.wasm; do
+          if [ -f "$wasm_file" ]; then
+            gzip -9 -c "$wasm_file" > "${wasm_file}.gz"
+            echo "Created compressed version: $(basename "${wasm_file}.gz") ($(du -h "${wasm_file}.gz" | cut -f1))"
+          fi
+        done
+        
+        # Update references in composeApp.js from hash names to static names
+        echo "Updating WASM references in composeApp.js..."
+        if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
+          # Replace hash-based WASM references with static names
+          sed -i 's/[a-f0-9]\\{20,\\}\\.wasm/composeApp.wasm/g' "$PUBLISH_DIR/composeApp.js"
+          echo "Updated composeApp.js to use static WASM names"
+        fi
         
         # Copy favicon and other static resources
         echo "Copying favicon and static resources..."
@@ -96,34 +126,6 @@ jobs:
         cp -v composeApp/src/wasmJsMain/resources/apple-touch-icon.png "$PUBLISH_DIR/" 2>/dev/null || echo "No apple-touch-icon found"
         cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
         cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
-        
-        # Create gzipped versions for all WASM files
-        echo "Creating gzipped versions..."
-        for wasm_file in "$PUBLISH_DIR"/*.wasm; do
-          if [ -f "$wasm_file" ]; then
-            gzip -9 -c "$wasm_file" > "${wasm_file}.gz"
-            echo "Created compressed version: $(basename "${wasm_file}.gz") ($(du -h "${wasm_file}.gz" | cut -f1))"
-          fi
-        done
-        
-        # Generate dynamic preload links in index.html
-        echo "Generating dynamic preload links..."
-        if [ -f "$PUBLISH_DIR/index.html" ]; then
-          # Find all WASM files and create preload links
-          PRELOAD_LINKS=""
-          for wasm_file in "$PUBLISH_DIR"/*.wasm; do
-            if [ -f "$wasm_file" ]; then
-              filename=$(basename "$wasm_file")
-              PRELOAD_LINKS="${PRELOAD_LINKS}
-    <link rel=\"preload\" href=\"${filename}\" as=\"fetch\" type=\"application/wasm\" crossorigin>"
-            fi
-          done
-          
-          # Insert preload links before the closing </head> tag
-          sed -i "s|</head>|${PRELOAD_LINKS}
-</head>|" "$PUBLISH_DIR/index.html"
-          echo "Added dynamic preload links to index.html"
-        fi
         
         # service files
         if [ -f CNAME ]; then
@@ -133,7 +135,6 @@ jobs:
         
         echo "Final WASM files in publish directory:"
         ls -la "$PUBLISH_DIR"/*.wasm* || echo "No WASM files found"
-      
     - name: Deploy to GitHub Pages
       id: deployment
       uses: peaceiris/actions-gh-pages@v4.0.0

@@ -75,7 +75,6 @@ kotlin {
         }
                 wasmJsMain.dependencies {
                     implementation(libs.ktor.client.js)
-                    implementation("io.coil-kt.coil3:coil-compose:3.0.6")
                 }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

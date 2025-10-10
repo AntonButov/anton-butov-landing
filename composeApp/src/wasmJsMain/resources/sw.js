@@ -1,18 +1,23 @@
 // Service Worker for caching critical resources
-const CACHE_NAME = 'anton-butov-v2';
+const CACHE_NAME = 'anton-butov-v3';
 const CRITICAL_RESOURCES = [
     '/',
-    '/composeApp.js',
-    '/styles.css',
     '/index.html',
-    '/android-chrome-192x192.png',
-    '/android-chrome-512x512.png'
+    '/composeApp.js',
+    '/composeApp.wasm',
+    '/skiko.wasm',
+    '/styles.css',
+    '/favicon-32x32.png',
+    '/favicon-16x16.png'
 ];
 
-// Install event - skip caching for faster first load
+// Install event - cache critical resources for faster subsequent loads
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        self.skipWaiting()
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(CRITICAL_RESOURCES))
+            .catch(() => {}) // Fail silently if offline
+            .then(() => self.skipWaiting())
     );
 });
 
@@ -33,39 +38,46 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch event - serve from cache when possible
+// Fetch event - Cache First strategy for better performance
 self.addEventListener('fetch', (event) => {
     // Only handle GET requests
-    if (event.request.method !== 'GET') {
-        return;
-    }
+    if (event.request.method !== 'GET') return;
 
     // Skip cross-origin requests
-    if (!event.request.url.startsWith(self.location.origin)) {
-        return;
-    }
+    if (!event.request.url.startsWith(self.location.origin)) return;
 
+    // Cache First strategy: Try cache first, then network
     event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Return cached version or fetch from network
-                return response || fetch(event.request).then((fetchResponse) => {
-                    // Don't cache non-successful responses
-                    if (!fetchResponse || fetchResponse.status !== 200 || fetchResponse.type !== 'basic') {
-                        return fetchResponse;
-                    }
-
-                    // Clone the response
-                    const responseToCache = fetchResponse.clone();
-
-                    // Cache the response for future use
-                    caches.open(CACHE_NAME)
-                        .then((cache) => {
-                            cache.put(event.request, responseToCache);
+        caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+                // Return cached version immediately
+                // Update cache in background for next time
+                fetch(event.request).then((freshResponse) => {
+                    if (freshResponse && freshResponse.status === 200) {
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, freshResponse);
                         });
+                    }
+                }).catch(() => {}); // Fail silently
+                
+                return cachedResponse;
+            }
 
-                    return fetchResponse;
+            // Not in cache - fetch from network and cache
+            return fetch(event.request).then((response) => {
+                // Don't cache non-successful responses
+                if (!response || response.status !== 200 || response.type !== 'basic') {
+                    return response;
+                }
+
+                // Cache for future use
+                const responseToCache = response.clone();
+                caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, responseToCache);
                 });
-            })
+
+                return response;
+            });
+        })
     );
 });

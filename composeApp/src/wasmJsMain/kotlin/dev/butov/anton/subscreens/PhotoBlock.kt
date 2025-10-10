@@ -1,13 +1,11 @@
 package dev.butov.anton.subscreens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -16,13 +14,13 @@ import antonbutov.composeapp.generated.resources.Res
 import antonbutov.composeapp.generated.resources.butov
 import dev.butov.anton.Colors
 import dev.butov.anton.LocalIsMobile
+import dev.butov.anton.components.AsyncImage
 import dev.butov.anton.subscreens.burger.HamburgerMenu
 import dev.butov.anton.subscreens.burger.MenuViewModel
 import dev.butov.anton.uikit.CallButtonLight
 import dev.butov.anton.uikit.FullStyle
 import dev.butov.anton.uikit.FullStyleUnderline
 import dev.butov.anton.uikit.SoftStyle
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PhotoBlock(menuViewModel: MenuViewModel) {
@@ -34,11 +32,10 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
+                AsyncImage(
+                    resource = Res.drawable.butov,
                     contentDescription = "Butov",
                     modifier = Modifier.height(300.dp),
-                    tint = Color.Unspecified,
                 )
                 Spacer(Modifier.size(6.dp))
                 Im(isMobile = isMobile)
@@ -47,11 +44,10 @@ fun PhotoBlock(menuViewModel: MenuViewModel) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Im(modifier = Modifier.align(Alignment.Bottom), isMobile)
                 Spacer(Modifier.weight(1f))
-                Icon(
-                    painter = painterResource(Res.drawable.butov),
+                AsyncImage(
+                    resource = Res.drawable.butov,
                     contentDescription = "Butov",
                     modifier = Modifier.height(600.dp),
-                    tint = Color.Unspecified,
                 )
             }
         }

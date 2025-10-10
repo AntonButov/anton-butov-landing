@@ -135,47 +135,66 @@ jobs:
               exit 1
             fi
             
-            # Find all JS and MJS files that might contain WASM references
-            JS_FILES=$(find "$PUBLISH_DIR" -name "*.js" -o -name "*.mjs" | head -20)
+            # Find and update ALL files that might contain WASM references
+            echo "Searching for files with WASM references..."
             
-            if [ -z "$JS_FILES" ]; then
-              echo "WARNING: No JS/MJS files found in $PUBLISH_DIR"
+            # Search in publish directory and build directory for comprehensive coverage
+            ALL_FILES=$(find "$PUBLISH_DIR" build/js/packages/composeApp/kotlin/ -name "*.js" -o -name "*.mjs" -o -name "*.ts" 2>/dev/null | head -50)
+            
+            if [ -z "$ALL_FILES" ]; then
+              echo "WARNING: No JS/MJS files found"
             else
-              echo "Found JS/MJS files to update:"
-              echo "$JS_FILES"
+              echo "Found files to check:"
+              echo "$ALL_FILES"
               
               # Update references in all found files
               UPDATED_FILES=0
-              for js_file in $JS_FILES; do
-                if grep -q "$COMPOSEAPP_HASH\|$SKIKO_HASH" "$js_file" 2>/dev/null; then
-                  echo "Updating $js_file..."
-                  sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$js_file"
-                  sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$js_file"
+              for file in $ALL_FILES; do
+                if [ -f "$file" ] && grep -q "$COMPOSEAPP_HASH\|$SKIKO_HASH" "$file" 2>/dev/null; then
+                  echo "Updating $file..."
+                  # Create backup
+                  cp "$file" "$file.backup"
+                  # Replace hash names with static names
+                  sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$file"
+                  sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$file"
                   UPDATED_FILES=$((UPDATED_FILES + 1))
+                  
+                  # Show what changed
+                  echo "Changes in $file:"
+                  diff "$file.backup" "$file" | head -10 || echo "No visible changes"
                 fi
               done
               
               echo "Updated $UPDATED_FILES files with WASM references"
               
-              # Verify the changes
+              # Verify the changes more thoroughly
               echo "Verifying changes..."
-              REMAINING_HASHES=$(find "$PUBLISH_DIR" -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
+              REMAINING_HASHES=$(find "$PUBLISH_DIR" build/js/packages/composeApp/kotlin/ -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
               
               if [ -n "$REMAINING_HASHES" ]; then
                 echo "WARNING: Some files still contain hash-based WASM references:"
                 echo "$REMAINING_HASHES"
-                echo "This might indicate additional WASM files or different hash patterns."
+                echo "Checking specific hash patterns:"
+                for hash_file in $REMAINING_HASHES; do
+                  echo "In $hash_file:"
+                  grep -o '[a-f0-9]\{20,\}\.wasm' "$hash_file" | head -5 || echo "No hash patterns found"
+                done
               else
                 echo "✅ All hash-based WASM references successfully replaced with static names"
               fi
             fi
         
-        # Copy favicon and other static resources
-        echo "Copying favicon and static resources..."
-        cp -v composeApp/src/wasmJsMain/resources/favicon*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No favicon files found"
-        cp -v composeApp/src/wasmJsMain/resources/apple-touch-icon.png "$PUBLISH_DIR/" 2>/dev/null || echo "No apple-touch-icon found"
-        cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
-        cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
+            # Copy favicon and other static resources
+            echo "Copying favicon and static resources..."
+            cp -v composeApp/src/wasmJsMain/resources/favicon*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No favicon files found"
+            cp -v composeApp/src/wasmJsMain/resources/apple-touch-icon.png "$PUBLISH_DIR/" 2>/dev/null || echo "No apple-touch-icon found"
+            cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
+            cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
+            
+            # Copy images as-is (AsyncImage handles optimization)
+            echo "Copying images for async loading..."
+            cp -v composeApp/src/wasmJsMain/resources/*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No PNG images found"
+            cp -v composeApp/src/wasmJsMain/resources/*.svg "$PUBLISH_DIR/" 2>/dev/null || echo "No SVG images found"
         
         # service files
         if [ -f CNAME ]; then

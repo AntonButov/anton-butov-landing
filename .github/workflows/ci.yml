@@ -112,23 +112,63 @@ jobs:
           fi
         done
         
-        # Update references in composeApp.js from hash names to static names
-        echo "Updating WASM references in composeApp.js..."
-        if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
-          # Get the actual hash names from the JavaScript file
-          COMPOSEAPP_HASH=$(echo "$LARGEST_WASM" | sed 's/.*\///')
-          SKIKO_HASH=$(echo "$SECOND_WASM" | sed 's/.*\///')
-          
-          echo "Found hash names: composeApp=$COMPOSEAPP_HASH, skiko=$SKIKO_HASH"
-          
-          # Replace specific hash-based WASM references with static names
-          sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$PUBLISH_DIR/composeApp.js"
-          sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$PUBLISH_DIR/composeApp.js"
-          
-          echo "Updated composeApp.js to use static WASM names"
-          echo "Verifying changes:"
-          grep -o '[a-f0-9]\{20,\}\.wasm' "$PUBLISH_DIR/composeApp.js" || echo "No hash-based WASM references found"
-        fi
+            # Update references in ALL JavaScript files from hash names to static names
+            echo "Updating WASM references in all JS/MJS files..."
+            
+            # Get the actual hash names from the WASM files
+            COMPOSEAPP_HASH=$(echo "$LARGEST_WASM" | sed 's/.*\///')
+            SKIKO_HASH=$(echo "$SECOND_WASM" | sed 's/.*\///')
+            
+            echo "Found hash names: composeApp=$COMPOSEAPP_HASH, skiko=$SKIKO_HASH"
+            
+            # Validate that we found both files
+            if [ -z "$COMPOSEAPP_HASH" ] || [ -z "$SKIKO_HASH" ]; then
+              echo "ERROR: Could not determine WASM file hashes!"
+              echo "Available WASM files:"
+              ls -la build/js/packages/composeApp/kotlin/*.wasm 2>/dev/null || echo "No WASM files found"
+              exit 1
+            fi
+            
+            # Validate that the files are different
+            if [ "$COMPOSEAPP_HASH" = "$SKIKO_HASH" ]; then
+              echo "ERROR: Both WASM files have the same hash: $COMPOSEAPP_HASH"
+              exit 1
+            fi
+            
+            # Find all JS and MJS files that might contain WASM references
+            JS_FILES=$(find "$PUBLISH_DIR" -name "*.js" -o -name "*.mjs" | head -20)
+            
+            if [ -z "$JS_FILES" ]; then
+              echo "WARNING: No JS/MJS files found in $PUBLISH_DIR"
+            else
+              echo "Found JS/MJS files to update:"
+              echo "$JS_FILES"
+              
+              # Update references in all found files
+              UPDATED_FILES=0
+              for js_file in $JS_FILES; do
+                if grep -q "$COMPOSEAPP_HASH\|$SKIKO_HASH" "$js_file" 2>/dev/null; then
+                  echo "Updating $js_file..."
+                  sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$js_file"
+                  sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$js_file"
+                  UPDATED_FILES=$((UPDATED_FILES + 1))
+                fi
+              done
+              
+              echo "Updated $UPDATED_FILES files with WASM references"
+              
+              # Verify the changes
+              echo "Verifying changes..."
+              REMAINING_HASHES=$(find "$PUBLISH_DIR" -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
+              
+              if [ -n "$REMAINING_HASHES" ]; then
+                echo "WARNING: Some files still contain hash-based WASM references:"
+                echo "$REMAINING_HASHES"
+                echo "This might indicate additional WASM files or different hash patterns."
+              else
+                echo "✅ All hash-based WASM references successfully replaced with static names"
+              fi
+            fi
         
         # Copy favicon and other static resources
         echo "Copying favicon and static resources..."

@@ -73,8 +73,18 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.datetime)
         }
+        jsMain.dependencies {
+            implementation(libs.ktor.client.js)
+            implementation(compose.components.uiToolingPreview)
+        }
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
+        }
+        jsTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.coroutines.core)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.coroutines.test)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -44,6 +44,8 @@
     <link rel="preload" href="composeApp.js" as="script">
     <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
+    <link rel="preload" href="skiko.js" as="script">
+    <link rel="preload" href="composeApp.mjs" as="script">
     
     <!-- Images are now loaded asynchronously with AsyncImage component -->
     <!-- This provides better performance by loading images only when needed -->
@@ -162,9 +164,26 @@
         // Register Service Worker for caching (deferred for performance)
         setTimeout(() => {
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('[SW] Registered successfully');
+                    })
+                    .catch((error) => {
+                        console.error('[SW] Registration failed:', error);
+                    });
             }
         }, 1000);
+        
+        // Early WASM preload validation
+        window.addEventListener('DOMContentLoaded', () => {
+            // Проверяем, что preload хинты работают
+            const preloadedResources = performance.getEntriesByType('resource')
+                .filter(entry => entry.name.includes('.wasm') || entry.name.includes('composeApp.js'));
+            
+            if (preloadedResources.length > 0) {
+                console.log('[Preload] Successfully preloaded resources:', preloadedResources.map(r => r.name));
+            }
+        });
         
         // Fallback timeout
         setTimeout(() => !isAppReady && window.hideLoadingScreen(), 5000);

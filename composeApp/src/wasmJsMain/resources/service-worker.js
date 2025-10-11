@@ -1,5 +1,5 @@
 // Service Worker для кэширования WASM файлов и оптимизации загрузки
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `anton-butov-landing-${CACHE_VERSION}`;
 
 // Критичные ресурсы для кэширования
@@ -14,6 +14,7 @@ const PRECACHE_URLS = [
   '/skiko.mjs',
   '/composeApp.mjs',
   '/composeApp.uninstantiated.mjs',
+  '/custom-formatters.js',
   '/preview.png'
 ];
 
@@ -26,17 +27,24 @@ self.addEventListener('install', (event) => {
       try {
         const cache = await caches.open(CACHE_NAME);
         
-        // Параллельная загрузка всех ресурсов
-        await Promise.all(
+        // Параллельная загрузка всех ресурсов с улучшенной обработкой ошибок
+        const cacheResults = await Promise.allSettled(
           PRECACHE_URLS.map(async (url) => {
             try {
               await cache.add(url);
               console.log(`[SW] Cached: ${url}`);
+              return { url, status: 'success' };
             } catch (error) {
               console.warn(`[SW] Failed to cache ${url}:`, error.message);
+              return { url, status: 'failed', error: error.message };
             }
           })
         );
+        
+        // Статистика кэширования
+        const successful = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'success').length;
+        const failed = cacheResults.length - successful;
+        console.log(`[SW] Cache stats: ${successful} successful, ${failed} failed`);
         
         console.log('[SW] All critical resources cached');
         

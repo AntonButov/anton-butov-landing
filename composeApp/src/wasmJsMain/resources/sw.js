@@ -3,14 +3,12 @@ const CACHE_NAME = 'anton-butov-v3';
 const CRITICAL_RESOURCES = [
     '/',
     '/index.html',
-    '/composeApp.js',
+    '/app.mjs',
+    '/app.wasm',
     '/styles.css',
     '/favicon-32x32.png',
     '/favicon-16x16.png'
 ];
-
-// WASM binaries are cached on-demand via the fetch handler to avoid
-// duplicating the parallel warmup requests kicked off by index.html.
 
 // Install event - cache critical resources for faster subsequent loads
 self.addEventListener('install', (event) => {

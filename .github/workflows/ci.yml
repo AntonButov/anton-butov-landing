@@ -77,59 +77,133 @@ jobs:
     - name: Build for production
       run: ./gradlew wasmJsBrowserDistribution
 
-    # Copy files to publish directory (files already have stable names)
-    - name: Prepare publish directory
+    # Rename WASM files to static names and update references
+    - name: Prepare publish directory (rename WASM files to static names)
       run: |
         PUBLISH_DIR=composeApp/build/dist/wasmJs/productionExecutable
         mkdir -p "$PUBLISH_DIR"
         
-        echo "Copying built files to publish directory..."
+        echo "Looking for WASM files in build/js/packages/composeApp/kotlin/"
+        ls -la build/js/packages/composeApp/kotlin/*.wasm || echo "No WASM files found in kotlin dir"
         
-        # Copy the main WASM file (rename from hash to composeApp.wasm)
-        echo "Looking for main WASM file in production directory..."
-        MAIN_WASM=$(find "$PUBLISH_DIR" -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
-        if [ -n "$MAIN_WASM" ] && [ "$(basename "$MAIN_WASM")" != "composeApp.wasm" ]; then
-          mv -v "$MAIN_WASM" "$PUBLISH_DIR/composeApp.wasm"
-          echo "Renamed $(basename "$MAIN_WASM") -> composeApp.wasm"
+        # Find and rename WASM files to static names
+        echo "Renaming WASM files to static names..."
+        
+        # Find the largest WASM file (usually composeApp.wasm) and rename to composeApp.wasm
+        LARGEST_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
+        if [ -n "$LARGEST_WASM" ]; then
+          cp -v "$LARGEST_WASM" "$PUBLISH_DIR/composeApp.wasm"
+          echo "Renamed $(basename "$LARGEST_WASM") -> composeApp.wasm"
         fi
         
-        # Copy the skiko WASM file (rename from hash to skiko.wasm)
-        echo "Looking for skiko WASM file in production directory..."
-        SKIKO_WASM=$(find "$PUBLISH_DIR" -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -2 | tail -1 | awk '{print $NF}')
-        if [ -n "$SKIKO_WASM" ] && [ "$(basename "$SKIKO_WASM")" != "skiko.wasm" ]; then
-          mv -v "$SKIKO_WASM" "$PUBLISH_DIR/skiko.wasm"
-          echo "Renamed $(basename "$SKIKO_WASM") -> skiko.wasm"
+        # Find the second largest WASM file (usually skiko.wasm) and rename to skiko.wasm
+        SECOND_WASM=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -2 | tail -1 | awk '{print $NF}')
+        if [ -n "$SECOND_WASM" ] && [ "$SECOND_WASM" != "$LARGEST_WASM" ]; then
+          cp -v "$SECOND_WASM" "$PUBLISH_DIR/skiko.wasm"
+          echo "Renamed $(basename "$SECOND_WASM") -> skiko.wasm"
         fi
         
-        # Copy the main JS file (now named composeApp.js)
-        if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
-          echo "composeApp.js already exists"
-        else
-          echo "composeApp.js not found in publish directory"
-        fi
-        
-        # Create gzipped versions
+        # Create gzipped versions for static WASM files
         echo "Creating gzipped versions..."
-        for file in "$PUBLISH_DIR"/composeApp.wasm "$PUBLISH_DIR"/composeApp.js "$PUBLISH_DIR"/skiko.wasm; do
-          if [ -f "$file" ]; then
-            gzip -9 -c "$file" > "${file}.gz"
-            echo "Created compressed version: $(basename "${file}.gz") ($(du -h "${file}.gz" | cut -f1))"
+        for wasm_file in "$PUBLISH_DIR"/composeApp.wasm "$PUBLISH_DIR"/skiko.wasm; do
+          if [ -f "$wasm_file" ]; then
+            gzip -9 -c "$wasm_file" > "${wasm_file}.gz"
+            echo "Created compressed version: $(basename "${wasm_file}.gz") ($(du -h "${wasm_file}.gz" | cut -f1))"
           fi
         done
         
-        echo "Files copied successfully with stable names!"
+            # Update references in ALL JavaScript files from hash names to static names
+            echo "Updating WASM references in all JS/MJS files..."
+            
+            # Get the actual hash names from the WASM files
+            COMPOSEAPP_HASH=$(echo "$LARGEST_WASM" | sed 's/.*\///')
+            SKIKO_HASH=$(echo "$SECOND_WASM" | sed 's/.*\///')
+            
+            echo "Found hash names: composeApp=$COMPOSEAPP_HASH, skiko=$SKIKO_HASH"
+            
+            # Validate that we found both files
+            if [ -z "$COMPOSEAPP_HASH" ] || [ -z "$SKIKO_HASH" ]; then
+              echo "ERROR: Could not determine WASM file hashes!"
+              echo "Available WASM files:"
+              ls -la build/js/packages/composeApp/kotlin/*.wasm 2>/dev/null || echo "No WASM files found"
+              exit 1
+            fi
+            
+            # Validate that the files are different
+            if [ "$COMPOSEAPP_HASH" = "$SKIKO_HASH" ]; then
+              echo "ERROR: Both WASM files have the same hash: $COMPOSEAPP_HASH"
+              exit 1
+            fi
+            
+            # Find and update ALL files that might contain WASM references
+            echo "Searching for files with WASM references..."
+            
+            # Search in ALL possible directories for comprehensive coverage
+            echo "Searching for WASM references in all build directories..."
+            ALL_FILES=$(find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -o -name "*.ts" 2>/dev/null | head -100)
+            
+            if [ -z "$ALL_FILES" ]; then
+              echo "WARNING: No JS/MJS files found"
+            else
+              echo "Found files to check:"
+              echo "$ALL_FILES"
+              
+              # Update references in all found files
+              UPDATED_FILES=0
+              for file in $ALL_FILES; do
+                if [ -f "$file" ] && grep -q "$COMPOSEAPP_HASH\|$SKIKO_HASH" "$file" 2>/dev/null; then
+                  echo "Updating $file..."
+                  # Create backup
+                  cp "$file" "$file.backup"
+                  # Replace hash names with static names
+                  sed -i "s/$COMPOSEAPP_HASH/composeApp.wasm/g" "$file"
+                  sed -i "s/$SKIKO_HASH/skiko.wasm/g" "$file"
+                  UPDATED_FILES=$((UPDATED_FILES + 1))
+                  
+                  # Show what changed
+                  echo "Changes in $file:"
+                  diff "$file.backup" "$file" | head -10 || echo "No visible changes"
+                fi
+              done
+              
+              echo "Updated $UPDATED_FILES files with WASM references"
+              
+              # Verify the changes more thoroughly
+              echo "Verifying changes..."
+              REMAINING_HASHES=$(find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -exec grep -l '[a-f0-9]\{20,\}\.wasm' {} \; 2>/dev/null || true)
+              
+              if [ -n "$REMAINING_HASHES" ]; then
+                echo "WARNING: Some files still contain hash-based WASM references:"
+                echo "$REMAINING_HASHES"
+                echo "Checking specific hash patterns:"
+                for hash_file in $REMAINING_HASHES; do
+                  echo "In $hash_file:"
+                  grep -o '[a-f0-9]\{20,\}\.wasm' "$hash_file" | head -5 || echo "No hash patterns found"
+                done
+                
+                # Additional check for specific known hashes from Network tab
+                echo "Checking for specific known problematic hashes..."
+                KNOWN_PROBLEM_HASHES="8bc1b48ee28fd6b51bb9.wasm fe1f72a3fb2a7d000613.wasm"
+                for known_hash in $KNOWN_PROBLEM_HASHES; do
+                  echo "Searching for $known_hash..."
+                  find "$PUBLISH_DIR" build/ -name "*.js" -o -name "*.mjs" -exec grep -l "$known_hash" {} \; 2>/dev/null || echo "Not found in current build"
+                done
+              else
+                echo "✅ All hash-based WASM references successfully replaced with static names"
+              fi
+            fi
         
-        # Copy favicon and other static resources
-        echo "Copying favicon and static resources..."
-        cp -v composeApp/src/wasmJsMain/resources/favicon*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No favicon files found"
-        cp -v composeApp/src/wasmJsMain/resources/apple-touch-icon.png "$PUBLISH_DIR/" 2>/dev/null || echo "No apple-touch-icon found"
-        cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
-        cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
-        
-        # Copy images as-is (AsyncImage handles optimization)
-        echo "Copying images for async loading..."
-        cp -v composeApp/src/wasmJsMain/resources/*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No PNG images found"
-        cp -v composeApp/src/wasmJsMain/resources/*.svg "$PUBLISH_DIR/" 2>/dev/null || echo "No SVG images found"
+            # Copy favicon and other static resources
+            echo "Copying favicon and static resources..."
+            cp -v composeApp/src/wasmJsMain/resources/favicon*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No favicon files found"
+            cp -v composeApp/src/wasmJsMain/resources/apple-touch-icon.png "$PUBLISH_DIR/" 2>/dev/null || echo "No apple-touch-icon found"
+            cp -v composeApp/src/wasmJsMain/resources/android-chrome-*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No android-chrome icons found"
+            cp -v composeApp/src/wasmJsMain/resources/site.webmanifest "$PUBLISH_DIR/" 2>/dev/null || echo "No webmanifest found"
+            
+            # Copy images as-is (AsyncImage handles optimization)
+            echo "Copying images for async loading..."
+            cp -v composeApp/src/wasmJsMain/resources/*.png "$PUBLISH_DIR/" 2>/dev/null || echo "No PNG images found"
+            cp -v composeApp/src/wasmJsMain/resources/*.svg "$PUBLISH_DIR/" 2>/dev/null || echo "No SVG images found"
         
         # service files
         if [ -f CNAME ]; then

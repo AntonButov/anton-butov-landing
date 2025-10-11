@@ -41,8 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload critical resources for faster cold start -->
-    <link rel="preload" href="app.mjs" as="script">
-    <link rel="preload" href="app.wasm" as="fetch" type="application/wasm" crossorigin>
+    <link rel="preload" href="composeApp.js" as="script">
+    <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
     
     <!-- Images are now loaded asynchronously with AsyncImage component -->
@@ -239,6 +239,6 @@
     {"@context":"https://schema.org","@type":"Person","name":"Anton Butov","url":"https://antonbutov.com/","description":"Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development","jobTitle":"Android/Kotlin Developer","sameAs":["https://www.linkedin.com/in/antonbutov","https://github.com/AntonButov"],"knowsAbout":["Android Development","Kotlin","Kotlin Multiplatform","Jetpack Compose","Mobile Development","Cross-platform Development"],"hasOccupation":{"@type":"Occupation","name":"Android Developer","occupationLocation":{"@type":"Country","name":"Russia"}}}
     </script>
     
-    <script defer src="app.mjs"></script>
+    <script defer src="composeApp.js"></script>
 </body>
 </html>

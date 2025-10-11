@@ -3,8 +3,8 @@ const CACHE_NAME = 'anton-butov-v3';
 const CRITICAL_RESOURCES = [
     '/',
     '/index.html',
-    '/app.mjs',
-    '/app.wasm',
+    '/composeApp.js',
+    '/composeApp.wasm',
     '/skiko.wasm',
     '/styles.css',
     '/favicon-32x32.png',

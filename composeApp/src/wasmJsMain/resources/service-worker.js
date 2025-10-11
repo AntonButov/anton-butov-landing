@@ -1,5 +1,5 @@
 // Service Worker для кэширования WASM файлов и оптимизации загрузки
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CACHE_NAME = `anton-butov-landing-${CACHE_VERSION}`;
 
 // Критичные ресурсы для кэширования (только файлы, которые точно существуют)
@@ -7,7 +7,12 @@ const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/styles.css',
-  '/preview.png'
+  '/preview.png',
+  '/favicon.svg',
+  '/favicon-32x32.png',
+  '/favicon-16x16.png',
+  '/apple-touch-icon.png',
+  '/site.webmanifest'
 ];
 
 // WASM и JS файлы кэшируются динамически при первом запросе

@@ -85,12 +85,12 @@ jobs:
         
         echo "Copying built files to publish directory..."
         
-        # Copy the main WASM file (rename from hash to composeApp.wasm)
+        # Copy the main WASM file (rename from hash to app.wasm)
         echo "Looking for main WASM file in production directory..."
         MAIN_WASM=$(find "$PUBLISH_DIR" -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
-        if [ -n "$MAIN_WASM" ] && [ "$(basename "$MAIN_WASM")" != "composeApp.wasm" ]; then
-          mv -v "$MAIN_WASM" "$PUBLISH_DIR/composeApp.wasm"
-          echo "Renamed $(basename "$MAIN_WASM") -> composeApp.wasm"
+        if [ -n "$MAIN_WASM" ] && [ "$(basename "$MAIN_WASM")" != "app.wasm" ]; then
+          mv -v "$MAIN_WASM" "$PUBLISH_DIR/app.wasm"
+          echo "Renamed $(basename "$MAIN_WASM") -> app.wasm"
         fi
         
         # Copy the skiko WASM file (rename from hash to skiko.wasm)
@@ -101,16 +101,16 @@ jobs:
           echo "Renamed $(basename "$SKIKO_WASM") -> skiko.wasm"
         fi
         
-        # Copy the main JS file (now named composeApp.js)
-        if [ -f "$PUBLISH_DIR/composeApp.js" ]; then
-          echo "composeApp.js already exists"
+        # Copy the main JS file (now named app.mjs)
+        if [ -f "$PUBLISH_DIR/app.mjs" ]; then
+          echo "app.mjs already exists"
         else
-          echo "composeApp.js not found in publish directory"
+          echo "app.mjs not found in publish directory"
         fi
         
         # Create gzipped versions
         echo "Creating gzipped versions..."
-        for file in "$PUBLISH_DIR"/composeApp.wasm "$PUBLISH_DIR"/composeApp.js "$PUBLISH_DIR"/skiko.wasm; do
+        for file in "$PUBLISH_DIR"/app.wasm "$PUBLISH_DIR"/app.mjs; do
           if [ -f "$file" ]; then
             gzip -9 -c "$file" > "${file}.gz"
             echo "Created compressed version: $(basename "${file}.gz") ($(du -h "${file}.gz" | cut -f1))"

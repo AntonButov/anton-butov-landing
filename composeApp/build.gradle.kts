@@ -36,15 +36,17 @@ tasks.named("check") {
 }
 
 kotlin {
-    @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        binaries.executable("app") // имя без хэша
+        outputModuleName = "app"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
-                outputFileName = "app.mjs" // убирает hash для .mjs
-                cssSupport.enabled = false
+                outputFileName = "app.mjs"
+                cssSupport {
+                    enabled.set(false)
+                }
                 devServer =
                     (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                         static =
@@ -56,6 +58,7 @@ kotlin {
                     }
             }
         }
+        binaries.executable()
     }
 
     sourceSets {

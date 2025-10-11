@@ -38,12 +38,12 @@ tasks.named("check") {
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        outputModuleName = "app"
+        moduleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
-                outputFileName = "app.mjs"
+                outputFileName = "composeApp.js"
                 cssSupport {
                     enabled.set(false)
                 }

@@ -41,102 +41,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload critical resources for faster cold start -->
-    <link rel="preload" href="composeApp.js" as="script">
-
-    <!-- Optimistic parallel WASM fetch without duplicate downloads -->
-    <script>
-        (function () {
-            if (typeof window === 'undefined' || typeof window.fetch !== 'function') {
-                return;
-            }
-
-            const nativeFetch = window.fetch.bind(window);
-            const normalizeUrl = (input) => {
-                try {
-                    return new URL(input, window.location.href).href;
-                } catch (_) {
-                    return null;
-                }
-            };
-
-            const shouldHandle = (absoluteUrl) => {
-                if (!absoluteUrl) {
-                    return false;
-                }
-                try {
-                    const parsed = new URL(absoluteUrl);
-                    return (
-                        parsed.origin === window.location.origin &&
-                        parsed.pathname.endsWith('.wasm')
-                    );
-                } catch (_) {
-                    return false;
-                }
-            };
-
-            const wasmFetches = new Map();
-            const track = (url, promise) => {
-                const tracked = promise
-                    .then((response) => {
-                        if (!response || !response.ok) {
-                            wasmFetches.delete(url);
-                        }
-                        return response;
-                    })
-                    .catch((error) => {
-                        wasmFetches.delete(url);
-                        throw error;
-                    });
-                wasmFetches.set(url, tracked);
-                return tracked;
-            };
-
-            const warmupTargets = ['composeApp.wasm', 'skiko.wasm']
-                .map(normalizeUrl)
-                .filter((url, index, array) => url && array.indexOf(url) === index);
-
-            warmupTargets.forEach((url) => {
-                track(url, nativeFetch(url, { credentials: 'same-origin' })).catch(() => {
-                    /* Warmup failures fall back to runtime fetches. */
-                });
-            });
-
-            const extractUrl = (input) => {
-                if (typeof input === 'string') {
-                    return input;
-                }
-                if (input && typeof input === 'object' && 'url' in input) {
-                    return input.url;
-                }
-                return null;
-            };
-
-            window.fetch = async (input, init) => {
-                const requested = extractUrl(input);
-                const absoluteUrl = normalizeUrl(requested);
-
-                if (shouldHandle(absoluteUrl)) {
-                    const existing = wasmFetches.get(absoluteUrl);
-                    if (existing) {
-                        const response = await existing;
-                        if (!response) {
-                            return nativeFetch(input, init);
-                        }
-                        return response.clone();
-                    }
-
-                    const pending = track(absoluteUrl, nativeFetch(input, init));
-                    const response = await pending;
-                    if (!response || !response.ok) {
-                        return response;
-                    }
-                    return response.clone();
-                }
-
-                return nativeFetch(input, init);
-            };
-        })();
-    </script>
+    <link rel="preload" href="app.mjs" as="script">
+    <link rel="preload" href="app.wasm" as="fetch" type="application/wasm" crossorigin>
     
     <!-- Images are now loaded asynchronously with AsyncImage component -->
     <!-- This provides better performance by loading images only when needed -->
@@ -332,6 +238,6 @@
     {"@context":"https://schema.org","@type":"Person","name":"Anton Butov","url":"https://antonbutov.com/","description":"Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development","jobTitle":"Android/Kotlin Developer","sameAs":["https://www.linkedin.com/in/antonbutov","https://github.com/AntonButov"],"knowsAbout":["Android Development","Kotlin","Kotlin Multiplatform","Jetpack Compose","Mobile Development","Cross-platform Development"],"hasOccupation":{"@type":"Occupation","name":"Android Developer","occupationLocation":{"@type":"Country","name":"Russia"}}}
     </script>
     
-    <script defer src="composeApp.js"></script>
+    <script defer src="app.mjs"></script>
 </body>
 </html>

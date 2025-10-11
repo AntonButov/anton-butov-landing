@@ -40,11 +40,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload critical resources for faster cold start -->
+    <!-- Preload critical WASM resources only (they exist for sure) -->
     <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
-    <link rel="preload" href="skiko.js" as="script">
-    <link rel="preload" href="composeApp.mjs" as="script">
     
     <!-- Images are now loaded asynchronously with AsyncImage component -->
     <!-- This provides better performance by loading images only when needed -->
@@ -175,12 +173,12 @@
         
         // Early WASM preload validation
         window.addEventListener('DOMContentLoaded', () => {
-            // Проверяем, что preload хинты работают
+            // Проверяем, что preload хинты работают для WASM файлов
             const preloadedResources = performance.getEntriesByType('resource')
-                .filter(entry => entry.name.includes('.wasm') || entry.name.includes('.mjs') || entry.name.includes('skiko.js'));
+                .filter(entry => entry.name.includes('.wasm'));
             
             if (preloadedResources.length > 0) {
-                console.log('[Preload] Successfully preloaded resources:', preloadedResources.map(r => r.name));
+                console.log('[Preload] Successfully preloaded WASM resources:', preloadedResources.map(r => r.name));
             }
         });
         

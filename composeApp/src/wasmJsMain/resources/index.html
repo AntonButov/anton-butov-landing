@@ -41,7 +41,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Preload critical resources for faster cold start -->
-    <link rel="preload" href="composeApp.js" as="script">
     <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
     <link rel="preload" href="skiko.js" as="script">
@@ -178,7 +177,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             // Проверяем, что preload хинты работают
             const preloadedResources = performance.getEntriesByType('resource')
-                .filter(entry => entry.name.includes('.wasm') || entry.name.includes('composeApp.js'));
+                .filter(entry => entry.name.includes('.wasm') || entry.name.includes('.mjs') || entry.name.includes('skiko.js'));
             
             if (preloadedResources.length > 0) {
                 console.log('[Preload] Successfully preloaded resources:', preloadedResources.map(r => r.name));

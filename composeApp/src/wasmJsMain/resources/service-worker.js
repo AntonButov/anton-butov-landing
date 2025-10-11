@@ -1,13 +1,12 @@
 // Service Worker для кэширования WASM файлов и оптимизации загрузки
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `anton-butov-landing-${CACHE_VERSION}`;
 
-// Критичные ресурсы для кэширования
+// Критичные ресурсы для кэширования (только существующие файлы)
 const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/styles.css',
-  '/composeApp.js',
   '/composeApp.wasm',
   '/skiko.wasm',
   '/skiko.js',
@@ -27,10 +26,18 @@ self.addEventListener('install', (event) => {
       try {
         const cache = await caches.open(CACHE_NAME);
         
-        // Параллельная загрузка всех ресурсов с улучшенной обработкой ошибок
+        // Параллельная загрузка всех ресурсов с проверкой существования
         const cacheResults = await Promise.allSettled(
           PRECACHE_URLS.map(async (url) => {
             try {
+              // Сначала проверяем, существует ли файл
+              const response = await fetch(url, { method: 'HEAD' });
+              if (!response.ok) {
+                console.warn(`[SW] File not found (${response.status}): ${url}`);
+                return { url, status: 'not_found', error: `HTTP ${response.status}` };
+              }
+              
+              // Если файл существует, кэшируем его
               await cache.add(url);
               console.log(`[SW] Cached: ${url}`);
               return { url, status: 'success' };
@@ -43,8 +50,9 @@ self.addEventListener('install', (event) => {
         
         // Статистика кэширования
         const successful = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'success').length;
-        const failed = cacheResults.length - successful;
-        console.log(`[SW] Cache stats: ${successful} successful, ${failed} failed`);
+        const notFound = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'not_found').length;
+        const failed = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'failed').length;
+        console.log(`[SW] Cache stats: ${successful} successful, ${notFound} not found, ${failed} failed`);
         
         console.log('[SW] All critical resources cached');
         

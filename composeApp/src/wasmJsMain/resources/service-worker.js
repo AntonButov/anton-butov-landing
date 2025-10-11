@@ -1,20 +1,22 @@
 // Service Worker для кэширования WASM файлов и оптимизации загрузки
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE_NAME = `anton-butov-landing-${CACHE_VERSION}`;
 
-// Критичные ресурсы для кэширования (только существующие файлы)
+// Критичные ресурсы для кэширования (только файлы, которые точно существуют)
 const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/styles.css',
-  '/composeApp.wasm',
-  '/skiko.wasm',
-  '/skiko.js',
-  '/skiko.mjs',
-  '/composeApp.mjs',
-  '/composeApp.uninstantiated.mjs',
-  '/custom-formatters.js',
   '/preview.png'
+];
+
+// WASM и JS файлы кэшируются динамически при первом запросе
+const DYNAMIC_CACHE_PATTERNS = [
+  /\.wasm$/,
+  /\.js$/,
+  /\.mjs$/,
+  /composeApp\./,
+  /skiko\./
 ];
 
 // Установка Service Worker и предварительное кэширование
@@ -26,33 +28,13 @@ self.addEventListener('install', (event) => {
       try {
         const cache = await caches.open(CACHE_NAME);
         
-        // Параллельная загрузка всех ресурсов с проверкой существования
-        const cacheResults = await Promise.allSettled(
-          PRECACHE_URLS.map(async (url) => {
-            try {
-              // Сначала проверяем, существует ли файл
-              const response = await fetch(url, { method: 'HEAD' });
-              if (!response.ok) {
-                console.warn(`[SW] File not found (${response.status}): ${url}`);
-                return { url, status: 'not_found', error: `HTTP ${response.status}` };
-              }
-              
-              // Если файл существует, кэшируем его
-              await cache.add(url);
-              console.log(`[SW] Cached: ${url}`);
-              return { url, status: 'success' };
-            } catch (error) {
-              console.warn(`[SW] Failed to cache ${url}:`, error.message);
-              return { url, status: 'failed', error: error.message };
-            }
-          })
-        );
-        
-        // Статистика кэширования
-        const successful = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'success').length;
-        const notFound = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'not_found').length;
-        const failed = cacheResults.filter(r => r.status === 'fulfilled' && r.value.status === 'failed').length;
-        console.log(`[SW] Cache stats: ${successful} successful, ${notFound} not found, ${failed} failed`);
+        // Кэшируем только критичные статические ресурсы
+        try {
+          await cache.addAll(PRECACHE_URLS);
+          console.log(`[SW] Cached ${PRECACHE_URLS.length} critical resources`);
+        } catch (error) {
+          console.warn('[SW] Some critical resources failed to cache:', error);
+        }
         
         console.log('[SW] All critical resources cached');
         
@@ -103,6 +85,7 @@ self.addEventListener('fetch', (event) => {
   const isWasm = url.pathname.endsWith('.wasm');
   const isJs = url.pathname.endsWith('.js') || url.pathname.endsWith('.mjs');
   const isStatic = isWasm || isJs || url.pathname.endsWith('.css') || url.pathname.endsWith('.png');
+  const isDynamicCacheable = DYNAMIC_CACHE_PATTERNS.some(pattern => pattern.test(url.pathname));
   
   if (isStatic) {
     // Cache First для статических ресурсов (WASM, JS, CSS, изображения)
@@ -117,16 +100,24 @@ self.addEventListener('fetch', (event) => {
             return cachedResponse;
           }
           
-          // Если нет в кэше - загружаем из сети и кэширую
+          // Если нет в кэше - загружаем из сети и кэшируем
           console.log(`[SW] Fetching from network: ${url.pathname}`);
-          const networkResponse = await fetch(request);
-          
-          // Кэшируем только успешные ответы
-          if (networkResponse && networkResponse.status === 200) {
-            cache.put(request, networkResponse.clone());
+          try {
+            const networkResponse = await fetch(request);
+            
+            // Кэшируем только успешные ответы
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(request, networkResponse.clone());
+              console.log(`[SW] Cached from network: ${url.pathname}`);
+            } else {
+              console.warn(`[SW] Failed to fetch ${url.pathname}: ${networkResponse.status}`);
+            }
+            
+            return networkResponse;
+          } catch (error) {
+            console.error(`[SW] Network error for ${url.pathname}:`, error);
+            throw error;
           }
-          
-          return networkResponse;
         } catch (error) {
           console.error(`[SW] Fetch failed for ${url.pathname}:`, error);
           throw error;
@@ -154,6 +145,17 @@ self.addEventListener('fetch', (event) => {
             console.log(`[SW] Network failed, serving from cache: ${url.pathname}`);
             return cachedResponse;
           }
+          
+          // Если файл не найден и это не критичный ресурс, возвращаем заглушку
+          if (url.pathname.includes('.js') || url.pathname.includes('.mjs')) {
+            console.warn(`[SW] Resource not found: ${url.pathname}`);
+            return new Response('', { 
+              status: 404, 
+              statusText: 'Not Found',
+              headers: { 'Content-Type': 'text/plain' }
+            });
+          }
+          
           throw error;
         }
       })()

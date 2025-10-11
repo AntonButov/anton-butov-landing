@@ -38,6 +38,7 @@ tasks.named("check") {
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
+        outputModuleName = "app"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path

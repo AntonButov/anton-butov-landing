@@ -5,7 +5,6 @@ const CRITICAL_RESOURCES = [
     '/index.html',
     '/app.mjs',
     '/app.wasm',
-    '/skiko.wasm',
     '/styles.css',
     '/favicon-32x32.png',
     '/favicon-16x16.png'

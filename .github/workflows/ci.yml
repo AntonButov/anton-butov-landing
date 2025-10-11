@@ -85,27 +85,30 @@ jobs:
         
         echo "Copying built files to publish directory..."
         
-        # Copy the main WASM file (rename from hash to app.wasm)
-        echo "Looking for main WASM file in production directory..."
-        MAIN_WASM=$(find "$PUBLISH_DIR" -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -1 | awk '{print $NF}')
-        if [ -n "$MAIN_WASM" ] && [ "$(basename "$MAIN_WASM")" != "app.wasm" ]; then
-          mv -v "$MAIN_WASM" "$PUBLISH_DIR/app.wasm"
-          echo "Renamed $(basename "$MAIN_WASM") -> app.wasm"
-        fi
-        
-        # Copy the skiko WASM file (rename from hash to skiko.wasm)
-        echo "Looking for skiko WASM file in production directory..."
-        SKIKO_WASM=$(find "$PUBLISH_DIR" -name "*.wasm" -type f -exec ls -la {} \; | sort -k5 -nr | head -2 | tail -1 | awk '{print $NF}')
-        if [ -n "$SKIKO_WASM" ] && [ "$(basename "$SKIKO_WASM")" != "skiko.wasm" ]; then
-          mv -v "$SKIKO_WASM" "$PUBLISH_DIR/skiko.wasm"
-          echo "Renamed $(basename "$SKIKO_WASM") -> skiko.wasm"
+        # Copy the main WASM file (now named app.wasm)
+        if [ -f "build/js/packages/composeApp/kotlin/app.wasm" ]; then
+          cp -v "build/js/packages/composeApp/kotlin/app.wasm" "$PUBLISH_DIR/"
+          echo "Copied app.wasm"
+        else
+          echo "app.wasm not found, looking for any .wasm file..."
+          WASM_FILE=$(find build/js/packages/composeApp/kotlin/ -name "*.wasm" -type f | head -1)
+          if [ -n "$WASM_FILE" ]; then
+            cp -v "$WASM_FILE" "$PUBLISH_DIR/app.wasm"
+            echo "Renamed $(basename "$WASM_FILE") -> app.wasm"
+          fi
         fi
         
         # Copy the main JS file (now named app.mjs)
-        if [ -f "$PUBLISH_DIR/app.mjs" ]; then
-          echo "app.mjs already exists"
+        if [ -f "build/js/packages/composeApp/kotlin/app.mjs" ]; then
+          cp -v "build/js/packages/composeApp/kotlin/app.mjs" "$PUBLISH_DIR/"
+          echo "Copied app.mjs"
         else
-          echo "app.mjs not found in publish directory"
+          echo "app.mjs not found, looking for any .mjs file..."
+          MJS_FILE=$(find build/js/packages/composeApp/kotlin/ -name "*.mjs" -type f | head -1)
+          if [ -n "$MJS_FILE" ]; then
+            cp -v "$MJS_FILE" "$PUBLISH_DIR/app.mjs"
+            echo "Renamed $(basename "$MJS_FILE") -> app.mjs"
+          fi
         fi
         
         # Create gzipped versions

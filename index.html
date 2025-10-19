@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Butov — Android/Kotlin Developer | KMP, Compose, Mobile Development</title>
+    <meta name="description" content="Anton Butov - Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development. View portfolio and projects." />
+    <meta name="keywords" content="Anton Butov, Android Developer, Kotlin Developer, KMP, Kotlin Multiplatform, Jetpack Compose, Mobile Development, Android Apps" />
+    <meta name="author" content="Anton Butov" />
+    <link rel="canonical" href="https://antonbutov.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://antonbutov.com/" />
+    <meta property="og:title" content="Anton Butov — Android/Kotlin Developer" />
+    <meta property="og:description" content="Experienced Android/Kotlin Developer specializing in KMP, Jetpack Compose, and mobile development." />
+    <meta property="og:image" content="https://antonbutov.com/preview.png" />
+    <meta property="og:site_name" content="Anton Butov" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://antonbutov.com/" />
+    <meta name="twitter:title" content="Anton Butov — Android/Kotlin Developer" />
+    <meta name="twitter:description" content="Experienced Android/Kotlin Developer specializing in KMP, Jetpack Compose, and mobile development." />
+    <meta name="twitter:image" content="https://antonbutov.com/preview.png" />
+    
+    <!-- Additional SEO meta tags -->
+    <meta name="theme-color" content="#E20100" />
+    <meta name="msapplication-TileColor" content="#E20100" />
+    
+    <!-- Favicon and app icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect for faster external resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical WASM resources only (they exist for sure) -->
+    <link rel="preload" href="composeApp.wasm" as="fetch" type="application/wasm" crossorigin>
+    <link rel="preload" href="skiko.wasm" as="fetch" type="application/wasm" crossorigin>
+    
+    <!-- Images are now loaded asynchronously with AsyncImage component -->
+    <!-- This provides better performance by loading images only when needed -->
+    
+    <!-- Inline critical CSS for instant render -->
+    <style>
+        :root { --dp: 1px; }
+        html, body {
+            width: 100%; height: 100%; margin: 0; padding: 0;
+            overflow-x: auto; overflow-y: hidden; background: #0B0B0B;
+            min-width: calc(1200 * var(--dp));
+            scrollbar-width: thin; scrollbar-color: #E20100 #000;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #E20100; }
+        canvas { background: #0B0B0B; min-width: calc(1200 * var(--dp)); }
+        
+        /* Loading screen styles */
+        #loading {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0B0B0B; color: #FFFFFF; font-family: sans-serif;
+            text-align: center; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+        }
+        .loading-spinner {
+            width: 50px; height: 50px; border: 3px solid #333;
+            border-top: 3px solid #E20100; border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 18px; margin-bottom: 30px; color: #FFFFFF;
+        }
+        .loading-progress {
+            width: 300px; height: 4px; background: #333;
+            border-radius: 2px; overflow: hidden;
+        }
+        .loading-progress-bar {
+            height: 100%; background: #E20100; width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 600px) {
+            :root { --dp: 0.5px; }
+            html, body, canvas { min-width: 100%; overflow-x: hidden; }
+            .loading-progress { width: 250px; }
+        }
+    </style>
+    
+    <!-- Load non-critical styles asynchronously -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+</head>
+<body>
+    <!-- Static content for SEO (visible to search engines) -->
+    <header style="display: none;" id="seo-header">
+        <h1>Anton Butov — Android/Kotlin Developer</h1>
+    </header>
+    
+    <main style="display: none;" id="seo-main">
+        <p>Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development.</p>
+        <p>Passionate about creating high-quality mobile applications using modern Android technologies and cross-platform solutions.</p>
+        
+        <h2>Core Expertise</h2>
+        <ul>
+            <li>Android Development with Kotlin</li>
+            <li>Kotlin Multiplatform (KMP) for cross-platform development</li>
+            <li>Jetpack Compose for modern UI development</li>
+            <li>Mobile application architecture and design patterns</li>
+            <li>Cross-platform development solutions</li>
+        </ul>
+        
+        <h2>Technologies & Skills</h2>
+        <ul>
+            <li>Kotlin, Java</li>
+            <li>Android SDK, Jetpack Compose</li>
+            <li>Kotlin Multiplatform Mobile (KMM)</li>
+            <li>MVVM, Clean Architecture</li>
+            <li>Git, Gradle</li>
+        </ul>
+        
+        <h2>Contact & Portfolio</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/antonbutov">LinkedIn Profile</a></li>
+            <li><a href="https://github.com/AntonButov">GitHub Projects</a></li>
+        </ul>
+    </main>
+    
+    <noscript>
+        <div style="padding: 20px; background: #0B0B0B; color: #FFFFFF; font-family: sans-serif;">
+            <h1>Anton Butov — Android/Kotlin Developer</h1>
+            <p>Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development.</p>
+            <p>Page loaded without JavaScript. All content is available.</p>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/antonbutov" style="color: #E20100;">LinkedIn</a></li>
+                <li><a href="https://github.com/AntonButov" style="color: #E20100;">GitHub</a></li>
+            </ul>
+        </div>
+    </noscript>
+    
+    <!-- Loading screen (hidden from search engines) -->
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Anton Butov...</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+    
+    <!-- Loading progress simulation and app initialization -->
+    <script>
+        let progress = 0, progressInterval = null, isAppReady = false;
+        const progressBar = document.getElementById('progressBar');
+        
+        // Start progress simulation
+        const startProgressSimulation = () => {
+            progressInterval = setInterval(() => {
+                if (!isAppReady && progress < 85) {
+                    progress += Math.random() * 10;
+                    progressBar.style.width = Math.min(progress, 85) + '%';
+                }
+            }, 150);
+        };
+        
+        // Function to hide loading screen (called from Kotlin app)
+        window.hideLoadingScreen = () => {
+            isAppReady = true;
+            if (progressInterval) clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            setTimeout(() => {
+                const loading = document.getElementById('loading');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => loading.remove(), 300);
+                }
+            }, 300);
+        };
+        
+        // Start immediately
+        startProgressSimulation();
+        
+        // Register Service Worker for caching (deferred for performance)
+        setTimeout(() => {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('[SW] Registered successfully');
+                    })
+                    .catch((error) => {
+                        console.error('[SW] Registration failed:', error);
+                    });
+            }
+        }, 1000);
+        
+        // Early WASM preload validation
+        window.addEventListener('DOMContentLoaded', () => {
+            // Проверяем, что preload хинты работают для WASM файлов
+            const preloadedResources = performance.getEntriesByType('resource')
+                .filter(entry => entry.name.includes('.wasm'));
+            
+            if (preloadedResources.length > 0) {
+                console.log('[Preload] Successfully preloaded WASM resources:', preloadedResources.map(r => r.name));
+            }
+        });
+        
+        // Fallback timeout
+        setTimeout(() => !isAppReady && window.hideLoadingScreen(), 5000);
+    </script>
+    
+    <!-- Structured Data (JSON-LD) - deferred for faster initial load -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Anton Butov","url":"https://antonbutov.com/","description":"Experienced Android/Kotlin Developer specializing in Kotlin Multiplatform, Jetpack Compose, and mobile application development","jobTitle":"Android/Kotlin Developer","sameAs":["https://www.linkedin.com/in/antonbutov","https://github.com/AntonButov"],"knowsAbout":["Android Development","Kotlin","Kotlin Multiplatform","Jetpack Compose","Mobile Development","Cross-platform Development"],"hasOccupation":{"@type":"Occupation","name":"Android Developer","occupationLocation":{"@type":"Country","name":"Russia"}}}
+    </script>
+    
+    <script defer src="composeApp.js"></script>
+</body>
+</html>

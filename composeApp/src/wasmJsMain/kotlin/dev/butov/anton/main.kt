@@ -10,7 +10,7 @@ import org.w3c.dom.events.Event
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    // Optimize initial rendering
+    // Set background color immediately to avoid white flash
     document.body?.style?.backgroundColor = "#0B0B0B"
 
     ComposeViewport(document.body!!) {

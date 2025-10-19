@@ -141,19 +141,45 @@
             }, 150);
         };
         
-        // Function to hide loading screen (called from Kotlin app)
-        window.hideLoadingScreen = () => {
-            isAppReady = true;
-            if (progressInterval) clearInterval(progressInterval);
-            progressBar.style.width = '100%';
-            setTimeout(() => {
-                const loading = document.getElementById('loading');
-                if (loading) {
-                    loading.style.opacity = '0';
-                    setTimeout(() => loading.remove(), 300);
-                }
-            }, 300);
+        // Optimized loading indicator with performance tracking
+        let appLoaded = false;
+        let composeAppReady = false;
+        
+        // Hide loading indicator when app is ready
+        function hideLoading() {
+            if (appLoaded) return;
+            appLoaded = true;
+            
+            const loading = document.getElementById('loading');
+            if (loading) {
+                const loadTime = performance.now() - startTime;
+                console.log(`App loaded in ${loadTime.toFixed(2)}ms`);
+                
+                // Плавное исчезновение лоадера
+                loading.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                loading.style.opacity = '0';
+                loading.style.transform = 'scale(0.95)';
+                setTimeout(function() {
+                    loading.style.display = 'none';
+                }, 600);
+            }
+        }
+        
+        // Функция для уведомления о готовности Compose приложения
+        window.composeAppReady = function() {
+            composeAppReady = true;
+            console.log('Compose app is ready');
+            // Сразу скрываем лоадер когда Compose готов
+            hideLoading();
         };
+        
+        // Fallback timeout - если Compose не уведомил о готовности
+        setTimeout(function() {
+            if (!composeAppReady) {
+                console.log('Fallback: hiding loading after timeout');
+                hideLoading();
+            }
+        }, 5000);
         
         // Start immediately
         startProgressSimulation();

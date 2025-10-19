@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Butov - Kotlin/Wasm Developer & Composer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Anton Butov - опытный разработчик Kotlin/Wasm, создатель инновационных веб-приложений с использованием современных технологий. Специализация: Compose Multiplatform, WebAssembly, производительность.">
+    <meta name="keywords" content="Kotlin, Wasm, WebAssembly, Compose Multiplatform, разработчик, программист, веб-разработка, производительность">
+    <meta name="author" content="Anton Butov">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="ru">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://antonbutov.com/">
+    <meta property="og:title" content="Anton Butov - Kotlin/Wasm Developer & Composer">
+    <meta property="og:description" content="Опытный разработчик Kotlin/Wasm, создатель инновационных веб-приложений с использованием современных технологий.">
+    <meta property="og:image" content="https://antonbutov.com/og-image.jpg">
+    <meta property="og:site_name" content="Anton Butov">
+    <meta property="og:locale" content="ru_RU">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://antonbutov.com/">
+    <meta property="twitter:title" content="Anton Butov - Kotlin/Wasm Developer & Composer">
+    <meta property="twitter:description" content="Опытный разработчик Kotlin/Wasm, создатель инновационных веб-приложений с использованием современных технологий.">
+    <meta property="twitter:image" content="https://antonbutov.com/og-image.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#E20100">
+    <meta name="msapplication-TileColor" content="#E20100">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Anton Butov">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://antonbutov.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preload critical resources with high priority -->
+    <link rel="preload" href="composeApp.js" as="script" crossorigin fetchpriority="high">
+    <link rel="preload" href="vendors.js" as="script" crossorigin>
+    
+    <!-- Preload Wasm modules with streaming -->
+    <link rel="preload" href="*.wasm" as="fetch" crossorigin type="application/wasm">
+    
+    <!-- Preload fonts with display=swap for better performance -->
+    <link rel="preload" href="composeResources/font/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="composeResources/font/Inter-Medium.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Resource hints for better loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    
+    <!-- Loading indicator -->
+    <style>
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0B0B0B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #333;
+            border-top: 3px solid #E20100;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div class="spinner"></div>
+        <span>Load...</span>
+    </div>
+    
+    <script>
+        // Performance monitoring
+        const startTime = performance.now();
+        
+        // Register Service Worker for caching with immediate registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
+                .then(function(registration) {
+                    console.log('SW registered: ', registration);
+                })
+                .catch(function(registrationError) {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
+        
+        // Optimized loading indicator with performance tracking
+        let appLoaded = false;
+        let composeAppReady = false;
+        
+        // Hide loading indicator when app is ready
+        function hideLoading() {
+            if (appLoaded) return;
+            appLoaded = true;
+            
+            const loading = document.getElementById('loading');
+            if (loading) {
+                const loadTime = performance.now() - startTime;
+                console.log(`App loaded in ${loadTime.toFixed(2)}ms`);
+                
+                // Плавное исчезновение лоадера
+                loading.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                loading.style.opacity = '0';
+                loading.style.transform = 'scale(0.95)';
+                setTimeout(function() {
+                    loading.style.display = 'none';
+                }, 600);
+            }
+        }
+        
+        // Функция для уведомления о готовности Compose приложения
+        window.composeAppReady = function() {
+            composeAppReady = true;
+            console.log('Compose app is ready');
+            // Сразу скрываем лоадер когда Compose готов
+            hideLoading();
+        };
+        
+        // Fallback timeout - если Compose не уведомил о готовности
+        setTimeout(function() {
+            if (!composeAppReady) {
+                console.log('Fallback: hiding loading after timeout');
+                hideLoading();
+            }
+        }, 5000);
+        
+        // Preload critical resources
+        function preloadResource(href, as) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = href;
+            link.as = as;
+            if (as === 'script' || as === 'fetch') {
+                link.crossOrigin = 'anonymous';
+            }
+            document.head.appendChild(link);
+        }
+        
+        // Preload vendor chunks
+        preloadResource('vendors.js', 'script');
+        
+        // Core Web Vitals monitoring
+        function sendToAnalytics(metric) {
+            console.log('Core Web Vital:', metric);
+            // Здесь можно добавить отправку в Google Analytics или другую аналитику
+            // gtag('event', metric.name, {
+            //     value: Math.round(metric.value),
+            //     event_category: 'Web Vitals',
+            //     event_label: metric.id,
+            //     non_interaction: true,
+            // });
+        }
+        
+        // LCP (Largest Contentful Paint)
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                sendToAnalytics({
+                    name: 'LCP',
+                    value: entry.startTime,
+                    id: entry.id
+                });
+            }
+        }).observe({entryTypes: ['largest-contentful-paint']});
+        
+        // FID (First Input Delay)
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                sendToAnalytics({
+                    name: 'FID',
+                    value: entry.processingStart - entry.startTime,
+                    id: entry.id
+                });
+            }
+        }).observe({entryTypes: ['first-input']});
+        
+        // CLS (Cumulative Layout Shift)
+        let clsValue = 0;
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    clsValue += entry.value;
+                }
+            }
+            sendToAnalytics({
+                name: 'CLS',
+                value: clsValue,
+                id: 'cls-observer'
+            });
+        }).observe({entryTypes: ['layout-shift']});
+        
+        // FCP (First Contentful Paint)
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                sendToAnalytics({
+                    name: 'FCP',
+                    value: entry.startTime,
+                    id: entry.id
+                });
+            }
+        }).observe({entryTypes: ['paint']});
+        
+        // TTFB (Time to First Byte)
+        new PerformanceObserver((entryList) => {
+            for (const entry of entryList.getEntries()) {
+                if (entry.responseStart > 0) {
+                    sendToAnalytics({
+                        name: 'TTFB',
+                        value: entry.responseStart - entry.requestStart,
+                        id: entry.id
+                    });
+                }
+            }
+        }).observe({entryTypes: ['navigation']});
+    </script>
+    
+    <script type="application/javascript" src="composeApp.js"></script>
+</body>
+</html>

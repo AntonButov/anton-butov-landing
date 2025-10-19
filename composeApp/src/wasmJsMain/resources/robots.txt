@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+
+# Блокируем служебные файлы
+Disallow: /build/
+Disallow: /gradle/
+Disallow: /scripts/
+Disallow: /docs/
+Disallow: /*.gradle
+Disallow: /*.kts
+Disallow: /*.properties
+Disallow: /*.lock
+Disallow: /*.jar
+
+# Блокируем временные файлы
+Disallow: /*.tmp
+Disallow: /*.log
+Disallow: /node_modules/
+
+# Указываем карту сайта
+Sitemap: https://antonbutov.com/sitemap.xml
+
+# Настройки для основных поисковиков
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+
+
+
